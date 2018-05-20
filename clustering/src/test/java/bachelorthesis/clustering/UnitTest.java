@@ -2,11 +2,15 @@ package bachelorthesis.clustering;
 
 import bachelorthesis.clustering.data.DataPoint;
 import bachelorthesis.clustering.grid.Cell;
+import bachelorthesis.clustering.grid.Cluster;
 import bachelorthesis.clustering.grid.Grid;
 import bachelorthesis.clustering.statistics.RegressionAnalyser;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -279,5 +283,251 @@ public class UnitTest {
         assertEquals(analyser.getAlpha1(), 1.6809, 0.0001);
         assertEquals(analyser.getAlpha0(),-0.8893, 0.0001);
         assertEquals(analyser.getDeviation(), 2.8226, 0.0001);
+    }
+
+    @Test
+    public void testClusters() {
+
+        // look at getInitialClusters() for the structure of the clusters
+        List<Cluster> clusters = getInitialClusters();
+
+        // initial
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 5);
+        assertEquals(clusters.get(1).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getClusterCells().size(), 1);
+        assertEquals(clusters.get(2).getNeighbors().size(), 3);
+        assertEquals(clusters.get(2).getClusterCells().size(), 3);
+        assertEquals(clusters.get(3).getNeighbors().size(), 1);
+        assertEquals(clusters.get(3).getClusterCells().size(), 4);
+        assertEquals(clusters.get(4).getNeighbors().size(), 1);
+        assertEquals(clusters.get(4).getClusterCells().size(), 2);
+
+        // merging B and E (index 1 and 4)
+        clusters.get(1).mergeClusters(clusters.get(4));
+        clusters.remove(4);
+
+        assertEquals(clusters.size(), 4);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 5);
+        assertEquals(clusters.get(1).getNeighbors().size(), 1);
+        assertEquals(clusters.get(1).getClusterCells().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 3);
+        assertEquals(clusters.get(2).getClusterCells().size(), 3);
+        assertEquals(clusters.get(3).getNeighbors().size(), 1);
+        assertEquals(clusters.get(3).getClusterCells().size(), 4);
+
+        // merging C and D (index 2 and 3)
+        clusters.get(2).mergeClusters(clusters.get(3));
+        clusters.remove(3);
+
+        assertEquals(clusters.size(), 3);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 5);
+        assertEquals(clusters.get(1).getNeighbors().size(), 1);
+        assertEquals(clusters.get(1).getClusterCells().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 2);
+        assertEquals(clusters.get(2).getClusterCells().size(), 7);
+
+        // merging A and CD (index 0 and 2)
+        clusters.get(0).mergeClusters(clusters.get(2));
+        clusters.remove(2);
+
+        assertEquals(clusters.size(), 2);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 12);
+        assertEquals(clusters.get(1).getNeighbors().size(), 1);
+        assertEquals(clusters.get(1).getClusterCells().size(), 3);
+
+        // merging ACD and BE (index 0 and 1)
+        //System.out.println("\n\n Last Iteration \n\n");
+        clusters.get(0).mergeClusters(clusters.get(1));
+        clusters.remove(1);
+
+        assertEquals(clusters.size(), 1);
+        assertEquals(clusters.get(0).getNeighbors().size(), 0);
+        assertEquals(clusters.get(0).getClusterCells().size(), 15);
+
+        int sum = 0;
+        for (Cell cell : clusters.get(0).getClusterCells()) {
+            sum++;
+        }
+        assertEquals(sum, 15);
+    }
+
+    @Test
+    public void testClusters1() {
+
+        List<Cluster> clusters = getInitialClusters();
+
+        // merging C and D (index 2 and 3)
+        clusters.get(2).mergeClusters(clusters.get(3));
+
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 5);
+        assertEquals(clusters.get(1).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getClusterCells().size(), 1);
+        assertEquals(clusters.get(2).getNeighbors().size(), 2);
+        assertEquals(clusters.get(2).getClusterCells().size(), 7);
+        assertEquals(clusters.get(3).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getClusterCells().size(), 7);
+        assertEquals(clusters.get(4).getNeighbors().size(), 1);
+        assertEquals(clusters.get(4).getClusterCells().size(), 2);
+
+        // merging C and A (index 2 and 3)
+        clusters.get(2).mergeClusters(clusters.get(0));
+
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 12);
+        assertEquals(clusters.get(1).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getClusterCells().size(), 1);
+        assertEquals(clusters.get(2).getNeighbors().size(), 1);
+        assertEquals(clusters.get(2).getClusterCells().size(), 12);
+        assertEquals(clusters.get(3).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getClusterCells().size(), 7);
+        assertEquals(clusters.get(4).getNeighbors().size(), 1);
+        assertEquals(clusters.get(4).getClusterCells().size(), 2);
+
+        // merging E and B (index 4 and 1)
+        clusters.get(4).mergeClusters(clusters.get(1));
+
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 12);
+        assertEquals(clusters.get(1).getNeighbors().size(), 1);
+        assertEquals(clusters.get(1).getClusterCells().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 1);
+        assertEquals(clusters.get(2).getClusterCells().size(), 12);
+        assertEquals(clusters.get(3).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getClusterCells().size(), 7);
+        assertEquals(clusters.get(4).getNeighbors().size(), 1);
+        assertEquals(clusters.get(4).getClusterCells().size(), 3);
+
+        // merging B and C (index 1 and 2)
+        clusters.get(1).mergeClusters(clusters.get(2));
+
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 1);
+        assertEquals(clusters.get(0).getClusterCells().size(), 12);
+        assertEquals(clusters.get(1).getNeighbors().size(), 0);
+        assertEquals(clusters.get(1).getClusterCells().size(), 15);
+        assertEquals(clusters.get(2).getNeighbors().size(), 0);
+        assertEquals(clusters.get(2).getClusterCells().size(), 15);
+        assertEquals(clusters.get(3).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getClusterCells().size(), 7);
+        assertEquals(clusters.get(4).getNeighbors().size(), 1);
+        assertEquals(clusters.get(4).getClusterCells().size(), 3);
+
+        // What is going on here? Well, the merging process converges
+
+        // merging D and E (index 3 and 4)
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(1));
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(3));
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(1));
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(3));
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(1));
+        clusters.get(3).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(4));
+        clusters.get(0).mergeClusters(clusters.get(3));
+
+        assertEquals(clusters.size(), 5);
+        assertEquals(clusters.get(0).getNeighbors().size(), 0);
+        assertEquals(clusters.get(0).getClusterCells().size(), 15);
+        assertEquals(clusters.get(1).getNeighbors().size(), 0);
+        assertEquals(clusters.get(1).getClusterCells().size(), 15);
+        assertEquals(clusters.get(2).getNeighbors().size(), 0);
+        assertEquals(clusters.get(2).getClusterCells().size(), 15);
+        assertEquals(clusters.get(3).getNeighbors().size(), 0);
+        assertEquals(clusters.get(3).getClusterCells().size(), 15);
+        assertEquals(clusters.get(4).getNeighbors().size(), 0);
+        assertEquals(clusters.get(4).getClusterCells().size(), 15);
+    }
+
+    private ArrayList<Cluster> getInitialClusters() {
+
+        /*
+            The test is run on 5 clusters with the following structure:
+
+              A
+            B C D
+            E
+
+            These 5 clusters are merged into one
+         */
+        List<Cluster> clusters = new ArrayList<>();
+
+        Cluster a = new Cluster();
+        Cluster b = new Cluster();
+        Cluster c = new Cluster();
+        Cluster d = new Cluster();
+        Cluster e = new Cluster();
+
+        a.setName("Cluster A");
+        b.setName("Cluster B");
+        c.setName("Cluster C");
+        d.setName("Cluster D");
+        e.setName("Cluster E");
+
+        a.addNeighbor(c);
+        b.addNeighbor(c);
+        b.addNeighbor(e);
+        c.addNeighbor(a);
+        c.addNeighbor(b);
+        c.addNeighbor(d);
+        d.addNeighbor(c);
+        e.addNeighbor(b);
+
+        Set<Cell> dataPointsA = new LinkedHashSet<>();
+        dataPointsA.add(new Cell());
+        dataPointsA.add(new Cell());
+        dataPointsA.add(new Cell());
+        dataPointsA.add(new Cell());
+        dataPointsA.add(new Cell());
+
+        a.setClusterCells(dataPointsA);
+
+        Set<Cell> dataPointsB = new LinkedHashSet<>();
+        dataPointsB.add(new Cell());
+
+        b.setClusterCells(dataPointsB);
+
+        Set<Cell> dataPointsC = new LinkedHashSet<>();
+        dataPointsC.add(new Cell());
+        dataPointsC.add(new Cell());
+        dataPointsC.add(new Cell());
+
+        c.setClusterCells(dataPointsC);
+
+        Set<Cell> dataPointsD = new LinkedHashSet<>();
+        dataPointsD.add(new Cell());
+        dataPointsD.add(new Cell());
+        dataPointsD.add(new Cell());
+        dataPointsD.add(new Cell());
+
+        d.setClusterCells(dataPointsD);
+
+        Set<Cell> dataPointsE = new LinkedHashSet<>();
+        dataPointsE.add(new Cell());
+        dataPointsE.add(new Cell());
+
+        e.setClusterCells(dataPointsE);
+
+        clusters.add(a);
+        clusters.add(b);
+        clusters.add(c);
+        clusters.add(d);
+        clusters.add(e);
+
+        return (ArrayList<Cluster>) clusters;
     }
 }

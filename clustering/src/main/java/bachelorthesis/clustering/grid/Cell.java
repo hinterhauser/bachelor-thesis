@@ -14,6 +14,10 @@ public class Cell implements StatsObj {
     private double mean;
     private double deviation;
 
+    public Cell() {
+        // currently only used for testing
+    }
+
     public Cell(ArrayList<DataPoint> dataPoints, int dim, double[] center) {
 
         setDataPoints(dataPoints);
