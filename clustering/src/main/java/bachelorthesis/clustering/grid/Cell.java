@@ -16,6 +16,7 @@ public class Cell implements StatsObj {
 
     public Cell() {
         // currently only used for testing
+        dataPoints = new ArrayList<>();
     }
 
     public Cell(ArrayList<DataPoint> dataPoints, int dim, double[] center) {

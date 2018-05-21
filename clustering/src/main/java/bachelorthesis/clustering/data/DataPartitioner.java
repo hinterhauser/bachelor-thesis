@@ -44,7 +44,7 @@ public class DataPartitioner {
         this.dataPoints = dataPoints;
     }
 
-    public void findOptimalPartition(String fileName, String areaFile) {
+    public void findOptimalPartition(String fileName, String areaFile) {    // TODO this function could return the optimal partition as an integer (k)
 
         String outputResults = "";
         String outputAreas = "";
@@ -80,7 +80,7 @@ public class DataPartitioner {
 
     private void computeOptimalGridSize(RegressionAnalyser analyser, int sizeTestSeries) {
 
-        analyser.setK(sizeTestSeries); // TODO that is not necessary, change it
+        analyser.setK(sizeTestSeries); // TODO that might not be necessary, change it eventually
         analyser.linearRegression();
         double sumDiffs = 0.0;
         for (int i = 1; i <= sizeTestSeries; ++i) {

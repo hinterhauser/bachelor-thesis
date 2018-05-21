@@ -3,13 +3,16 @@ package bachelorthesis.clustering.grid;
 import bachelorthesis.clustering.data.DataPoint;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Grid implements StatsObj {
 
     private int k;
     private Cell[][] cells;
     private List<DataPoint> dataPoints;
+    private List<Cluster> clusters;
     private double x;
     private double y;
 
@@ -21,6 +24,7 @@ public class Grid implements StatsObj {
         setK(k);
         setDataPoints(dataPoints);
         cells = new Cell[k][k];
+        clusters = new ArrayList<>();
         setX(x);
         setY(y);
     }
@@ -72,6 +76,16 @@ public class Grid implements StatsObj {
     public void setDataPoints(List<DataPoint> dataPoints) {
         this.dataPoints = dataPoints;
     }
+
+    public List<Cluster> getClusters() {
+        return clusters;
+    }
+
+    public void setClusters(List<Cluster> clusters) {
+        this.clusters = clusters;
+    }
+
+    // -------------- end Setter and Getter ------------------------------------
 
     private void calculateMean() {
 
@@ -163,5 +177,43 @@ public class Grid implements StatsObj {
             }
         }
         return sum;
+    }
+
+    public void setupClusters() {
+
+        Cluster[][] clusterArray = new Cluster[k][k];
+        for (int i = 0; i < k; ++i) {
+            for (int j = 0; j < k; ++j) {
+
+                if (getCells()[i][j] != null & getCells()[i][j].getDataPoints().size() > 0) {
+
+                    clusterArray[i][j] = new Cluster(getCells()[i][j]);
+                }
+            }
+        }
+        for (int i = 0; i < k; ++i) {
+            for (int j = 0; j < k; ++j) {
+
+                if (getCells()[i][j].getDataPoints().size() > 0) {
+
+                    clusterArray[i][j].setNeighbors(assignNeighbors(i, j, clusterArray));
+                    clusters.add(clusterArray[i][j]);
+                }
+            }
+        }
+    }
+
+    private Set<Cluster> assignNeighbors(int i, int j, Cluster[][] clusterArray) {
+
+        Set<Cluster> neighbors = new LinkedHashSet<>();
+        for (int y = i-1; y <= i+1; ++y) {
+            for (int x = j-1; x <= j+1; ++x) {
+
+                if (clusterArray[y][x] != null & !(y != i & x != j)) {     // TODO beware of the edges!
+                    neighbors.add(clusterArray[y][x]);
+                }
+            }
+        }
+        return neighbors;
     }
 }

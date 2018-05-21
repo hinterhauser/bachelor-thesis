@@ -3,27 +3,33 @@ package bachelorthesis.clustering.grid;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Cluster {
+public class Cluster {          // TODO clean it up
 
     private Set<Cell> clusterCells;
     private Set<Cluster> neighbors;
-    private Set<Cluster> parts;
+    //private Set<Cluster> parts;
     private String name;
 
     public Cluster() {
 
         clusterCells = new LinkedHashSet<>();
         neighbors = new LinkedHashSet<>();
-        parts = new LinkedHashSet<>();
-        parts.add(this);
+        //parts = new LinkedHashSet<>();
+        //parts.add(this);
+    }
+
+    public Cluster(Cell clusterCell) {
+
+        clusterCells = new LinkedHashSet<>();
+        clusterCells.add(clusterCell);
     }
 
     public Cluster(Set<Cell> clusterCells, Set<Cluster> neighbors) {
 
         setClusterCells(clusterCells);
         setNeighbors(neighbors);
-        parts = new LinkedHashSet<>();
-        parts.add(this);
+        //parts = new LinkedHashSet<>();
+        //parts.add(this);
     }
 
     public Cluster(Cell clusterCell, Set<Cluster> neighbors) {
@@ -31,8 +37,8 @@ public class Cluster {
         clusterCells = new LinkedHashSet<>();
         clusterCells.add(clusterCell);
         setNeighbors(neighbors);
-        parts = new LinkedHashSet<>();
-        parts.add(this);
+        //parts = new LinkedHashSet<>();
+        //parts.add(this);
     }
 
     public Set<Cell> getClusterCells() {
@@ -51,13 +57,13 @@ public class Cluster {
         this.neighbors = neighbors;
     }
 
-    public Set<Cluster> getParts() {
+    /*public Set<Cluster> getParts() {
         return parts;
     }
 
     public void setParts(Set<Cluster> parts) {
         this.parts = parts;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -67,7 +73,7 @@ public class Cluster {
         this.name = name;
     }
 
-    private boolean removeNeighbor(Cluster neighbor) {
+    public boolean removeNeighbor(Cluster neighbor) {
 
         return neighbors.remove(neighbor);
     }
@@ -92,31 +98,49 @@ public class Cluster {
         return clusterCells.addAll(cluster.getClusterCells());
     }
 
-    private boolean addParts(Cluster cluster) {
+    /*private boolean addParts(Cluster cluster) {
 
         return parts.addAll(cluster.getParts());
-    }
+    }*/
 
-    public void mergeClusters(Cluster merger) {
+    // the merger will be removed, this has to be done outside of the Cluster.class
+    public void mergeClusters(Cluster merger) {     // TODO clean it up
 
-        /*System.out.println("Neighbors before merging:");
-        System.out.println("Cluster:  " + getName());
-        printNeighbors();
-        System.out.println("Merger:   " + merger.getName());
-        merger.printNeighbors();*/
+        //debugMerging("Neighbors before merging:", merger);
 
-        merger.removeNeighbors(getParts());
+        // first the merging clusters remove themselves from the neighborhood
+        merger.removeNeighbor(this);
+        removeNeighbor(merger);
+
+        // assign the neighbors
+        merger.addNeighbors(getNeighbors());
+        addNeighbors(merger.getNeighbors());
+        //System.out.println("\nthis:");
+        for (Cluster neighbor : neighbors) {
+            neighbor.addNeighbor(merger);
+            //System.out.println(neighbor.getName());
+            //neighbor.printNeighbors();
+        }
+        //System.out.println("merger:");
+        for (Cluster neighbor : merger.getNeighbors()) {
+            neighbor.addNeighbor(this);
+            //System.out.println(neighbor.getName());
+            //neighbor.printNeighbors();
+        }
+        //System.out.println("\n");
+
+        //merger.removeNeighbors(getParts());
         //System.out.println(getName() + " " + getParts() + "  " + this.getParts());
         /*for (Cluster c : getParts()) {
             System.out.println("parts: " + c.getName());
         }*/
-        removeNeighbors(merger.getParts());
+        //removeNeighbors(merger.getParts());
 
-        merger.addNeighbors(neighbors);
-        addNeighbors(merger.getNeighbors());
+        //merger.addNeighbors(neighbors);
+        //addNeighbors(merger.getNeighbors());
 
-        merger.addParts(this);
-        addParts(merger);
+        //merger.addParts(this);
+        //addParts(merger);
 
         //System.out.println("merger, neighbors: " + merger.getNeighbors().size());
         //System.out.println("neighbors: " + getNeighbors().size());
@@ -124,21 +148,27 @@ public class Cluster {
         addClusterCells(merger);
         merger.addClusterCells(this);   // is this really necessary
 
-        /*System.out.println("Neighbors after merging:");
+        //debugMerging("Neighbors after merging:", merger);
+    }
+
+    private void debugMerging(String description, Cluster merger) {
+
+        System.out.println(description);
         System.out.println("Cluster:  " + getName());
         printNeighbors();
         System.out.println("Merger:   " + merger.getName());
-        merger.printNeighbors();*/
+        merger.printNeighbors();
     }
 
-    private void printNeighbors() {
+    public void printNeighbors() {
 
+        System.out.println("neighbors:    " + getName());
         for (Cluster neighbor : neighbors) {
-            System.out.println(neighbor.getName() + " parts:");
-            for (Cluster part : neighbor.getParts()) {
+            System.out.println("    " + neighbor.getName());
+            /*for (Cluster part : neighbor.getParts()) {
                 System.out.print("    " + part.getName());
             }
-            System.out.println();
+            System.out.println();*/
         }
     }
 }

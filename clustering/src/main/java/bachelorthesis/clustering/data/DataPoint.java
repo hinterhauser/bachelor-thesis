@@ -7,6 +7,10 @@ public class DataPoint {
     private String cluster;
     private String groundTruth;
 
+    public DataPoint() {
+        // currently only used for testing
+    }
+
     public DataPoint(int dim, double[] vector) {
 
         setDim(dim);
