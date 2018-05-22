@@ -19,7 +19,7 @@ public class Cell implements StatsObj {
         dataPoints = new ArrayList<>();
     }
 
-    public Cell(ArrayList<DataPoint> dataPoints, int dim, double[] center) {
+    public Cell(List<DataPoint> dataPoints, int dim, double[] center) {
 
         setDataPoints(dataPoints);
         setDim(dim);
@@ -104,6 +104,24 @@ public class Cell implements StatsObj {
             sum += Math.pow(partSum, 2.0);
         }
         return Math.sqrt(sum);
+    }
+
+    public double calculateComputingCost() {
+
+        double computingCost = 0.0;
+        for (DataPoint dataPoint : dataPoints) {
+
+            computingCost += probability(dataPoint);
+        }
+        return computingCost;
+    }
+
+    private double probability(DataPoint dataPoint) {
+
+        double factor1 = 1.0 / (deviation * Math.sqrt(2.0 * Math.PI));
+        double x = Math.pow(calculateCenterDistance(dataPoint) - mean, 2.0);
+        double factor2 = Math.exp(-x / (2 * Math.pow(deviation, 2.0)));
+        return factor1 * factor2;
     }
 
     public void emptyCell() {

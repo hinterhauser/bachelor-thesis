@@ -1,6 +1,10 @@
 package bachelorthesis.clustering.grid;
 
+import bachelorthesis.clustering.data.DataPoint;
+
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Cluster {          // TODO clean it up
@@ -149,6 +153,30 @@ public class Cluster {          // TODO clean it up
         merger.addClusterCells(this);   // is this really necessary
 
         //debugMerging("Neighbors after merging:", merger);
+    }
+
+    public double calculateComputingCost() {
+        
+        List<DataPoint> dataPointList = new ArrayList<>();
+        int dim = clusterCells.iterator().next().getDim();
+        double[] center = new double[dim];
+        for (int i = 0; i < dim; ++i) {
+            center[i] = 0.0;
+        }
+        int numberCells = 0;
+        for (Cell cell : clusterCells) {
+
+            dataPointList.addAll(cell.getDataPoints());
+            for (int i = 0; i < dim; ++i) {
+                center[i] += cell.getCenter()[i];
+            }
+            numberCells++;
+        }
+        for (int i = 0; i < dim; ++i) {
+            center[i] /= numberCells;
+        }
+        Cell dataStore = new Cell(dataPointList, dim, center);
+        return dataStore.calculateComputingCost();
     }
 
     private void debugMerging(String description, Cluster merger) {

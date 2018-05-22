@@ -570,35 +570,78 @@ public class UnitTest {
         for (int i = 0; i < 9; ++i)
             assertEquals(clusters.get(i).getClusterCells().size(), 1);
         // test for assigned datapoints
-        Iterator<Cell> iterator;
-        iterator = clusters.get(0).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 2);
-        iterator = clusters.get(1).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 1);
-        iterator = clusters.get(2).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 4);
-        iterator = clusters.get(3).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 5);
-        iterator = clusters.get(4).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 7);
-        iterator = clusters.get(5).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 1);
-        iterator = clusters.get(6).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 1);
-        iterator = clusters.get(7).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 3);
-        iterator = clusters.get(8).getClusterCells().iterator();
-        assertEquals(iterator.next().getDataPoints().size(), 2);
+        assertEquals(numberDataPoints(clusters.get(0)), 2);
+        assertEquals(numberDataPoints(clusters.get(1)), 1);
+        assertEquals(numberDataPoints(clusters.get(2)), 4);
+        assertEquals(numberDataPoints(clusters.get(3)), 5);
+        assertEquals(numberDataPoints(clusters.get(4)), 7);
+        assertEquals(numberDataPoints(clusters.get(5)), 1);
+        assertEquals(numberDataPoints(clusters.get(6)), 1);
+        assertEquals(numberDataPoints(clusters.get(7)), 3);
+        assertEquals(numberDataPoints(clusters.get(8)), 2);
         // test for neighbors
-        assertEquals(clusters.get(0).getNeighbors().size(), 3); // TODO something is wrong here, fix it
-        assertEquals(clusters.get(1).getNeighbors().size(), 3);
+        assertEquals(clusters.get(0).getNeighbors().size(), 3);
+        assertEquals(clusters.get(1).getNeighbors().size(), 5);
         assertEquals(clusters.get(2).getNeighbors().size(), 3);
-        assertEquals(clusters.get(3).getNeighbors().size(), 3);
-        assertEquals(clusters.get(4).getNeighbors().size(), 3);
-        assertEquals(clusters.get(5).getNeighbors().size(), 3);
+        assertEquals(clusters.get(3).getNeighbors().size(), 5);
+        assertEquals(clusters.get(4).getNeighbors().size(), 8);
+        assertEquals(clusters.get(5).getNeighbors().size(), 5);
         assertEquals(clusters.get(6).getNeighbors().size(), 3);
-        assertEquals(clusters.get(7).getNeighbors().size(), 3);
+        assertEquals(clusters.get(7).getNeighbors().size(), 5);
         assertEquals(clusters.get(8).getNeighbors().size(), 3);
+
+        // merge index 3 and 4
+        testGrid.mergeClusters(testGrid.getClusters().get(3), (Cluster) testGrid.getClusters().get(3).getNeighbors().toArray()[2]);
+
+        assertEquals(clusters.size(), 8);
+        // test for neighbors
+        assertEquals(clusters.get(0).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getNeighbors().size(), 4);
+        assertEquals(clusters.get(2).getNeighbors().size(), 3);
+        assertEquals(clusters.get(3).getNeighbors().size(), 7);
+        assertEquals(clusters.get(4).getNeighbors().size(), 5);
+        assertEquals(clusters.get(5).getNeighbors().size(), 2);
+        assertEquals(clusters.get(6).getNeighbors().size(), 4);
+        assertEquals(clusters.get(7).getNeighbors().size(), 3);
+        // test for assigned datapoints
+        assertEquals(numberDataPoints(clusters.get(0)), 2);
+        assertEquals(numberDataPoints(clusters.get(1)), 1);
+        assertEquals(numberDataPoints(clusters.get(2)), 4);
+        assertEquals(numberDataPoints(clusters.get(3)), 12);
+        assertEquals(numberDataPoints(clusters.get(4)), 1);
+        assertEquals(numberDataPoints(clusters.get(5)), 1);
+        assertEquals(numberDataPoints(clusters.get(6)), 3);
+        assertEquals(numberDataPoints(clusters.get(7)), 2);
+
+        // merge index 2 and 4
+        testGrid.mergeClusters(testGrid.getClusters().get(2), (Cluster) testGrid.getClusters().get(2).getNeighbors().toArray()[1]);
+
+        assertEquals(clusters.size(), 7);   // be aware of diagonals
+        // test for neighbors
+        assertEquals(clusters.get(0).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getNeighbors().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 4);
+        assertEquals(clusters.get(3).getNeighbors().size(), 6);
+        assertEquals(clusters.get(4).getNeighbors().size(), 2);
+        assertEquals(clusters.get(5).getNeighbors().size(), 4);
+        assertEquals(clusters.get(6).getNeighbors().size(), 3);
+        // test for assigned datapoints
+        assertEquals(numberDataPoints(clusters.get(0)), 2);
+        assertEquals(numberDataPoints(clusters.get(1)), 1);
+        assertEquals(numberDataPoints(clusters.get(2)), 5);
+        assertEquals(numberDataPoints(clusters.get(3)), 12);
+        assertEquals(numberDataPoints(clusters.get(4)), 1);
+        assertEquals(numberDataPoints(clusters.get(5)), 3);
+        assertEquals(numberDataPoints(clusters.get(6)), 2);
+    }
+
+    private int numberDataPoints(Cluster cluster) {
+
+        int sum = 0;
+        for (Cell cell : cluster.getClusterCells()) {
+            sum += cell.getDataPoints().size();
+        }
+        return sum;
     }
 
     private void fillTestGridCells(Grid testGrid) {

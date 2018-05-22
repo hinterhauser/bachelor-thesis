@@ -209,11 +209,20 @@ public class Grid implements StatsObj {
         for (int y = i-1; y <= i+1; ++y) {
             for (int x = j-1; x <= j+1; ++x) {
 
-                if (clusterArray[y][x] != null & !(y != i & x != j)) {     // TODO beware of the edges!
+                if ((y > 0 && x > 0) && (y < k && x < k) && clusterArray[y][x] != null && !(y == i && x == j)) {
                     neighbors.add(clusterArray[y][x]);
                 }
             }
         }
         return neighbors;
+    }
+
+    public void mergeClusters(Cluster cluster, Cluster merger) {
+
+        cluster.mergeClusters(merger);
+        for (Cluster clus : clusters) {
+            clus.removeNeighbor(merger);
+        }
+        clusters.remove(merger);
     }
 }
