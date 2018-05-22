@@ -230,17 +230,17 @@ public class Grid implements StatsObj {
 
         double actualCost = 0.0;
         double costBeforeMerging = 0.0;
-        for (Cluster cluster : clusters) {
+        for (Cluster cluster : clusters) {      // TODO this does not work, fix it
 
             for (Cluster c : cluster.getNeighbors()) {
                 System.out.println("ComputationCost before: " + calculateComputingCost());
 
-                System.out.println("   " + (actualCost = cluster.calculateComputingCost()));
+                System.out.println("   " + (actualCost = cluster.calculateComputingCost() + c.calculateComputingCost()));
                 System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(c)));
 
                 if (costBeforeMerging < actualCost) {
 
-                    cluster.mergeClusters(c);
+                    mergeClusters(cluster, c);
                 }
 
                 System.out.println("ComputationCost after: " + calculateComputingCost());

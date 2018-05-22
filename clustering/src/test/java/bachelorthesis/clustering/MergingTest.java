@@ -25,7 +25,7 @@ public class MergingTest {
         Cell testCell = new Cell( dataPoints, 2, mean);
         System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
         Grid testGrid = new Grid(2, dataPoints, 100, 100);
-
+        testTestGridSimple(testGrid);
 
         System.out.println("Now perform the clustering:");
         testGrid = new Grid(2, dataPoints, 100, 100);
