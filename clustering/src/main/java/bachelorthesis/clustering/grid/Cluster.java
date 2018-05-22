@@ -156,15 +156,29 @@ public class Cluster {          // TODO clean it up
     }
 
     public double calculateComputingCost() {
-        
+
         List<DataPoint> dataPointList = new ArrayList<>();
         int dim = clusterCells.iterator().next().getDim();
         double[] center = new double[dim];
-        for (int i = 0; i < dim; ++i) {
-            center[i] = 0.0;
-        }
         int numberCells = 0;
-        for (Cell cell : clusterCells) {
+
+        fillArrayWithZeros(center, dim);
+        numberCells = getNumberOfCellsAndStoreInformation(this, dataPointList, center, dim);
+        divideArrayByScalarInteger(center, dim, numberCells);
+
+        Cell dataStore = new Cell(dataPointList, dim, center);
+        return dataStore.calculateComputingCost();
+    }
+
+    public double calculateComputingCostBeforeMerging(Cluster merger) {
+
+        return 0.0;
+    }
+
+    private int getNumberOfCellsAndStoreInformation(Cluster cluster, List<DataPoint> dataPointList, double[] center, int dim) {
+
+        int numberCells = 0;
+        for (Cell cell : cluster.getClusterCells()) {
 
             dataPointList.addAll(cell.getDataPoints());
             for (int i = 0; i < dim; ++i) {
@@ -172,11 +186,21 @@ public class Cluster {          // TODO clean it up
             }
             numberCells++;
         }
+        return numberCells;
+    }
+
+    private void divideArrayByScalarInteger(double[] array, int dim, int divisor) {
+
         for (int i = 0; i < dim; ++i) {
-            center[i] /= numberCells;
+            array[i] /= divisor;
         }
-        Cell dataStore = new Cell(dataPointList, dim, center);
-        return dataStore.calculateComputingCost();
+    }
+
+    private void fillArrayWithZeros(double[] array, int dim) {
+
+        for (int i = 0; i < dim; ++i) {
+            array[i] = 0.0;
+        }
     }
 
     private void debugMerging(String description, Cluster merger) {
