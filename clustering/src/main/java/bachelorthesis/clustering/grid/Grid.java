@@ -225,4 +225,36 @@ public class Grid implements StatsObj {
         }
         clusters.remove(merger);
     }
+
+    public void performClustering() {
+
+        double actualCost = 0.0;
+        double costBeforeMerging = 0.0;
+        for (Cluster cluster : clusters) {
+
+            for (Cluster c : cluster.getNeighbors()) {
+                System.out.println("ComputationCost before: " + calculateComputingCost());
+
+                System.out.println("   " + (actualCost = cluster.calculateComputingCost()));
+                System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(c)));
+
+                if (costBeforeMerging < actualCost) {
+
+                    cluster.mergeClusters(c);
+                }
+
+                System.out.println("ComputationCost after: " + calculateComputingCost());
+            }
+        }
+    }
+
+    private double calculateComputingCost() {
+
+        double cost = 0.0;
+        for (Cluster cluster : clusters) {
+
+            cost += cluster.calculateComputingCost();
+        }
+        return cost;
+    }
 }

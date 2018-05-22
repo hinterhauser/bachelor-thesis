@@ -172,7 +172,18 @@ public class Cluster {          // TODO clean it up
 
     public double calculateComputingCostBeforeMerging(Cluster merger) {
 
-        return 0.0;
+        List<DataPoint> dataPointList = new ArrayList<>();
+        int dim = clusterCells.iterator().next().getDim();
+        double[] center = new double[dim];
+        int numberCells = 0;
+
+        fillArrayWithZeros(center, dim);
+        numberCells += getNumberOfCellsAndStoreInformation(this, dataPointList, center, dim);
+        numberCells += getNumberOfCellsAndStoreInformation(merger, dataPointList, center, dim);
+        divideArrayByScalarInteger(center, dim, numberCells);
+
+        Cell dataStore = new Cell(dataPointList, dim, center);
+        return dataStore.calculateComputingCost();
     }
 
     private int getNumberOfCellsAndStoreInformation(Cluster cluster, List<DataPoint> dataPointList, double[] center, int dim) {

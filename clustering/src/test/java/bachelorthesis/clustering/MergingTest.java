@@ -25,23 +25,35 @@ public class MergingTest {
         Cell testCell = new Cell( dataPoints, 2, mean);
         System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
         Grid testGrid = new Grid(2, dataPoints, 100, 100);
+
+
+        System.out.println("Now perform the clustering:");
+        testGrid = new Grid(2, dataPoints, 100, 100);
+        testGrid.setupCells();
+        testGrid.setupClusters();
+        testGrid.performClustering();
+    }
+
+    private static void testTestGridSimple(Grid testGrid) {
+
         testGrid.setupCells();
         testGrid.setupClusters();
         double sum = 0.0;
-        System.out.println("Computing Cost of grid");
-        System.out.println(testGrid.getCells()[0][0].calculateComputingCost());
-        System.out.println(testGrid.getCells()[0][1].calculateComputingCost());
-        System.out.println(testGrid.getCells()[1][0].calculateComputingCost());
-        System.out.println(testGrid.getCells()[1][1].calculateComputingCost());
+        System.out.println("Computing Cost of grid, 4 cells: ");
+        System.out.println("    " + testGrid.getCells()[0][0].calculateComputingCost());
+        System.out.println("    " + testGrid.getCells()[0][1].calculateComputingCost());
+        System.out.println("    " + testGrid.getCells()[1][0].calculateComputingCost());
+        System.out.println("    " + testGrid.getCells()[1][1].calculateComputingCost());
 
         sum += testGrid.getCells()[0][0].calculateComputingCost();
         sum += testGrid.getCells()[0][1].calculateComputingCost();
         sum += testGrid.getCells()[1][0].calculateComputingCost();
         sum += testGrid.getCells()[1][1].calculateComputingCost();
 
-        System.out.println("Summe: " + sum);
+        System.out.println("Sum of all cells: " + sum);
 
         // other method
+        System.out.println("Now the sum using merging of cells:");
         printSum(testGrid);
 
         testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
@@ -59,6 +71,6 @@ public class MergingTest {
 
             sum += cluster.calculateComputingCost();
         }
-        System.out.println("Summe: " + sum);
+        System.out.println("Sum: " + sum);
     }
 }
