@@ -279,7 +279,10 @@ public class Grid implements StatsObj {
             costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger);
             //System.out.println("   " + (actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost()));
             //System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger)));
-            if (costBeforeMerging < actualCost) {
+            /*if (Double.isNaN(actualCost)) { // just an experiment
+                mergeClusters(cluster, neighbors.get(neighborIndex));
+            }*/
+            if (costBeforeMerging < actualCost || Double.isNaN(actualCost)) {
 
                 mergeClusters(cluster, neighbors.get(neighborIndex));
             } else {

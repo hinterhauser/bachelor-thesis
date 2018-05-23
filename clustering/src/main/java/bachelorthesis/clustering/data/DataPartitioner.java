@@ -44,7 +44,7 @@ public class DataPartitioner {
         this.dataPoints = dataPoints;
     }
 
-    public void findOptimalPartition(String fileName, String areaFile) {    // TODO this function could return the optimal partition as an integer (k)
+    public int findOptimalPartition(String fileName, String areaFile) {    // TODO this function could return the optimal partition as an integer (k)
 
         String outputResults = "";
         String outputAreas = "";
@@ -65,8 +65,8 @@ public class DataPartitioner {
             AreaAnalyser.addDataPoint(areaCost);
         }
         System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
-        computeOptimalGridSize(CostAnalyser, sizeTestSeries);
-        computeOptimalGridSize(AreaAnalyser, sizeTestSeries);
+        int costK = computeOptimalGridSize(CostAnalyser, sizeTestSeries);
+        int costA = computeOptimalGridSize(AreaAnalyser, sizeTestSeries);
 
         try {
             writeToFile(outputResults, fileName);
@@ -76,9 +76,13 @@ public class DataPartitioner {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (costA > costK) {
+            return costA;
+        }
+        return costK;
     }
 
-    private void computeOptimalGridSize(RegressionAnalyser analyser, int sizeTestSeries) {
+    private int computeOptimalGridSize(RegressionAnalyser analyser, int sizeTestSeries) {
 
         analyser.setK(sizeTestSeries); // TODO that might not be necessary, change it eventually
         analyser.linearRegression();
@@ -99,6 +103,7 @@ public class DataPartitioner {
         }
         ++i; // because it is rounded upwards
         System.out.println("The size of the grid should be at least " + i + " times " + i);
+        return i;
     }
 
     private void writeToFile(String output, String fileName) throws IOException {
