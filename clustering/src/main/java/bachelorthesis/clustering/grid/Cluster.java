@@ -13,27 +13,27 @@ public class Cluster {          // TODO clean it up
     private Set<Cluster> neighbors;
     //private Set<Cluster> parts;
     private String name;
+    private boolean converged;
 
     public Cluster() {
 
         clusterCells = new LinkedHashSet<>();
         neighbors = new LinkedHashSet<>();
-        //parts = new LinkedHashSet<>();
-        //parts.add(this);
+        setConverged(false);
     }
 
     public Cluster(Cell clusterCell) {
 
         clusterCells = new LinkedHashSet<>();
         clusterCells.add(clusterCell);
+        setConverged(false);
     }
 
     public Cluster(Set<Cell> clusterCells, Set<Cluster> neighbors) {
 
         setClusterCells(clusterCells);
         setNeighbors(neighbors);
-        //parts = new LinkedHashSet<>();
-        //parts.add(this);
+        setConverged(false);
     }
 
     public Cluster(Cell clusterCell, Set<Cluster> neighbors) {
@@ -41,8 +41,15 @@ public class Cluster {          // TODO clean it up
         clusterCells = new LinkedHashSet<>();
         clusterCells.add(clusterCell);
         setNeighbors(neighbors);
-        //parts = new LinkedHashSet<>();
-        //parts.add(this);
+        setConverged(false);
+    }
+
+    public boolean isConverged() {
+        return converged;
+    }
+
+    public void setConverged(boolean converged) {
+        this.converged = converged;
     }
 
     public Set<Cell> getClusterCells() {

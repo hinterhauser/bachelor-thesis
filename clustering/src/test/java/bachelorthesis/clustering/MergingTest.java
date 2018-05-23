@@ -22,8 +22,8 @@ public class MergingTest {
 
             dataPoints.add(generator.generateDataPoint(mean, 10.0));
         }
-        Cell testCell = new Cell( dataPoints, 2, mean);
-        System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
+        //Cell testCell = new Cell( dataPoints, 2, mean);
+        //System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
         Grid testGrid = new Grid(2, dataPoints, 100, 100);
         testTestGridSimple(testGrid);
 
@@ -31,7 +31,13 @@ public class MergingTest {
         testGrid = new Grid(2, dataPoints, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
+        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
+        System.out.println("Results of Clustering:");
+        System.out.println("     Number clusters: " + testGrid.getClusters().size());
+        System.out.println("     Computing Cost: " + testGrid.calculateComputingCost());
+        Cell testCell = new Cell( dataPoints, 2, mean);
+        System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
     }
 
     private static void testTestGridSimple(Grid testGrid) {

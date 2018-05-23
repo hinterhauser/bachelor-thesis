@@ -209,11 +209,13 @@ public class Grid implements StatsObj {
         for (int y = i-1; y <= i+1; ++y) {
             for (int x = j-1; x <= j+1; ++x) {
 
-                if ((y > 0 && x > 0) && (y < k && x < k) && clusterArray[y][x] != null && !(y == i && x == j)) {
+                if ((y >= 0 && x >= 0) && (y < k && x < k) && clusterArray[y][x] != null && !(y == i && x == j)) {
+                    //System.out.println("y: " + y + " x: " + x);
                     neighbors.add(clusterArray[y][x]);
                 }
             }
         }
+        //System.out.println("assign: " + neighbors.size());
         return neighbors;
     }
 
@@ -230,7 +232,9 @@ public class Grid implements StatsObj {
 
         double actualCost = 0.0;
         double costBeforeMerging = 0.0;
-        for (Cluster cluster : clusters) {      // TODO this does not work, fix it
+        List<Cluster> notConvergedClusters = new ArrayList<>();
+        List<Cluster> convergedClusters = new ArrayList<>();
+        /*for (Cluster cluster : clusters) {      // TODO this does not work, fix it
 
             for (Cluster c : cluster.getNeighbors()) {
                 System.out.println("ComputationCost before: " + calculateComputingCost());
@@ -245,10 +249,63 @@ public class Grid implements StatsObj {
 
                 System.out.println("ComputationCost after: " + calculateComputingCost());
             }
+        }*/
+        do {
+
+            getNotConvergedClusters(notConvergedClusters);
+            if (notConvergedClusters.size() <= 0) {
+                break;
+            }
+            mergeWithNeighbors(notConvergedClusters.get(0), convergedClusters);
+        } while (notConvergedClusters.size() > 0);
+        clusters = convergedClusters;
+    }
+
+    private void mergeWithNeighbors(Cluster cluster, List<Cluster> convergedClusters) {
+
+        double actualCost = 0.0;
+        double costBeforeMerging = 0.0;
+        List<Cluster> neighbors = new ArrayList<>();
+        int neighborIndex = 0;
+        while(true) {
+
+            neighbors.addAll(cluster.getNeighbors());
+            if (neighborIndex >= neighbors.size()) {
+                break;
+            }
+            //System.out.println("neighbors size: " + neighbors.size());
+            Cluster merger = neighbors.get(neighborIndex);
+            actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost();
+            costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger);
+            //System.out.println("   " + (actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost()));
+            //System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger)));
+            if (costBeforeMerging < actualCost) {
+
+                mergeClusters(cluster, neighbors.get(neighborIndex));
+            } else {
+
+                ++neighborIndex;
+            }
+            //System.out.println("ni: " + neighborIndex + "  ns: " + neighbors.size());
+            neighbors.clear();
+        }
+        //System.out.println("End");
+        cluster.setConverged(true);
+        convergedClusters.add(cluster);
+    }
+
+    private void getNotConvergedClusters(List<Cluster> notConvergedClusters) {
+
+        notConvergedClusters.clear();
+        for (Cluster cluster : clusters) {
+            if (!cluster.isConverged()) {
+
+                notConvergedClusters.add(cluster);
+            }
         }
     }
 
-    private double calculateComputingCost() {
+    public double calculateComputingCost() {
 
         double cost = 0.0;
         for (Cluster cluster : clusters) {
