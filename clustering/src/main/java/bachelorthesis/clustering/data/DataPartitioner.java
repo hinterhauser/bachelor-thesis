@@ -44,7 +44,7 @@ public class DataPartitioner {
         this.dataPoints = dataPoints;
     }
 
-    public int findOptimalPartition(String fileName, String areaFile) {    // TODO this function could return the optimal partition as an integer (k)
+    public int findOptimalPartition(String fileName, String areaFile) {
 
         String outputResults = "";
         String outputAreas = "";

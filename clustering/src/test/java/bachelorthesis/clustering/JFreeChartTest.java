@@ -35,10 +35,10 @@ public class JFreeChartTest {
 		try {
 			input = Integer.parseInt(reader.readLine());
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Wrong Numberformat");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("IOException occured");
 			e.printStackTrace();
 		}
 		

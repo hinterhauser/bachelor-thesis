@@ -19,7 +19,7 @@ public class TestDataReader {
         try {
             parseData(csvFile);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            System.out.println("Could not read the data, IOException");
             e.printStackTrace();
         }
     }
