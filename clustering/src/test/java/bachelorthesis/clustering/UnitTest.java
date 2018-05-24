@@ -676,6 +676,34 @@ public class UnitTest {
         return cell;
     }
 
+    @Test
+    public void testMuAndSigma() {
+
+        List<DataPoint> dataPoints = getTestDataPointsList();
+        Cell testCell = new Cell(dataPoints, 3, dataPoints.get(0).getVector());
+
+        assertEquals(testCell.getMu()[0], 4.0, 0.001);
+        assertEquals(testCell.getMu()[1], 6.0, 0.001);
+        assertEquals(testCell.getMu()[2], 5.0, 0.001);
+        // TODO test for sigma
+    }
+
+    private List<DataPoint> getTestDataPointsList() {
+
+        List<DataPoint> dataPoints = new ArrayList<>();
+
+        for (int i = 0; i < 7; ++i) {
+
+            double[] point = new double[3];
+            point[0] = i+1;
+            point[1] = 2 * i;
+            point[2] = 5;
+            dataPoints.add(new DataPoint(3, point));
+        }
+
+        return dataPoints;
+    }
+
     /*
         ***************************
         * functions for debugging *

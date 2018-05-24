@@ -14,6 +14,9 @@ public class Cell implements StatsObj {
     private double mean;
     private double deviation;
 
+    private double[] mu;
+    private double[] sigma;
+
     public Cell() {
         // currently only used for testing
         dataPoints = new ArrayList<>();
@@ -24,6 +27,7 @@ public class Cell implements StatsObj {
         setDataPoints(dataPoints);
         setDim(dim);
         setCenter(center);
+        calculateMuAndSigma();
         calculateDeviationAndMean();
     }
 
@@ -57,6 +61,77 @@ public class Cell implements StatsObj {
 
     public void setDataPoints(List<DataPoint> dataPoints) {
         this.dataPoints = dataPoints;
+    }
+
+    public double[] getMu() {
+        return mu;
+    }
+
+    public double[] getSigma() {
+        return sigma;
+    }
+
+    // ------------------------ end Getter and Setter --------------------------------------
+
+    private void fillVectorWithZeros(double[] vector) {
+
+        for (int i = 0; i < vector.length; ++i) {
+
+            vector[i] = 0.0;
+        }
+    }
+
+    private void fillMuAndSigmaWithZeros() {
+
+        mu = new double[dim];
+        sigma = new double[dim];
+        fillVectorWithZeros(mu);
+        fillVectorWithZeros(sigma);
+    }
+
+    private void calculateMu() {
+
+        for (DataPoint dataPoint : dataPoints) {
+            for (int i = 0; i < dim; ++i) {
+
+                mu[i] += dataPoint.getVector()[i];
+            }
+        }
+        scalarVectorDivision(mu, dataPoints.size());
+    }
+
+    private void scalarVectorDivision(double[] vector, double scalar) {
+
+        for (int i = 0; i < vector.length; ++i) {
+
+            vector[i] /= scalar;
+        }
+    }
+
+    private void scalarVectorPow(double[] vector, double scalar) {
+
+        for (int i = 0; i < vector.length; ++i) {
+
+            vector[i] = Math.pow(vector[i], scalar);
+        }
+    }
+
+    private void scalarVectorSqrt(double[] vector) {
+
+        for (int i = 0; i < vector.length; ++i) {
+
+            vector[i] = Math.sqrt(vector[i]);
+        }
+    }
+
+    private void calculateMuAndSigma() {
+
+        fillMuAndSigmaWithZeros();
+        calculateMu();
+        for (DataPoint dataPoint : dataPoints) {
+            // TODO implement calculation of sigma (deviation) in all dimensions
+            // TODO use scalarVectorFunc
+        }
     }
 
     private void calculateMean() {
