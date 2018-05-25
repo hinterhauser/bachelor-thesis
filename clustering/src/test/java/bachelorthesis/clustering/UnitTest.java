@@ -749,7 +749,6 @@ public class UnitTest {
                 dataPoints1.addAll(cell.getDataPoints());
             }
             Cell cell = new Cell(dataPoints1, 2, mean);
-            cellMean = getMeanDataPoint(cell);
             dataPoints1.clear();
         }
         Cell testCell = new Cell( dataPoints, 2, mean);
