@@ -685,7 +685,10 @@ public class UnitTest {
         assertEquals(testCell.getMu()[0], 4.0, 0.001);
         assertEquals(testCell.getMu()[1], 6.0, 0.001);
         assertEquals(testCell.getMu()[2], 5.0, 0.001);
-        // TODO test for sigma
+
+        assertEquals(testCell.getSigma()[0], 2.0, 0.001);
+        assertEquals(testCell.getSigma()[1], 4.0, 0.001);
+        assertEquals(testCell.getSigma()[2], 0.0, 0.001);
     }
 
     private List<DataPoint> getTestDataPointsList() {
@@ -702,6 +705,13 @@ public class UnitTest {
         }
 
         return dataPoints;
+    }
+
+    @Test
+    public void testLogConversion() {
+
+        double three = Math.log(8) / Math.log(2);
+        assertEquals((int) three, 3);
     }
 
     /*

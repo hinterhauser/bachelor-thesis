@@ -38,7 +38,7 @@ public class MergingTest {
         testGrid.performClustering();
         System.out.println("Results of Clustering:");
         System.out.println("     Number clusters: " + testGrid.getClusters().size());
-        System.out.println("     Computing Cost: " + testGrid.calculateComputingCost());
+        System.out.println("     Computing Cost: " + testGrid.calculateCodingCost());
         List<DataPoint> dataPoints1 = new ArrayList<>();
         int i = 0;
         double[] cellMean;
@@ -55,7 +55,7 @@ public class MergingTest {
         }
         //System.out.println("     Deviation: " + cell.getDeviation());
         Cell testCell = new Cell( dataPoints, 2, mean);
-        System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
+        System.out.println("Computing Cost of single cell: " + testCell.calculateCodingCost());
         cellMean = getMeanDataPoint(testCell);
         System.out.println("     Mean: " + cellMean[0] + " , " + cellMean[1]);
         //System.out.println("     Mean: " + testCell.getMean());
@@ -127,7 +127,7 @@ public class MergingTest {
 
         System.out.println("Results of Clustering:");
         System.out.println("     Number clusters: " + testGrid.getClusters().size());
-        System.out.println("     Computing Cost: " + testGrid.calculateComputingCost());
+        System.out.println("     Computing Cost: " + testGrid.calculateCodingCost());
         List<DataPoint> dataPoints1 = new ArrayList<>();
         int i = 0;
         double[] cellMean;
@@ -164,15 +164,15 @@ public class MergingTest {
         testGrid.setupClusters();
         double sum = 0.0;
         System.out.println("Computing Cost of grid, 4 cells: ");
-        System.out.println("    " + testGrid.getCells()[0][0].calculateComputingCost());
-        System.out.println("    " + testGrid.getCells()[0][1].calculateComputingCost());
-        System.out.println("    " + testGrid.getCells()[1][0].calculateComputingCost());
-        System.out.println("    " + testGrid.getCells()[1][1].calculateComputingCost());
+        System.out.println("    " + testGrid.getCells()[0][0].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[0][1].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[1][0].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[1][1].calculateCodingCost());
 
-        sum += testGrid.getCells()[0][0].calculateComputingCost();
-        sum += testGrid.getCells()[0][1].calculateComputingCost();
-        sum += testGrid.getCells()[1][0].calculateComputingCost();
-        sum += testGrid.getCells()[1][1].calculateComputingCost();
+        sum += testGrid.getCells()[0][0].calculateCodingCost();
+        sum += testGrid.getCells()[0][1].calculateCodingCost();
+        sum += testGrid.getCells()[1][0].calculateCodingCost();
+        sum += testGrid.getCells()[1][1].calculateCodingCost();
 
         System.out.println("Sum of all cells: " + sum);
 
@@ -193,7 +193,7 @@ public class MergingTest {
         double sum = 0.0;
         for (Cluster cluster : testGrid.getClusters()) {
 
-            sum += cluster.calculateComputingCost();
+            sum += cluster.calculateCodingCost();
         }
         System.out.println("Sum: " + sum);
     }

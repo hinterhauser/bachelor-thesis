@@ -151,6 +151,7 @@ public class Grid implements StatsObj {
             for (int j = 0; j < k; ++j) {
 
                 cells[i][j].calculateDeviationAndMean();
+                cells[i][j].calculateMuAndSigma();
             }
         }
     }
@@ -275,8 +276,8 @@ public class Grid implements StatsObj {
             }
             //System.out.println("neighbors size: " + neighbors.size());
             Cluster merger = neighbors.get(neighborIndex);
-            actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost();
-            costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger);
+            actualCost = cluster.calculateCodingCost() + merger.calculateCodingCost();
+            costBeforeMerging = cluster.calculateCodingCostBeforeMerging(merger);
             //System.out.println("   " + (actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost()));
             //System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger)));
             /*if (Double.isNaN(actualCost)) { // just an experiment
@@ -308,12 +309,12 @@ public class Grid implements StatsObj {
         }
     }
 
-    public double calculateComputingCost() {
+    public double calculateCodingCost() {
 
         double cost = 0.0;
         for (Cluster cluster : clusters) {
 
-            cost += cluster.calculateComputingCost();
+            cost += cluster.calculateCodingCost();
         }
         return cost;
     }

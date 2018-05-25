@@ -124,14 +124,19 @@ public class Cell implements StatsObj {
         }
     }
 
-    private void calculateMuAndSigma() {
+    public void calculateMuAndSigma() {
 
         fillMuAndSigmaWithZeros();
         calculateMu();
         for (DataPoint dataPoint : dataPoints) {
-            // TODO implement calculation of sigma (deviation) in all dimensions
-            // TODO use scalarVectorFunc
+
+            for (int i = 0; i < sigma.length; ++i) {
+
+                sigma[i] += Math.pow(dataPoint.getVector()[i] - mu[i], 2.0);
+            }
         }
+        scalarVectorDivision(sigma, dataPoints.size());
+        scalarVectorSqrt(sigma);
     }
 
     private void calculateMean() {
@@ -181,21 +186,35 @@ public class Cell implements StatsObj {
         return Math.sqrt(sum);
     }
 
-    public double calculateComputingCost() {
+    public double calculateCodingCost() {
 
-        double computingCost = 0.0;
+        double[] codingCosts = new double[dim];
+        fillVectorWithZeros(codingCosts);
         for (DataPoint dataPoint : dataPoints) {
+            for (int i = 0; i < dim; ++i) {
 
-            computingCost += probability(dataPoint);
+                double p = probability(dataPoint, i);
+                codingCosts[i] += -p * Math.log(p) / Math.log(2.0);
+            }
         }
-        return computingCost;
+        return vectorSum(codingCosts);
     }
 
-    private double probability(DataPoint dataPoint) {
+    private double vectorSum(double[] vector) {
 
-        double factor1 = 1.0 / (deviation * Math.sqrt(2.0 * Math.PI));
-        double x = Math.pow(calculateCenterDistance(dataPoint) - mean, 2.0);
-        double factor2 = Math.exp(-x / (2 * Math.pow(deviation, 2.0)));
+        double sum = 0.0;
+        for (int i = 0; i < vector.length; ++i) {
+
+            sum += vector[i];
+        }
+        return sum;
+    }
+
+    private double probability(DataPoint dataPoint, int index) {
+
+        double factor1 = 1.0 / (sigma[index] * Math.sqrt(2.0 * Math.PI));
+        double x = Math.pow(dataPoint.getVector()[index] - mu[index], 2.0);
+        double factor2 = Math.exp(-x / (2 * Math.pow(sigma[index], 2.0)));
         return factor1 * factor2;
     }
 

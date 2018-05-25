@@ -162,7 +162,7 @@ public class Cluster {          // TODO clean it up
         //debugMerging("Neighbors after merging:", merger);
     }
 
-    public double calculateComputingCost() {
+    public double calculateCodingCost() {
 
         List<DataPoint> dataPointList = new ArrayList<>();
         int dim = clusterCells.iterator().next().getDim();
@@ -174,10 +174,10 @@ public class Cluster {          // TODO clean it up
         divideArrayByScalarInteger(center, dim, numberCells);
 
         Cell dataStore = new Cell(dataPointList, dim, center);
-        return dataStore.calculateComputingCost();
+        return dataStore.calculateCodingCost();
     }
 
-    public double calculateComputingCostBeforeMerging(Cluster merger) {
+    public double calculateCodingCostBeforeMerging(Cluster merger) {
 
         List<DataPoint> dataPointList = new ArrayList<>();
         int dim = clusterCells.iterator().next().getDim();
@@ -190,7 +190,7 @@ public class Cluster {          // TODO clean it up
         divideArrayByScalarInteger(center, dim, numberCells);
 
         Cell dataStore = new Cell(dataPointList, dim, center);
-        return dataStore.calculateComputingCost();
+        return dataStore.calculateCodingCost();
     }
 
     private int getNumberOfCellsAndStoreInformation(Cluster cluster, List<DataPoint> dataPointList, double[] center, int dim) {
