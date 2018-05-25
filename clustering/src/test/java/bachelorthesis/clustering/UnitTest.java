@@ -1,5 +1,6 @@
 package bachelorthesis.clustering;
 
+import bachelorthesis.clustering.data.DataGenerator;
 import bachelorthesis.clustering.data.DataPoint;
 import bachelorthesis.clustering.grid.Cell;
 import bachelorthesis.clustering.grid.Cluster;
@@ -9,6 +10,8 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static bachelorthesis.clustering.MergingTest.getMeanDataPoint;
+import static bachelorthesis.clustering.MergingTest.printSum;
 import static org.junit.Assert.*;
 
 public class UnitTest {
@@ -712,6 +715,94 @@ public class UnitTest {
 
         double three = Math.log(8) / Math.log(2);
         assertEquals((int) three, 3);
+    }
+
+    @Test
+    public void testMerging() {
+
+        DataGenerator generator = new DataGenerator(2);
+        List<DataPoint> dataPoints = new ArrayList<DataPoint>();
+        double[] mean = new double[2];
+        mean[0] = 50;
+        mean[1] = 50;
+        for (int i = 0; i < 1000; ++i) {
+
+            dataPoints.add(generator.generateDataPoint(mean, 10.0));
+        }
+
+        Grid testGrid = new Grid(2, dataPoints, 100, 100);
+        double cost = testTestGridSimple(testGrid);
+
+        testGrid = new Grid(2, dataPoints, 100, 100);
+        testGrid.setupCells();
+        testGrid.setupClusters();
+        testGrid.performClustering();
+
+        assertEquals(cost, testGrid.calculateCodingCost(), 0.0001);
+        assertEquals(testGrid.getClusters().size(), 1);
+        List<DataPoint> dataPoints1 = new ArrayList<>();
+        int i = 0;
+        double[] cellMean;
+        for (Cluster cluster : testGrid.getClusters()) {
+            for (Cell cell : cluster.getClusterCells()) {
+
+                dataPoints1.addAll(cell.getDataPoints());
+            }
+            Cell cell = new Cell(dataPoints1, 2, mean);
+            cellMean = getMeanDataPoint(cell);
+            dataPoints1.clear();
+        }
+        Cell testCell = new Cell( dataPoints, 2, mean);
+        assertEquals(testCell.calculateCodingCost(), testGrid.calculateCodingCost(), 0.0001);
+        cellMean = getMeanDataPoint(testCell);
+        assertEquals(cellMean[0], 50.0, 1.0);
+        assertEquals(cellMean[1], 50.0, 1.0);
+    }
+
+    private static double testTestGridSimple(Grid testGrid) {
+
+        testGrid.setupCells();
+        testGrid.setupClusters();
+        double sum = 0.0;
+        /*System.out.println("Computing Cost of grid, 4 cells: ");
+        System.out.println("    " + testGrid.getCells()[0][0].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[0][1].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[1][0].calculateCodingCost());
+        System.out.println("    " + testGrid.getCells()[1][1].calculateCodingCost());*/
+
+        sum += testGrid.getCells()[0][0].calculateCodingCost();
+        sum += testGrid.getCells()[0][1].calculateCodingCost();
+        sum += testGrid.getCells()[1][0].calculateCodingCost();
+        sum += testGrid.getCells()[1][1].calculateCodingCost();
+
+        // other method
+        double sum1;
+        sum1 = getSumOfTestGrid(testGrid);
+        assertEquals(sum, sum1, 0.0001);
+
+        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
+        sum = sum1;
+        sum1 = getSumOfTestGrid(testGrid);
+        assertTrue(sum > sum1);
+        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
+        sum = sum1;
+        sum1 = getSumOfTestGrid(testGrid);
+        assertTrue(sum > sum1);
+        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
+        sum = sum1;
+        sum1 = getSumOfTestGrid(testGrid);
+        assertTrue(sum > sum1);
+        return sum1;
+    }
+
+    private static double getSumOfTestGrid(Grid testGrid) {
+
+        double sum = 0.0;
+        for (Cluster cluster : testGrid.getClusters()) {
+
+            sum += cluster.calculateCodingCost();
+        }
+        return sum;
     }
 
     /*

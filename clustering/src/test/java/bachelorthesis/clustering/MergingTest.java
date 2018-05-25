@@ -16,61 +16,19 @@ public class MergingTest {
 
     public static void main(String[] args) {
 
-        DataGenerator generator = new DataGenerator(2);
-        List<DataPoint> dataPoints = new ArrayList<DataPoint>();
         double[] mean = new double[2];
         mean[0] = 50;
         mean[1] = 50;
-        for (int i = 0; i < 1000; ++i) {
 
-            dataPoints.add(generator.generateDataPoint(mean, 10.0));
-        }
-        //Cell testCell = new Cell( dataPoints, 2, mean);
-        //System.out.println("Computing Cost of single cell: " + testCell.calculateComputingCost());
-        Grid testGrid = new Grid(2, dataPoints, 100, 100);
-        testTestGridSimple(testGrid);
-
-        System.out.println("Now perform the clustering:");
-        testGrid = new Grid(2, dataPoints, 100, 100);
-        testGrid.setupCells();
-        testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
-        testGrid.performClustering();
-        System.out.println("Results of Clustering:");
-        System.out.println("     Number clusters: " + testGrid.getClusters().size());
-        System.out.println("     Computing Cost: " + testGrid.calculateCodingCost());
-        List<DataPoint> dataPoints1 = new ArrayList<>();
-        int i = 0;
-        double[] cellMean;
-        for (Cluster cluster : testGrid.getClusters()) {
-            System.out.print("Cluster" + ++i + ": ");
-            for (Cell cell : cluster.getClusterCells()) {
-
-                dataPoints1.addAll(cell.getDataPoints());
-            }
-            Cell cell = new Cell(dataPoints1, 2, mean);
-            cellMean = getMeanDataPoint(cell);
-            System.out.println("     Mean: " + cellMean[0] + " , " + cellMean[1]);
-            dataPoints1.clear();
-        }
-        //System.out.println("     Deviation: " + cell.getDeviation());
-        Cell testCell = new Cell( dataPoints, 2, mean);
-        System.out.println("Computing Cost of single cell: " + testCell.calculateCodingCost());
-        cellMean = getMeanDataPoint(testCell);
-        System.out.println("     Mean: " + cellMean[0] + " , " + cellMean[1]);
-        //System.out.println("     Mean: " + testCell.getMean());
-        //System.out.println("     Deviation: " + testCell.getDeviation());
-
-        System.out.println("Now for the fun part: Do it with the test data");
+        System.out.println("Test merging with the testdata");
 
         List<DataPoint> dataPointsTest = extractDataPointsFromFile("results/testData.csv");
         DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
         int k = dataPartitioner.findOptimalPartition("results/results.txt", "results/areas.txt");
 
-        testGrid = new Grid(k, dataPointsTest, 100, 100);
+        Grid testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
         resultsOfClustering(testGrid, mean);
 
@@ -82,7 +40,6 @@ public class MergingTest {
         testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
         resultsOfClustering(testGrid, mean);
 
@@ -94,7 +51,6 @@ public class MergingTest {
         testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
         resultsOfClustering(testGrid, mean);
 
@@ -106,7 +62,6 @@ public class MergingTest {
         testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
         resultsOfClustering(testGrid, mean);
 
@@ -118,7 +73,6 @@ public class MergingTest {
         testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        //System.out.println("testGrid.getNeighbors(): " + testGrid.getClusters().get(0).getNeighbors().size());
         testGrid.performClustering();
         resultsOfClustering(testGrid, mean);
     }
@@ -144,7 +98,7 @@ public class MergingTest {
         }
     }
 
-    private static double[] getMeanDataPoint(Cell cell) {
+    public static double[] getMeanDataPoint(Cell cell) {
 
         double[] mean = new double[2];
         mean[0] = 0.0;
@@ -158,37 +112,7 @@ public class MergingTest {
         return mean;
     }
 
-    private static void testTestGridSimple(Grid testGrid) {
-
-        testGrid.setupCells();
-        testGrid.setupClusters();
-        double sum = 0.0;
-        System.out.println("Computing Cost of grid, 4 cells: ");
-        System.out.println("    " + testGrid.getCells()[0][0].calculateCodingCost());
-        System.out.println("    " + testGrid.getCells()[0][1].calculateCodingCost());
-        System.out.println("    " + testGrid.getCells()[1][0].calculateCodingCost());
-        System.out.println("    " + testGrid.getCells()[1][1].calculateCodingCost());
-
-        sum += testGrid.getCells()[0][0].calculateCodingCost();
-        sum += testGrid.getCells()[0][1].calculateCodingCost();
-        sum += testGrid.getCells()[1][0].calculateCodingCost();
-        sum += testGrid.getCells()[1][1].calculateCodingCost();
-
-        System.out.println("Sum of all cells: " + sum);
-
-        // other method
-        System.out.println("Now the sum using merging of cells:");
-        printSum(testGrid);
-
-        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
-        printSum(testGrid);
-        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
-        printSum(testGrid);
-        testGrid.mergeClusters(testGrid.getClusters().get(0), testGrid.getClusters().get(1));
-        printSum(testGrid);
-    }
-
-    private static void printSum(Grid testGrid) {
+    public static void printSum(Grid testGrid) {
 
         double sum = 0.0;
         for (Cluster cluster : testGrid.getClusters()) {

@@ -11,7 +11,6 @@ public class Cluster {          // TODO clean it up
 
     private Set<Cell> clusterCells;
     private Set<Cluster> neighbors;
-    //private Set<Cluster> parts;
     private String name;
     private boolean converged;
 
