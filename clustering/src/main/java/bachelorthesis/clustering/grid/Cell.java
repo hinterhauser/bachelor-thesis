@@ -1,9 +1,12 @@
 package bachelorthesis.clustering.grid;
 
 import bachelorthesis.clustering.data.DataPoint;
+import bachelorthesis.clustering.statistics.VectorMath;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static bachelorthesis.clustering.statistics.VectorMath.*;
 
 public class Cell implements StatsObj {
 
@@ -73,14 +76,6 @@ public class Cell implements StatsObj {
 
     // ------------------------ end Getter and Setter --------------------------------------
 
-    private void fillVectorWithZeros(double[] vector) {
-
-        for (int i = 0; i < vector.length; ++i) {
-
-            vector[i] = 0.0;
-        }
-    }
-
     private void fillMuAndSigmaWithZeros() {
 
         mu = new double[dim];
@@ -98,30 +93,6 @@ public class Cell implements StatsObj {
             }
         }
         scalarVectorDivision(mu, dataPoints.size());
-    }
-
-    private void scalarVectorDivision(double[] vector, double scalar) {
-
-        for (int i = 0; i < vector.length; ++i) {
-
-            vector[i] /= scalar;
-        }
-    }
-
-    private void scalarVectorPow(double[] vector, double scalar) {
-
-        for (int i = 0; i < vector.length; ++i) {
-
-            vector[i] = Math.pow(vector[i], scalar);
-        }
-    }
-
-    private void scalarVectorSqrt(double[] vector) {
-
-        for (int i = 0; i < vector.length; ++i) {
-
-            vector[i] = Math.sqrt(vector[i]);
-        }
     }
 
     public void calculateMuAndSigma() {
@@ -197,7 +168,8 @@ public class Cell implements StatsObj {
                 codingCosts[i] += -p * Math.log(p) / Math.log(2.0);
             }
         }
-        return vectorSum(codingCosts);
+        // first trials with the sum of vector elements
+        return vectorMean(codingCosts); // TODO maybe this can be improved
     }
 
     private double vectorSum(double[] vector) {

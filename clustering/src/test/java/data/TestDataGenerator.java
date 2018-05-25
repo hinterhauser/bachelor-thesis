@@ -47,7 +47,7 @@ public class TestDataGenerator {
         mean[0] = 30;
         mean[1] = 70;
         for (int i = 0; i < 2000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,5.0));
+            dataPoints.add(generator.generateDataPoint(mean,2.0)); // 5
         }
     }
 
@@ -56,7 +56,7 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 1.0));
+            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
         }
 
         mean[0] = 80;
@@ -71,13 +71,13 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 1.0));
+            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
         }
 
         mean[0] = 30;
         mean[1] = 70;
         for (int i = 0; i < 2000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,5.0));
+            dataPoints.add(generator.generateDataPoint(mean,2.0)); // 5
         }
 
         mean[0] = 80;
@@ -92,13 +92,13 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 1.0));
+            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
         }
 
         mean[0] = 30;
         mean[1] = 70;
-        for (int i = 0; i < 2000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,5.0));
+        for (int i = 0; i < 1000; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean,2.0)); // before: 5.0
         }
 
         mean[0] = 80;

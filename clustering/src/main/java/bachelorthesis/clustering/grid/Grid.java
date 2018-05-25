@@ -2,10 +2,7 @@ package bachelorthesis.clustering.grid;
 
 import bachelorthesis.clustering.data.DataPoint;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Grid implements StatsObj {
 
@@ -257,7 +254,8 @@ public class Grid implements StatsObj {
             if (notConvergedClusters.size() <= 0) {
                 break;
             }
-            mergeWithNeighbors(notConvergedClusters.get(0), convergedClusters);
+            int index = (int) Math.random() * notConvergedClusters.size();
+            mergeWithNeighbors(notConvergedClusters.get(index), convergedClusters);
         } while (notConvergedClusters.size() > 0);
         clusters = convergedClusters;
     }

@@ -77,7 +77,7 @@ public class DataPartitioner {
             e.printStackTrace();
         }
         if (costA > costK) {
-            return costA;
+            costK = costA;
         }
         return costK;
     }

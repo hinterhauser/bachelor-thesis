@@ -87,7 +87,21 @@ public class MergingTest {
         testGrids.add(testGrid2);
         testGrids.add(testGrid3);
         testGrids.add(testGrid4);
-        visualiseGrids(testGrids);
+
+        //visualiseGrids(testGrids);
+        visualiseAllGrids(testGrids);
+    }
+
+    private static void visualiseAllGrids(List<Grid> grids) {
+
+        int input = 0;
+        for (Grid grid : grids) {
+
+            DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + input, grids.get(input++));
+            chart.pack();
+            RefineryUtilities.centerFrameOnScreen(chart);
+            chart.setVisible(true);
+        }
     }
 
     private static void visualiseGrids(List<Grid> grids) {
@@ -109,7 +123,7 @@ public class MergingTest {
             chart.pack();
             RefineryUtilities.centerFrameOnScreen(chart);
             chart.setVisible(true);
-            System.out.println("Type exit to exit");
+            /*System.out.println("Type exit to exit");
             String inputString = "";
             try {
                 inputString = reader.readLine();
@@ -117,6 +131,9 @@ public class MergingTest {
                 e.printStackTrace();
             }
             if (inputString.equals("exit")) {
+                break;
+            }*/
+            if (input == -1) {
                 break;
             }
         }
