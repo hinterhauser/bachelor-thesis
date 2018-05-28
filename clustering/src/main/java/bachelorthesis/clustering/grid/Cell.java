@@ -168,25 +168,18 @@ public class Cell implements StatsObj {
                 codingCosts[i] += -p * Math.log(p) / Math.log(2.0);
             }
         }
-        // first trials with the sum of vector elements
-        return vectorMean(codingCosts); // TODO maybe this can be improved
-    }
-
-    private double vectorSum(double[] vector) {
-
-        double sum = 0.0;
-        for (int i = 0; i < vector.length; ++i) {
-
-            sum += vector[i];
+        if (dataPoints.size() <= 1) {
+            return 0.0;
         }
-        return sum;
+        // first trials with the sum of vector elements
+        return vectorSum(codingCosts); // TODO maybe this can be improved
     }
 
     private double probability(DataPoint dataPoint, int index) {
 
         double factor1 = 1.0 / (sigma[index] * Math.sqrt(2.0 * Math.PI));
         double x = Math.pow(dataPoint.getVector()[index] - mu[index], 2.0);
-        double factor2 = Math.exp(-x / (2 * Math.pow(sigma[index], 2.0)));
+        double factor2 = Math.exp(-x / (2.0 * Math.pow(sigma[index], 2.0)));
         return factor1 * factor2;
     }
 

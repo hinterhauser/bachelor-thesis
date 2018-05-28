@@ -12,6 +12,16 @@ public class VectorMath {
         return sum / vector.length;
     }
 
+    public static double vectorSum(double[] vector) {
+
+        double sum = 0.0;
+        for (int i = 0; i < vector.length; ++i) {
+
+            sum += vector[i];
+        }
+        return sum;
+    }
+
     public static void scalarVectorPow(double[] vector, double scalar) {
 
         for (int i = 0; i < vector.length; ++i) {

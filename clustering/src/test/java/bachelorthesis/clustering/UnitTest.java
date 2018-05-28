@@ -736,7 +736,7 @@ public class UnitTest {
         testGrid = new Grid(2, dataPoints, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
-        testGrid.performClustering();
+        testGrid.performClustering(false);
 
         assertEquals(cost, testGrid.calculateCodingCost(), 0.0001);
         assertEquals(testGrid.getClusters().size(), 1);

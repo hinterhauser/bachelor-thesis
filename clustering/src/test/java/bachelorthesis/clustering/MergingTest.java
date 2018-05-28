@@ -7,9 +7,11 @@ import bachelorthesis.clustering.data.DataPoint;
 import bachelorthesis.clustering.grid.Cell;
 import bachelorthesis.clustering.grid.Cluster;
 import bachelorthesis.clustering.grid.Grid;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.ui.RefineryUtilities;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -24,72 +26,106 @@ public class MergingTest {
         double[] mean = new double[2];
         mean[0] = 50;
         mean[1] = 50;
+        int k;
 
         System.out.println("Test merging with the testdata");
 
-        List<DataPoint> dataPointsTest = extractDataPointsFromFile("results/testData.csv");
-        DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
-        int k = dataPartitioner.findOptimalPartition("results/results.txt", "results/areas.txt");
+        List<DataPoint> dataPointsTest0 = null;
+        Grid testGrid0 = null;
+        List<DataPoint> dataPointsTest1 = null;
+        Grid testGrid1 = null;
+        List<DataPoint> dataPointsTest2 = null;
+        Grid testGrid2 = null;
+        List<DataPoint> dataPointsTest3 = null;
+        Grid testGrid3 = null;
+        List<DataPoint> dataPointsTest4 = null;
+        Grid testGrid4 = null;
 
-        Grid testGrid = new Grid(k, dataPointsTest, 100, 100);
-        testGrid.setupCells();
-        testGrid.setupClusters();
-        testGrid.performClustering();
-        resultsOfClustering(testGrid, mean);
+        //testClustering(testGrid0, dataPointsTest0, 0, false, mean);
+        //testClustering(testGrid1, dataPointsTest1, 1, false, mean);
+        //testClustering(testGrid2, dataPointsTest2, 2, false, mean);
+        testClustering(testGrid3, dataPointsTest3, 3, false, mean);
+        //testClustering(testGrid4, dataPointsTest4, 4, false, mean);
 
-        List<DataPoint> dataPointsTest1 = extractDataPointsFromFile("results/testData1.csv");
-        DataPartitioner dataPartitioner1 = new DataPartitioner(dataPointsTest1, 100, 100);
-        k = dataPartitioner1.findOptimalPartition("results/results1.txt", "results/areas1.txt");
-        System.out.println("k " + k);
-
-        Grid testGrid1 = new Grid(k, dataPointsTest1, 100, 100);
-        testGrid1.setupCells();
-        testGrid1.setupClusters();
-        testGrid1.performClustering();
-        resultsOfClustering(testGrid1, mean);
-
-        List<DataPoint> dataPointsTest2 = extractDataPointsFromFile("results/testData2.csv");
-        DataPartitioner dataPartitioner2 = new DataPartitioner(dataPointsTest2, 100, 100);
-        k = dataPartitioner2.findOptimalPartition("results/results2.txt", "results/areas2.txt");
-        System.out.println("k " + k);
-
-        Grid testGrid2 = new Grid(k, dataPointsTest2, 100, 100);
-        testGrid2.setupCells();
-        testGrid2.setupClusters();
-        testGrid2.performClustering();
-        resultsOfClustering(testGrid2, mean);
-
-        List<DataPoint> dataPointsTest3 = extractDataPointsFromFile("results/testData3.csv");
-        DataPartitioner dataPartitioner3 = new DataPartitioner(dataPointsTest3, 100, 100);
-        k = dataPartitioner3.findOptimalPartition("results/results3.txt", "results/areas3.txt");
-        System.out.println("k " + k);
-
-        Grid testGrid3 = new Grid(k, dataPointsTest3, 100, 100);
-        testGrid3.setupCells();
-        testGrid3.setupClusters();
-        testGrid3.performClustering();
-        resultsOfClustering(testGrid3, mean);
-
-        List<DataPoint> dataPointsTest4 = extractDataPointsFromFile("results/testData4.csv");
-        DataPartitioner dataPartitioner4 = new DataPartitioner(dataPointsTest4, 100, 100);
-        k = dataPartitioner4.findOptimalPartition("results/results4.txt", "results/areas4.txt");
-        System.out.println("k " + k);
-
-        Grid testGrid4 = new Grid(k, dataPointsTest4, 100, 100);
-        testGrid4.setupCells();
-        testGrid4.setupClusters();
-        testGrid4.performClustering();
-        resultsOfClustering(testGrid4, mean);
+        /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);*/
 
         List<Grid> testGrids = new ArrayList<>();
-        testGrids.add(testGrid);
+        testGrids.add(testGrid0);
         testGrids.add(testGrid1);
         testGrids.add(testGrid2);
         testGrids.add(testGrid3);
         testGrids.add(testGrid4);
 
         //visualiseGrids(testGrids);
-        visualiseAllGrids(testGrids);
+        //visualiseAllGrids(testGrids);
+        /*System.out.println("A quick test:");
+        double[] mean1 = new double[2];
+        List<DataPoint> dataPoints1 = new ArrayList<>();
+        DataGenerator generator = new DataGenerator(2);
+        mean1[0] = 30;
+        mean1[1] = 70;
+        for (int i = 0; i < 1000; ++i) {
+            dataPoints1.add(generator.generateDataPoint(mean1, 2.0)); // before: 5.0
+        }
+        Cell cell1 = new Cell(dataPoints1, 2, mean1);
+        System.out.println(cell1.calculateCodingCost());
+
+        double[] mean2 = new double[2];
+        List<DataPoint> dataPoints2 = new ArrayList<>();
+        mean2[0] = 50;
+        mean2[1] = 50;
+        for (int i = 0; i < 500; ++i) {
+            dataPoints2.add(generator.generateDataPoint(mean,2.0));
+        }
+        Cell cell2 = new Cell(dataPoints2, 2, mean2);
+        System.out.println(cell2.calculateCodingCost());
+
+        double[] mean3 = new double[2];
+        List<DataPoint> dataPoints3 = new ArrayList<>();
+        mean3[0] = 36;
+        mean3[1] = 63;
+        dataPoints3.addAll(dataPoints1);
+        dataPoints3.addAll(dataPoints2);
+        Cell cell3 = new Cell(dataPoints3, 2, mean3);
+        System.out.println(cell3.calculateCodingCost());
+
+        DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrids.get(3));
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);*/
+    }
+
+    private static void testClustering(Grid testGrid, List<DataPoint> dataPointsTest, int index, boolean debug, double[] mean) {
+
+        dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
+        DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
+        int k = dataPartitioner.findOptimalPartition("results/results" + index + ".txt", "results/areas" + index + ".txt");
+
+        testGrid = new Grid(k, dataPointsTest, 100, 100);
+        testGrid.setupCells();
+        testGrid.setupClusters();
+        if (debug) {
+            System.out.println("clusters: " + testGrid.getClusters().size());
+        }
+        testGrid.performClustering(debug);
+        resultsOfClustering(testGrid, mean);
+        saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + ".jpg"));
+    }
+
+    private static void saveToFile(Grid grid, int index, File filename) {
+
+        DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + index, grid);
+        //chart.pack();
+        //RefineryUtilities.centerFrameOnScreen(chart);
+        try {
+            ChartUtilities.saveChartAsJPEG(filename, chart.getChart(), 500, 500);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //chart.setVisible(false);
     }
 
     private static void visualiseAllGrids(List<Grid> grids) {

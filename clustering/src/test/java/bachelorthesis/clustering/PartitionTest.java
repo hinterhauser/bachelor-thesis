@@ -12,7 +12,7 @@ public class PartitionTest {
     public static void main(String[] args) {
 
         // Before starting this program, run TestDataGenerator to produce the csv file used in this program
-        List<DataPoint> dataPoints = extractDataPointsFromFile("results/testData.csv");
+        List<DataPoint> dataPoints = extractDataPointsFromFile("results/testData0.csv");
         DataPartitioner dataPartitioner = new DataPartitioner(dataPoints, 100, 100);
         dataPartitioner.findOptimalPartition("results/results.txt", "results/areas.txt");
 

@@ -1,7 +1,12 @@
 package bachelorthesis.clustering.grid;
 
+import bachelorthesis.clustering.charts.DataChartAlternateDesign;
 import bachelorthesis.clustering.data.DataPoint;
+import org.jfree.ui.RefineryUtilities;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Grid implements StatsObj {
@@ -226,62 +231,66 @@ public class Grid implements StatsObj {
         clusters.remove(merger);
     }
 
-    public void performClustering() {
+    public void performClustering(boolean debug) {
 
         double actualCost = 0.0;
         double costBeforeMerging = 0.0;
         List<Cluster> notConvergedClusters = new ArrayList<>();
         List<Cluster> convergedClusters = new ArrayList<>();
-        /*for (Cluster cluster : clusters) {      // TODO this does not work, fix it
-
-            for (Cluster c : cluster.getNeighbors()) {
-                System.out.println("ComputationCost before: " + calculateComputingCost());
-
-                System.out.println("   " + (actualCost = cluster.calculateComputingCost() + c.calculateComputingCost()));
-                System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(c)));
-
-                if (costBeforeMerging < actualCost) {
-
-                    mergeClusters(cluster, c);
-                }
-
-                System.out.println("ComputationCost after: " + calculateComputingCost());
-            }
-        }*/
         do {
-
+            //System.out.println("   cost: " + calculateCodingCost());
             getNotConvergedClusters(notConvergedClusters);
             if (notConvergedClusters.size() <= 0) {
                 break;
             }
-            int index = (int) Math.random() * notConvergedClusters.size();
-            mergeWithNeighbors(notConvergedClusters.get(index), convergedClusters);
+            int index = (int) (Math.random() * notConvergedClusters.size());
+            if (debug) {
+                System.out.println("Random index: " + index);
+            }
+            mergeWithNeighbors(notConvergedClusters.get(index), convergedClusters, debug);
         } while (notConvergedClusters.size() > 0);
         clusters = convergedClusters;
     }
 
-    private void mergeWithNeighbors(Cluster cluster, List<Cluster> convergedClusters) {
+    private void mergeWithNeighbors(Cluster cluster, List<Cluster> convergedClusters, boolean debug) {
 
         double actualCost = 0.0;
         double costBeforeMerging = 0.0;
         List<Cluster> neighbors = new ArrayList<>();
         int neighborIndex = 0;
+        int iteration = 0;
         while(true) {
-
+            if (debug) {
+                System.out.println("Iteration " + iteration);
+                System.out.println("   cost, before: " + calculateCodingCost());
+                DataChartAlternateDesign chart = new DataChartAlternateDesign("Iteration " + iteration++, this);
+                chart.pack();
+                RefineryUtilities.centerFrameOnScreen(chart);
+                chart.setVisible(true);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             neighbors.addAll(cluster.getNeighbors());
             if (neighborIndex >= neighbors.size()) {
                 break;
             }
             //System.out.println("neighbors size: " + neighbors.size());
             Cluster merger = neighbors.get(neighborIndex);
-            actualCost = cluster.calculateCodingCost() + merger.calculateCodingCost();
-            costBeforeMerging = cluster.calculateCodingCostBeforeMerging(merger);
-            //System.out.println("   " + (actualCost = cluster.calculateComputingCost() + merger.calculateComputingCost()));
-            //System.out.println("   " + (costBeforeMerging = cluster.calculateComputingCostBeforeMerging(merger)));
+            //actualCost = cluster.calculateCodingCost() + merger.calculateCodingCost();
+            actualCost = calculateCodingCost();
+            //costBeforeMerging = cluster.calculateCodingCostBeforeMerging(merger);
+            costBeforeMerging = calculateCodingCostBeforeMerging(cluster, merger);
+            if (debug) {
+                System.out.println("   " + actualCost);
+                System.out.println("   " + costBeforeMerging);
+            }
             /*if (Double.isNaN(actualCost)) { // just an experiment
                 mergeClusters(cluster, neighbors.get(neighborIndex));
             }*/
-            if (costBeforeMerging < actualCost || Double.isNaN(actualCost)) {
+            if (costBeforeMerging < actualCost || Double.isNaN(actualCost) || merger.getClusterCells().iterator().next().getDataPoints().size() == 1) {
 
                 mergeClusters(cluster, neighbors.get(neighborIndex));
             } else {
@@ -290,6 +299,9 @@ public class Grid implements StatsObj {
             }
             //System.out.println("ni: " + neighborIndex + "  ns: " + neighbors.size());
             neighbors.clear();
+            if (debug) {
+                System.out.println("   cost, after: " + calculateCodingCost());
+            }
         }
         //System.out.println("End");
         cluster.setConverged(true);
@@ -309,10 +321,34 @@ public class Grid implements StatsObj {
 
     public double calculateCodingCost() {
 
+        //System.out.println("calculateCodingCost");
         double cost = 0.0;
         for (Cluster cluster : clusters) {
 
+            //System.out.println("cells: " + cluster.getClusterCells().size());
+            for (Cell cell : cluster.getClusterCells()) {
+                //System.out.println("   " + cell.getDataPoints().size());
+            }
             cost += cluster.calculateCodingCost();
+        }
+        return cost;
+    }
+
+    public double calculateCodingCostBeforeMerging(Cluster c, Cluster merger) {
+
+        //System.out.println("calculateCodingCost");
+        double cost = 0.0;
+        for (Cluster cluster : clusters) {
+
+            //System.out.println("cells: " + cluster.getClusterCells().size());
+            for (Cell cell : cluster.getClusterCells()) {
+                //System.out.println("   " + cell.getDataPoints().size());
+            }
+            if (!cluster.equals(c) && !cluster.equals(merger)) {
+                cost += cluster.calculateCodingCost();
+            } else if (cluster.equals(c)) {
+                cost += cluster.calculateCodingCostBeforeMerging(merger);
+            }
         }
         return cost;
     }

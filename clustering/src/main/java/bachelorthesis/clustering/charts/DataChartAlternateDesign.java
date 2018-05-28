@@ -16,6 +16,8 @@ import java.awt.*;
 
 public class DataChartAlternateDesign extends ApplicationFrame {
 
+    final JFreeChart chart;
+
     public DataChartAlternateDesign(String title, Grid grid) {
 
         super(title);
@@ -33,9 +35,13 @@ public class DataChartAlternateDesign extends ApplicationFrame {
             }
             collection.addSeries(serie);
         }
-        final JFreeChart chart = ChartFactory.createScatterPlot(title, "x", "y", collection, PlotOrientation.VERTICAL, true, false, false);
+        chart = ChartFactory.createScatterPlot(title, "x", "y", collection, PlotOrientation.VERTICAL, true, false, false);
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));
         setContentPane(chartPanel);
+    }
+
+    public JFreeChart getChart() {
+        return chart;
     }
 }

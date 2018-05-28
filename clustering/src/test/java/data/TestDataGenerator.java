@@ -27,8 +27,8 @@ public class TestDataGenerator {
         fillDataForTestData4(dataPoints4, mean);
 
         try {
-            writeToCSV(dataPoints, "results/testData.csv");
-            System.out.println("testData.csv written successfully");
+            writeToCSV(dataPoints, "results/testData0.csv");
+            System.out.println("testData0.csv written successfully");
             writeToCSV(dataPoints1, "results/testData1.csv");
             System.out.println("testData1.csv written successfully");
             writeToCSV(dataPoints2, "results/testData2.csv");
@@ -47,7 +47,7 @@ public class TestDataGenerator {
         mean[0] = 30;
         mean[1] = 70;
         for (int i = 0; i < 2000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,2.0)); // 5
+            dataPoints.add(generator.generateDataPoint(mean,5.0));
         }
     }
 
@@ -56,7 +56,7 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
+            dataPoints.add(generator.generateDataPoint(mean, 1.0));
         }
 
         mean[0] = 80;
@@ -71,13 +71,13 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
+            dataPoints.add(generator.generateDataPoint(mean, 1.0));
         }
 
         mean[0] = 30;
         mean[1] = 70;
         for (int i = 0; i < 2000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,2.0)); // 5
+            dataPoints.add(generator.generateDataPoint(mean,5.0));
         }
 
         mean[0] = 80;
@@ -92,13 +92,13 @@ public class TestDataGenerator {
         mean[0] = 15;
         mean[1] = 15;
         for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean, 2.0)); // 1
+            dataPoints.add(generator.generateDataPoint(mean, 1.0));
         }
 
         mean[0] = 30;
         mean[1] = 70;
-        for (int i = 0; i < 1000; ++i) {
-            dataPoints.add(generator.generateDataPoint(mean,2.0)); // before: 5.0
+        for (int i = 0; i < 5000; ++i) { // 1000
+            dataPoints.add(generator.generateDataPoint(mean,4.0));
         }
 
         mean[0] = 80;
@@ -109,7 +109,7 @@ public class TestDataGenerator {
 
         mean[0] = 50;
         mean[1] = 50;
-        for (int i = 0; i < 500; ++i) {
+        for (int i = 0; i < 5000; ++i) { // 500
             dataPoints.add(generator.generateDataPoint(mean,2.0));
         }
     }
