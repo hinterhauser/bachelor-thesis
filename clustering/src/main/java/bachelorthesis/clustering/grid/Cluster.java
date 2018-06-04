@@ -13,6 +13,7 @@ public class Cluster {          // TODO clean it up
     private Set<Cluster> neighbors;
     private String name;
     private boolean converged;
+    private int n;  // size of the whole dataset
 
     public Cluster() {
 
@@ -67,13 +68,13 @@ public class Cluster {          // TODO clean it up
         this.neighbors = neighbors;
     }
 
-    /*public Set<Cluster> getParts() {
-        return parts;
+    public int getN() {
+        return n;
     }
 
-    public void setParts(Set<Cluster> parts) {
-        this.parts = parts;
-    }*/
+    public void setN(int n) {
+        this.n = n;
+    }
 
     public String getName() {
         return name;
@@ -174,6 +175,16 @@ public class Cluster {          // TODO clean it up
 
         Cell dataStore = new Cell(dataPointList, dim, center);
         return dataStore.calculateCodingCost();
+    }
+
+    public double calculateParameterCost() {
+
+        return clusterCells.iterator().next().getDim() * Math.log(clusterCells.size()) / Math.log(2.0);
+    }
+
+    public double calculateIDCost() {
+
+        return Math.log(n / (double) clusterCells.size());
     }
 
     public double calculateCodingCostBeforeMerging(Cluster merger) {

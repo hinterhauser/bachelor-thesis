@@ -29,6 +29,22 @@ public class CodingCostTest {
         dataPoints.addAll(dataPoints1);
 
         test(dataPoints, dim);
+
+        System.out.println("-------------------------------");
+
+        List<DataPoint> testData = new ArrayList<>();
+        for (int i = 0; i <= 20; ++i) {
+            double[] vector = new double[dim];
+            vector[0] = i;
+            testData.add(new DataPoint(dim, vector));
+        }
+        mean[0] = 0.0;
+        double[] sigma = new double[dim];
+        sigma[0] = 1.0;
+        for (DataPoint dp : testData) {
+            double cost = calculateIndividualCodingCost(dp, 0, mean, sigma);
+            System.out.println(dp.getVector()[0] + " ::: " + cost);
+        }
     }
 
     private static void fillDataPoints(DataGenerator generator, List<DataPoint> dataPoints, double[] mean, double deviation) {
@@ -50,6 +66,12 @@ public class CodingCostTest {
             System.out.println("   mu:    " + mu[i]);
             System.out.println("   sigma: " + sigma[i]);
         }
+    }
+
+    private static double calculateIndividualCodingCost(DataPoint dataPoint, int index, double[] mu, double[] sigma) {
+
+        double p = probability(dataPoint, sigma, mu, index);
+        return -p * Math.log(p) / Math.log(2.0);
     }
 
     private static double calculateCodingCost(List<DataPoint> dataPoints, int dim, double[] mu, double[] sigma) {

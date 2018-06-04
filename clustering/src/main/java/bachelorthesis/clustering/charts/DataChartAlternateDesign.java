@@ -7,7 +7,11 @@ import bachelorthesis.clustering.grid.Grid;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.TickUnitSource;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
@@ -36,6 +40,23 @@ public class DataChartAlternateDesign extends ApplicationFrame {
             collection.addSeries(serie);
         }
         chart = ChartFactory.createScatterPlot(title, "x", "y", collection, PlotOrientation.VERTICAL, true, false, false);
+        chart.setBackgroundPaint(Color.white);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.white);
+        plot.setDomainGridlinePaint(Color.black);
+        plot.setRangeGridlinePaint(Color.black);
+        plot.setDomainGridlinesVisible(true);
+        plot.setRangeGridlinesVisible(true);
+
+        NumberTickUnit tickUnit = new NumberTickUnit(grid.getX() / grid.getK());
+        //TickUnitSource ticks = NumberAxis.createIntegerTickUnits();
+        NumberAxis domain = (NumberAxis) plot.getDomainAxis();
+        //domain.setStandardTickUnits(ticks);
+        domain.setTickUnit(tickUnit);
+        NumberAxis range = (NumberAxis) plot.getRangeAxis();
+        //range.setStandardTickUnits(ticks);
+        range.setTickUnit(tickUnit);
+
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));
         setContentPane(chartPanel);

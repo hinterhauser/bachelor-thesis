@@ -200,6 +200,7 @@ public class Grid implements StatsObj {
                 if (getCells()[i][j].getDataPoints().size() > 0) {
 
                     clusterArray[i][j].setNeighbors(assignNeighbors(i, j, clusterArray));
+                    clusterArray[i][j].setN(dataPoints.size());
                     clusters.add(clusterArray[i][j]);
                 }
             }
@@ -280,9 +281,11 @@ public class Grid implements StatsObj {
             //System.out.println("neighbors size: " + neighbors.size());
             Cluster merger = neighbors.get(neighborIndex);
             //actualCost = cluster.calculateCodingCost() + merger.calculateCodingCost();
-            actualCost = calculateCodingCost();
+            //actualCost = calculateCodingCost();
+            actualCost = calculateMDL();
             //costBeforeMerging = cluster.calculateCodingCostBeforeMerging(merger);
-            costBeforeMerging = calculateCodingCostBeforeMerging(cluster, merger);
+            //costBeforeMerging = calculateCodingCostBeforeMerging(cluster, merger);
+            calculateMDLBeforeMerging(cluster, merger);
             if (debug) {
                 System.out.println("   " + actualCost);
                 System.out.println("   " + costBeforeMerging);
@@ -319,6 +322,17 @@ public class Grid implements StatsObj {
         }
     }
 
+    public double calculateMDL() {
+
+        double mdl = 0.0;
+        mdl += calculateCodingCost();
+        for (Cluster cluster : clusters) {
+            mdl += cluster.calculateParameterCost();
+            mdl += cluster.calculateIDCost();
+        }
+        return mdl;
+    }
+
     public double calculateCodingCost() {
 
         //System.out.println("calculateCodingCost");
@@ -326,12 +340,32 @@ public class Grid implements StatsObj {
         for (Cluster cluster : clusters) {
 
             //System.out.println("cells: " + cluster.getClusterCells().size());
-            for (Cell cell : cluster.getClusterCells()) {
+            /*for (Cell cell : cluster.getClusterCells()) {
                 //System.out.println("   " + cell.getDataPoints().size());
-            }
+            }*/
             cost += cluster.calculateCodingCost();
         }
         return cost;
+    }
+
+    public double calculateMDLBeforeMerging(Cluster c, Cluster merger) {
+
+        double mdl = 0.0;
+        mdl += calculateCodingCostBeforeMerging(c, merger);
+        for (Cluster cluster : clusters) {
+
+            if (!cluster.equals(c) && !cluster.equals(merger)) {
+                mdl += cluster.calculateParameterCost();
+                mdl += cluster.calculateIDCost();
+            }
+        }
+        Cluster mergeCandidate = new Cluster();
+        mergeCandidate.setN(dataPoints.size());
+        mergeCandidate.getClusterCells().addAll(c.getClusterCells());
+        mergeCandidate.getClusterCells().addAll(merger.getClusterCells());
+        mdl += mergeCandidate.calculateParameterCost();
+        mdl += mergeCandidate.calculateIDCost();
+        return mdl;
     }
 
     public double calculateCodingCostBeforeMerging(Cluster c, Cluster merger) {
