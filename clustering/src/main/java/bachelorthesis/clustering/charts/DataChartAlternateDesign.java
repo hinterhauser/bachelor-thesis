@@ -15,6 +15,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
+import org.jfree.ui.RefineryUtilities;
 
 import java.awt.*;
 
@@ -64,5 +65,12 @@ public class DataChartAlternateDesign extends ApplicationFrame {
 
     public JFreeChart getChart() {
         return chart;
+    }
+
+    public void showChart() {
+
+        this.pack();
+        RefineryUtilities.centerFrameOnScreen(this);
+        this.setVisible(true);
     }
 }
