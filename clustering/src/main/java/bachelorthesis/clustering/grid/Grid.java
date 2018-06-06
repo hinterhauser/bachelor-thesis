@@ -285,10 +285,10 @@ public class Grid implements StatsObj {
             actualCost = calculateMDL();
             //costBeforeMerging = cluster.calculateCodingCostBeforeMerging(merger);
             //costBeforeMerging = calculateCodingCostBeforeMerging(cluster, merger);
-            calculateMDLBeforeMerging(cluster, merger);
+            costBeforeMerging = calculateMDLBeforeMerging(cluster, merger);
             if (debug) {
-                System.out.println("   " + actualCost);
-                System.out.println("   " + costBeforeMerging);
+                System.out.println("   actual cost " + actualCost);
+                System.out.println("   mergin cost " + costBeforeMerging);
             }
             /*if (Double.isNaN(actualCost)) { // just an experiment
                 mergeClusters(cluster, neighbors.get(neighborIndex));
@@ -303,7 +303,7 @@ public class Grid implements StatsObj {
             //System.out.println("ni: " + neighborIndex + "  ns: " + neighbors.size());
             neighbors.clear();
             if (debug) {
-                System.out.println("   cost, after: " + calculateCodingCost());
+                System.out.println("   cost, after: " + calculateMDL());
             }
         }
         //System.out.println("End");
@@ -324,12 +324,18 @@ public class Grid implements StatsObj {
 
     public double calculateMDL() {
 
+        double para = 0.0;
+        double id = 0.0;
         double mdl = 0.0;
         mdl += calculateCodingCost();
         for (Cluster cluster : clusters) {
             mdl += cluster.calculateParameterCost();
             mdl += cluster.calculateIDCost();
+            para += cluster.calculateParameterCost();
+            id += cluster.calculateIDCost();
         }
+        //System.out.println("mdl: " + mdl);
+        System.out.println(" actual: " + para + " . " + id);
         return mdl;
     }
 
@@ -350,6 +356,8 @@ public class Grid implements StatsObj {
 
     public double calculateMDLBeforeMerging(Cluster c, Cluster merger) {
 
+        double para = 0.0;
+        double id = 0.0;
         double mdl = 0.0;
         mdl += calculateCodingCostBeforeMerging(c, merger);
         for (Cluster cluster : clusters) {
@@ -357,14 +365,21 @@ public class Grid implements StatsObj {
             if (!cluster.equals(c) && !cluster.equals(merger)) {
                 mdl += cluster.calculateParameterCost();
                 mdl += cluster.calculateIDCost();
+                para += cluster.calculateParameterCost();
+                id += cluster.calculateIDCost();
             }
         }
+        //System.out.println("mdl: " + mdl);
         Cluster mergeCandidate = new Cluster();
         mergeCandidate.setN(dataPoints.size());
         mergeCandidate.getClusterCells().addAll(c.getClusterCells());
         mergeCandidate.getClusterCells().addAll(merger.getClusterCells());
         mdl += mergeCandidate.calculateParameterCost();
         mdl += mergeCandidate.calculateIDCost();
+        para += mergeCandidate.calculateParameterCost();
+        id += mergeCandidate.calculateIDCost();
+        //System.out.println("mdl: " + mdl);
+        System.out.println("before merge: " + para + " . " + id);
         return mdl;
     }
 

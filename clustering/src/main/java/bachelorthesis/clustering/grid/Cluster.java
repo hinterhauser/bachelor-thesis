@@ -179,12 +179,22 @@ public class Cluster {          // TODO clean it up
 
     public double calculateParameterCost() {
 
-        return clusterCells.iterator().next().getDim() * Math.log(clusterCells.size()) / Math.log(2.0);
+        double sum = 0.0;
+        for (Cell cell : clusterCells) {
+            sum += cell.getDataPoints().size();
+        }
+        //System.out.println("parameter cost: " + (clusterCells.iterator().next().getDim() * Math.log(sum) / Math.log(2.0)));
+        return clusterCells.iterator().next().getDim() * Math.log(sum) / Math.log(2.0);
     }
 
     public double calculateIDCost() {
 
-        return Math.log(n / (double) clusterCells.size());
+        double sum = 0.0;
+        for (Cell cell : clusterCells) {
+            sum += cell.getDataPoints().size();
+        }
+        //System.out.println("ID cost: " + (Math.log(n / sum)));
+        return Math.log(n / sum);
     }
 
     public double calculateCodingCostBeforeMerging(Cluster merger) {

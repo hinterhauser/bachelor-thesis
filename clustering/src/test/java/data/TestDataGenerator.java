@@ -41,7 +41,7 @@ public class TestDataGenerator {
             e.printStackTrace();
         }
     }
-
+        // TODO removed 0s
     private static void fillDataForTestData(ArrayList<DataPoint> dataPoints, double[] mean) {
 
         mean[0] = 30;
