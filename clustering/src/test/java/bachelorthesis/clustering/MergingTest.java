@@ -41,11 +41,11 @@ public class MergingTest {
         List<DataPoint> dataPointsTest4 = null;
         Grid testGrid4 = null;
 
-        testClustering(testGrid0, dataPointsTest0, 0, true, mean);
-        //testClustering(testGrid1, dataPointsTest1, 1, false, mean);
-        //testClustering(testGrid2, dataPointsTest2, 2, false, mean);
-        //testClustering(testGrid3, dataPointsTest3, 3, false, mean);
-        //testClustering(testGrid4, dataPointsTest4, 4, false, mean);
+        testClustering(testGrid0, dataPointsTest0, 0, false, mean);
+        testClustering(testGrid1, dataPointsTest1, 1, false, mean);
+        testClustering(testGrid2, dataPointsTest2, 2, false, mean);
+        testClustering(testGrid3, dataPointsTest3, 3, false, mean);
+        testClustering(testGrid4, dataPointsTest4, 4, false, mean);
 
         /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
         chart.pack();
@@ -103,7 +103,9 @@ public class MergingTest {
         dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
         DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
         int k = dataPartitioner.findOptimalPartition("results/results" + index + ".txt", "results/areas" + index + ".txt");
-
+        if (index == 3) {
+            k += 20;
+        }
         testGrid = new Grid(k, dataPointsTest, 100, 100);
         testGrid.setupCells();
         testGrid.setupClusters();
@@ -179,7 +181,7 @@ public class MergingTest {
 
         System.out.println("Results of Clustering:");
         System.out.println("     Number clusters: " + testGrid.getClusters().size());
-        System.out.println("     Computing Cost: " + testGrid.calculateCodingCost());
+        System.out.println("     MDL:             " + testGrid.calculateCodingCost());
         List<DataPoint> dataPoints1 = new ArrayList<>();
         int i = 0;
         double[] cellMean;

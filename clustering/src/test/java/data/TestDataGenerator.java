@@ -97,7 +97,7 @@ public class TestDataGenerator {
 
         mean[0] = 30;
         mean[1] = 70;
-        for (int i = 0; i < 5000; ++i) { // 1000
+        for (int i = 0; i < 5000; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,4.0));
         }
 
@@ -109,7 +109,7 @@ public class TestDataGenerator {
 
         mean[0] = 50;
         mean[1] = 50;
-        for (int i = 0; i < 5000; ++i) { // 500
+        for (int i = 0; i < 5000; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,2.0));
         }
     }

@@ -5,6 +5,7 @@ import bachelorthesis.clustering.data.*;
 import bachelorthesis.clustering.grid.Grid;
 import org.jfree.ui.RefineryUtilities;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +15,31 @@ import java.util.List;
  */
 public class App 
 {
+    private static final String DIR_NAME = "results/shapes/";
+
     public static void main( String[] args ) {
 
         //createShape("halfmoon");
-        String shapeName = "halfmoon";
+
+        //clusterData("halfmoon-simple", "Halfmoon-simple");
+        //clusterData("halfmoon", "Halfmoon");
+        clusterData("double-moon", "Double-moon");
+        //clusterData("double-moon-close", "Double-moon-close");
+    }
+
+    private static void clusterData(String shapeName, String fileName) {
+
         ArbitraryShape shape = new ArbitraryShape(2);
         List<Segment> segments = new ArrayList<>();
         selectShape(shapeName, segments);
         shape.setSegments(segments);
         ShapeGenerator generator = new ShapeGenerator(shape);
-        List<DataPoint> dataPoints = generator.generateShape(1000);
+        List<DataPoint> dataPoints = generator.generateShape(2000);
         DataPartitioner partitioner = new DataPartitioner(dataPoints, 100.0, 100.0);
-        int k = partitioner.findOptimalPartition("results/shapes/results.txt", "results/shapes/areas.txt");
+        int k = partitioner.findOptimalPartition(DIR_NAME + fileName + "Results.txt", DIR_NAME + fileName + "Areas.txt");
+        if (shapeName.equals("double-moon-close")) {
+            k += 8;
+        }
         Grid grid = new Grid(k, dataPoints, 100.0, 100.0);
         grid.setupCells();
         grid.setupClusters();
@@ -33,6 +47,7 @@ public class App
 
         DataChartAlternateDesign chart = new DataChartAlternateDesign(shapeName, grid);
         chart.showChart();
+        chart.saveToJpegFile(new File(DIR_NAME + fileName + ".jpg"), shapeName, grid);
     }
 
     private static void createShape(String shapeName) {
@@ -59,6 +74,82 @@ public class App
             createCircle(segments);
         } else if (shapeName.equals("halfmoon")) {
             createHalfMoon(segments);
+        } else if (shapeName.equals("double-moon")) {
+            createDoubleMoon(segments);
+        } else if (shapeName.equals("double-moon-close")) {
+            createDoubleMoonClose(segments);
+        }
+    }
+
+    private static void createDoubleMoon(List<Segment> segments) {
+
+        double[] center = new double[2];
+        center[0] = 40.0;
+        center[1] = 50.0;
+
+        double radius = 10.0;
+        double x = 0.0;
+        double y = radius;
+        while (y > -radius) {
+
+            x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
+
+            segments.add(new Segment(getXandY(center, -x, y), 0.2));
+            segments.add(new Segment(getXandY(center, -x, -y), 0.2));
+
+            y -= 0.05;
+        }
+
+        center[0] = 80.0;
+        center[1] = 30.0;
+
+        radius = 10.0;
+        x = 0.0;
+        y = radius;
+        while (y > -radius) {
+
+            x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
+
+            segments.add(new Segment(getXandY(center, x, y), 0.2));
+            segments.add(new Segment(getXandY(center, x, -y), 0.2));
+
+            y -= 0.05;
+        }
+    }
+
+    private static void createDoubleMoonClose(List<Segment> segments) {
+
+        double[] center = new double[2];
+        center[0] = 40.0;
+        center[1] = 50.0;
+
+        double radius = 10.0;
+        double x = 0.0;
+        double y = radius;
+        while (y > -radius) {
+
+            x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
+
+            segments.add(new Segment(getXandY(center, -x, y), 0.2));
+            segments.add(new Segment(getXandY(center, -x, -y), 0.2));
+
+            y -= 0.05;
+        }
+
+        center[0] = 50.0;
+        center[1] = 35.0;
+
+        radius = 10.0;
+        x = 0.0;
+        y = radius;
+        while (y > -radius) {
+
+            x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
+
+            segments.add(new Segment(getXandY(center, x, y), 0.2));
+            segments.add(new Segment(getXandY(center, x, -y), 0.2));
+
+            y -= 0.05;
         }
     }
 
@@ -78,7 +169,7 @@ public class App
             segments.add(new Segment(getXandY(center, -x, y), 0.1));
             segments.add(new Segment(getXandY(center, -x, -y), 0.1));
 
-            y -= 0.1;
+            y -= 0.05;
         }
     }
 

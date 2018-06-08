@@ -335,7 +335,7 @@ public class Grid implements StatsObj {
             id += cluster.calculateIDCost();
         }
         //System.out.println("mdl: " + mdl);
-        System.out.println(" actual: " + para + " . " + id);
+        //System.out.println(" actual: " + para + " . " + id);
         return mdl;
     }
 
@@ -379,7 +379,7 @@ public class Grid implements StatsObj {
         para += mergeCandidate.calculateParameterCost();
         id += mergeCandidate.calculateIDCost();
         //System.out.println("mdl: " + mdl);
-        System.out.println("before merge: " + para + " . " + id);
+        //System.out.println("before merge: " + para + " . " + id);
         return mdl;
     }
 

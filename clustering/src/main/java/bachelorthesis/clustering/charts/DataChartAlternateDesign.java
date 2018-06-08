@@ -6,6 +6,7 @@ import bachelorthesis.clustering.grid.Cluster;
 import bachelorthesis.clustering.grid.Grid;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
@@ -18,6 +19,8 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class DataChartAlternateDesign extends ApplicationFrame {
 
@@ -28,7 +31,7 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         super(title);
         final XYSeriesCollection collection = new XYSeriesCollection();
         int clusterIndex = 0;
-        System.out.println("Clusters: " + grid.getClusters().size());
+        //System.out.println("Clusters: " + grid.getClusters().size());
         for (Cluster cluster : grid.getClusters()) {
 
             final XYSeries serie = new XYSeries("Cluster " + ++clusterIndex);
@@ -72,5 +75,14 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         this.pack();
         RefineryUtilities.centerFrameOnScreen(this);
         this.setVisible(true);
+    }
+
+    public void saveToJpegFile(File filename, String name, Grid grid) {
+
+        try {
+            ChartUtilities.saveChartAsJPEG(filename, chart, 500, 500);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
