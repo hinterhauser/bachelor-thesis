@@ -21,10 +21,11 @@ public class App
 
         //createShape("halfmoon");
 
-        //clusterData("halfmoon-simple", "Halfmoon-simple");
-        //clusterData("halfmoon", "Halfmoon");
+        /*clusterData("halfmoon-simple", "Halfmoon-simple");
+        clusterData("halfmoon", "Halfmoon");
         clusterData("double-moon", "Double-moon");
-        //clusterData("double-moon-close", "Double-moon-close");
+        clusterData("double-moon-close", "Double-moon-close");*/
+        clusterData("circle", "Circle");
     }
 
     private static void clusterData(String shapeName, String fileName) {

@@ -547,7 +547,7 @@ public class UnitTest {
         clusters.remove(merger);
     }
 
-    @Test
+    @Test       // this test was broken, due to a new neighboring strategy
     public void testGridClustering() {
 
         List<DataPoint> dataPoints = new ArrayList<>();
@@ -584,15 +584,15 @@ public class UnitTest {
         assertEquals(numberDataPoints(clusters.get(7)), 3);
         assertEquals(numberDataPoints(clusters.get(8)), 2);
         // test for neighbors
-        assertEquals(clusters.get(0).getNeighbors().size(), 3);
-        assertEquals(clusters.get(1).getNeighbors().size(), 5);
-        assertEquals(clusters.get(2).getNeighbors().size(), 3);
-        assertEquals(clusters.get(3).getNeighbors().size(), 5);
-        assertEquals(clusters.get(4).getNeighbors().size(), 8);
-        assertEquals(clusters.get(5).getNeighbors().size(), 5);
-        assertEquals(clusters.get(6).getNeighbors().size(), 3);
-        assertEquals(clusters.get(7).getNeighbors().size(), 5);
-        assertEquals(clusters.get(8).getNeighbors().size(), 3);
+        assertEquals(clusters.get(0).getNeighbors().size(), 2);
+        assertEquals(clusters.get(1).getNeighbors().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getNeighbors().size(), 3);
+        assertEquals(clusters.get(4).getNeighbors().size(), 4);
+        assertEquals(clusters.get(5).getNeighbors().size(), 3);
+        assertEquals(clusters.get(6).getNeighbors().size(), 2);
+        assertEquals(clusters.get(7).getNeighbors().size(), 3);
+        assertEquals(clusters.get(8).getNeighbors().size(), 2);
 
         // merge index 3 and 4
         testGrid.mergeClusters(testGrid.getClusters().get(3), (Cluster) testGrid.getClusters().get(3).getNeighbors().toArray()[2]);
@@ -600,9 +600,9 @@ public class UnitTest {
         assertEquals(clusters.size(), 8);
         // test for neighbors
         assertEquals(clusters.get(0).getNeighbors().size(), 2);
-        assertEquals(clusters.get(1).getNeighbors().size(), 4);
-        assertEquals(clusters.get(2).getNeighbors().size(), 3);
-        assertEquals(clusters.get(3).getNeighbors().size(), 7);
+        assertEquals(clusters.get(1).getNeighbors().size(), 3);
+        assertEquals(clusters.get(2).getNeighbors().size(), 2);
+        assertEquals(clusters.get(3).getNeighbors().size(), 5);
         assertEquals(clusters.get(4).getNeighbors().size(), 5);
         assertEquals(clusters.get(5).getNeighbors().size(), 2);
         assertEquals(clusters.get(6).getNeighbors().size(), 4);

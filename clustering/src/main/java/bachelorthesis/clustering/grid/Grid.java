@@ -210,7 +210,7 @@ public class Grid implements StatsObj {
     private Set<Cluster> assignNeighbors(int i, int j, Cluster[][] clusterArray) {
 
         Set<Cluster> neighbors = new LinkedHashSet<>();
-        for (int y = i-1; y <= i+1; ++y) {
+        /*for (int y = i-1; y <= i+1; ++y) {
             for (int x = j-1; x <= j+1; ++x) {
 
                 if ((y >= 0 && x >= 0) && (y < k && x < k) && clusterArray[y][x] != null && !(y == i && x == j)) {
@@ -218,6 +218,18 @@ public class Grid implements StatsObj {
                     neighbors.add(clusterArray[y][x]);
                 }
             }
+        }*/
+        if (i-1 >= 0 && clusterArray[i-1][j] != null) {
+            neighbors.add(clusterArray[i-1][j]);
+        }
+        if (j-1 >= 0 && clusterArray[i][j-1] != null) {
+            neighbors.add(clusterArray[i][j-1]);
+        }
+        if (i+1 < k && clusterArray[i+1][j] != null) {
+            neighbors.add(clusterArray[i+1][j]);
+        }
+        if (j+1 < k && clusterArray[i][j+1] != null) {
+            neighbors.add(clusterArray[i][j+1]);
         }
         //System.out.println("assign: " + neighbors.size());
         return neighbors;
