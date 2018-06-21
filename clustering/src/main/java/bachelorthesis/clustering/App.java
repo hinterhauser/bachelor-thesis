@@ -21,21 +21,21 @@ public class App
 
         //createShape("halfmoon");
 
-        /*clusterData("halfmoon-simple", "Halfmoon-simple");
-        clusterData("halfmoon", "Halfmoon");
-        clusterData("double-moon", "Double-moon");
-        clusterData("double-moon-close", "Double-moon-close");*/
-        clusterData("circle", "Circle");
+        clusterData("halfmoon-simple", "Halfmoon-simple", true);
+        //clusterData("halfmoon", "Halfmoon");
+        //clusterData("double-moon", "Double-moon");
+        //clusterData("double-moon-close", "Double-moon-close");
+        //clusterData("circle", "Circle");
     }
 
-    private static void clusterData(String shapeName, String fileName) {
+    private static void clusterData(String shapeName, String fileName, boolean debug) {
 
         ArbitraryShape shape = new ArbitraryShape(2);
         List<Segment> segments = new ArrayList<>();
         selectShape(shapeName, segments);
         shape.setSegments(segments);
         ShapeGenerator generator = new ShapeGenerator(shape);
-        List<DataPoint> dataPoints = generator.generateShape(2000);
+        List<DataPoint> dataPoints = generator.generateShape(500);
         DataPartitioner partitioner = new DataPartitioner(dataPoints, 100.0, 100.0);
         int k = partitioner.findOptimalPartition(DIR_NAME + fileName + "Results.txt", DIR_NAME + fileName + "Areas.txt");
         if (shapeName.equals("double-moon-close")) {
@@ -44,7 +44,7 @@ public class App
         Grid grid = new Grid(k, dataPoints, 100.0, 100.0);
         grid.setupCells();
         grid.setupClusters();
-        grid.performClustering(false);
+        grid.performClustering(debug);
 
         DataChartAlternateDesign chart = new DataChartAlternateDesign(shapeName, grid);
         chart.showChart();

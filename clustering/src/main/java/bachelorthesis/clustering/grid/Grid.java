@@ -256,7 +256,8 @@ public class Grid implements StatsObj {
             if (notConvergedClusters.size() <= 0) {
                 break;
             }
-            int index = (int) (Math.random() * notConvergedClusters.size());
+            //int index = (int) (Math.random() * notConvergedClusters.size());
+            int index = 0;
             if (debug) {
                 System.out.println("Random index: " + index);
             }
@@ -275,7 +276,7 @@ public class Grid implements StatsObj {
         while(true) {
             if (debug) {
                 System.out.println("Iteration " + iteration);
-                System.out.println("   cost, before: " + calculateCodingCost());
+                //System.out.println("   cost, before: " + calculateCodingCost());
                 DataChartAlternateDesign chart = new DataChartAlternateDesign("Iteration " + iteration++, this);
                 chart.pack();
                 RefineryUtilities.centerFrameOnScreen(chart);
@@ -315,7 +316,7 @@ public class Grid implements StatsObj {
             //System.out.println("ni: " + neighborIndex + "  ns: " + neighbors.size());
             neighbors.clear();
             if (debug) {
-                System.out.println("   cost, after: " + calculateMDL());
+                //System.out.println("   cost, after: " + calculateMDL());
             }
         }
         //System.out.println("End");
@@ -339,15 +340,20 @@ public class Grid implements StatsObj {
         double para = 0.0;
         double id = 0.0;
         double mdl = 0.0;
+        double codingCost = 0.0;
         mdl += calculateCodingCost();
+        //codingCost = calculateCodingCost();
+        int i = 0;
         for (Cluster cluster : clusters) {
             mdl += cluster.calculateParameterCost();
             mdl += cluster.calculateIDCost();
             para += cluster.calculateParameterCost();
             id += cluster.calculateIDCost();
+            System.out.println("cluster " + i++ + "; " + cluster.calculateCodingCost());
         }
-        //System.out.println("mdl: " + mdl);
-        //System.out.println(" actual: " + para + " . " + id);
+        System.out.println("mdl: " + mdl);
+        System.out.println("cc: " + codingCost);
+        System.out.println(" actual: " + para + " . " + id);
         return mdl;
     }
 
@@ -371,6 +377,8 @@ public class Grid implements StatsObj {
         double para = 0.0;
         double id = 0.0;
         double mdl = 0.0;
+        double cc = 0.0;
+        int i = 0;
         mdl += calculateCodingCostBeforeMerging(c, merger);
         for (Cluster cluster : clusters) {
 
@@ -379,6 +387,7 @@ public class Grid implements StatsObj {
                 mdl += cluster.calculateIDCost();
                 para += cluster.calculateParameterCost();
                 id += cluster.calculateIDCost();
+                System.out.println("cc" + i++ + ": " + cluster.calculateCodingCost());
             }
         }
         //System.out.println("mdl: " + mdl);
@@ -390,8 +399,9 @@ public class Grid implements StatsObj {
         mdl += mergeCandidate.calculateIDCost();
         para += mergeCandidate.calculateParameterCost();
         id += mergeCandidate.calculateIDCost();
-        //System.out.println("mdl: " + mdl);
-        //System.out.println("before merge: " + para + " . " + id);
+        System.out.println("cc" + i++ + ": " + mergeCandidate.calculateCodingCost());
+        System.out.println("mdl: " + mdl);
+        System.out.println("before merge: " + para + " . " + id);
         return mdl;
     }
 

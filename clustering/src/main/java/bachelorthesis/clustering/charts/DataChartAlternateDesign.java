@@ -84,5 +84,10 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
