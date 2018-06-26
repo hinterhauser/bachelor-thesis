@@ -4,7 +4,9 @@ import bachelorthesis.clustering.charts.DataChartAlternateDesign;
 import bachelorthesis.clustering.data.DataPoint;
 import org.jfree.ui.RefineryUtilities;
 
+import javax.xml.crypto.Data;
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -15,8 +17,8 @@ public class Grid implements StatsObj {
     private Cell[][] cells;
     private List<DataPoint> dataPoints;
     private List<Cluster> clusters;
-    private double x;
-    private double y;
+    private double[] xDomain;
+    private double[] yDomain;
 
     private double mean;
     private double deviation;
@@ -29,6 +31,29 @@ public class Grid implements StatsObj {
         clusters = new ArrayList<>();
         setX(x);
         setY(y);
+    }
+
+    public Grid(int k, List<DataPoint> dataPoints) {
+
+        setK(k);
+        setDataPoints(dataPoints);
+        cells = new Cell[k][k];
+        clusters = new ArrayList<>();
+        defineDomain();
+        setupCells();
+        setupClusters();
+    }
+
+    public void setX(double x) {    // TODO be aware of the case where x or y is smaller than 0.0
+        xDomain = new double[2];
+        xDomain[0] = 0.0;
+        xDomain[1] = x;
+    }
+
+    public void setY(double y) {
+        yDomain = new double[2];
+        yDomain[0] = 0.0;
+        yDomain[1] = y;
     }
 
     public double getMean() {
@@ -47,20 +72,20 @@ public class Grid implements StatsObj {
         this.cells = cells;
     }
 
-    public double getX() {
-        return x;
+    public double[] getXDomain() {
+        return xDomain;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setX(double[] xDomain) {
+        this.xDomain = xDomain;
     }
 
-    public double getY() {
-        return y;
+    public double[] getYDomain() {
+        return yDomain;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setYDomain(double[] yDomain) {
+        this.yDomain = yDomain;
     }
 
     public int getK() {
@@ -88,6 +113,37 @@ public class Grid implements StatsObj {
     }
 
     // -------------- end Setter and Getter ------------------------------------
+
+    private void defineDomain() {
+
+        defineInitialDomain();
+        for (DataPoint dataPoint : dataPoints) {
+
+            if (dataPoint.getVector()[0] < xDomain[0]) {
+                xDomain[0] = dataPoint.getVector()[0] - 5;
+            } else if (dataPoint.getVector()[0] > xDomain[1]) {
+                xDomain[1] = dataPoint.getVector()[0] + 5;
+            }
+
+            if (dataPoint.getVector()[1] < yDomain[0]) {
+                yDomain[0] = dataPoint.getVector()[1] - 5;
+            } else if (dataPoint.getVector()[1] > yDomain[1]) {
+                yDomain[1] = dataPoint.getVector()[1] + 5;
+            }
+        }
+    }
+
+    private void defineInitialDomain() {
+
+        xDomain = new double[2];
+        yDomain = new double[2];
+
+        xDomain[0] = dataPoints.get(0).getVector()[0] - 5;
+        xDomain[1] = dataPoints.get(0).getVector()[0] + 5;
+
+        yDomain[0] = dataPoints.get(0).getVector()[1] - 5;
+        yDomain[1] = dataPoints.get(0).getVector()[1] + 5;
+    }
 
     private void calculateMean() {
 
@@ -127,13 +183,13 @@ public class Grid implements StatsObj {
 
     public void setupCells() {
 
-        double xCellLength = x / k;
-        double yCellLength = y / k;
+        double xCellLength = (xDomain[1] - xDomain[0]) / k;
+        double yCellLength = (yDomain[1] - yDomain[0]) / k;
 
         int xCellIndex = 0;
         int yCellIndex = 0;
-        for (double i = 0.0; (i < y) & (yCellIndex < k); i += yCellLength) {
-            for (double j = 0.0; (j < x) & (xCellIndex < k); j += xCellLength) {
+        for (double i = yDomain[0]; (i < yDomain[1]) & (yCellIndex < k); i += yCellLength) {
+            for (double j = xDomain[0]; (j < xDomain[1]) & (xCellIndex < k); j += xCellLength) {
 
                 double cellCenter[] = new double[2];
                 cellCenter[0] = (i + i + yCellLength) / 2;
@@ -162,8 +218,10 @@ public class Grid implements StatsObj {
 
         for (DataPoint dataPoint : dataPoints) {
 
-            int indexX = (int) (dataPoint.getVector()[1] / xCellLength);
-            int indexY = (int) (dataPoint.getVector()[0] / yCellLength);
+            int indexX = (int) ((dataPoint.getVector()[0] - xDomain[0]) / xCellLength);
+            //System.out.println("dp: " + dataPoint.getVector()[0] + " : xd: " + xDomain[0] + " : xCellLength: " +xCellLength);
+            int indexY = (int) ((dataPoint.getVector()[1] - yDomain[0]) / yCellLength);
+            //System.out.println("dp: " + dataPoint.getVector()[1] + " : xd: " + yDomain[0] + " : xCellLength: " +yCellLength);
             cells[indexY][indexX].getDataPoints().add(dataPoint);
         }
     }
@@ -248,6 +306,7 @@ public class Grid implements StatsObj {
 
         double actualCost = 0.0;
         double costBeforeMerging = 0.0;
+        int index = 0;
         List<Cluster> notConvergedClusters = new ArrayList<>();
         List<Cluster> convergedClusters = new ArrayList<>();
         do {
@@ -256,14 +315,73 @@ public class Grid implements StatsObj {
             if (notConvergedClusters.size() <= 0) {
                 break;
             }
-            //int index = (int) (Math.random() * notConvergedClusters.size());
-            int index = 0;
+            /*
+                3 strategies:
+                    get a random index
+                    start with a constant index (0)
+                    get the index of the cluster with the most datapoints
+             */
+            //index = (int) (Math.random() * notConvergedClusters.size());
+            index = getClusterIndexWithMostDataPoints(notConvergedClusters);
+
             if (debug) {
-                System.out.println("Random index: " + index);
+                System.out.println("Index: " + index);
             }
             mergeWithNeighbors(notConvergedClusters.get(index), convergedClusters, debug);
         } while (notConvergedClusters.size() > 0);
-        clusters = convergedClusters;
+        //clusters = convergedClusters;
+        assignClusterID();
+    }
+
+    public void writeToCSV(String csvFile) throws IOException {
+
+        FileWriter writer = new FileWriter(csvFile);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Cluster cluster : clusters) {
+            for (Cell cell : cluster.getClusterCells()) {
+                for (DataPoint dataPoint : cell.getDataPoints()) {
+
+                    boolean first = true;
+                    for (int i = 0; i < dataPoint.getDim(); ++i) {
+                        if (!first) {
+                            stringBuilder.append(',');
+                        }
+                        first = false;
+                        stringBuilder.append(dataPoint.getVector()[i]);
+                    }
+                    stringBuilder.append(',');
+                    stringBuilder.append(dataPoint.getGroundTruth());
+                    stringBuilder.append(',');
+                    stringBuilder.append(dataPoint.getCluster());
+                    stringBuilder.append("\n");
+                }
+            }
+        }
+        writer.append(stringBuilder.toString());
+
+        writer.flush();
+        writer.close();
+    }
+
+    private void assignClusterID() {
+
+        for (int i = 0; i < clusters.size(); ++i) {
+
+            for (DataPoint dataPoint : clusters.get(i).getDataPoints()) {
+                dataPoint.setCluster("" + i);
+            }
+        }
+    }
+
+    private int getClusterIndexWithMostDataPoints(List<Cluster> notConvergedClusters) {
+        int index = 0;
+        for (int i = 1; i < notConvergedClusters.size(); ++i) {
+            if (notConvergedClusters.get(index).getNumberOfDataPointsInCluster() < notConvergedClusters.get(i).getNumberOfDataPointsInCluster()) {
+                index = i;
+            }
+        }
+        return index;
     }
 
     private void mergeWithNeighbors(Cluster cluster, List<Cluster> convergedClusters, boolean debug) {
@@ -335,7 +453,7 @@ public class Grid implements StatsObj {
         }
     }
 
-    public double calculateMDL() {
+    private double calculateMDL() {
 
         double para = 0.0;
         double id = 0.0;
@@ -349,11 +467,11 @@ public class Grid implements StatsObj {
             mdl += cluster.calculateIDCost();
             para += cluster.calculateParameterCost();
             id += cluster.calculateIDCost();
-            System.out.println("cluster " + i++ + "; " + cluster.calculateCodingCost());
+            //System.out.println("cluster " + i++ + "; " + cluster.calculateCodingCost());
         }
-        System.out.println("mdl: " + mdl);
+        /*System.out.println("mdl: " + mdl);
         System.out.println("cc: " + codingCost);
-        System.out.println(" actual: " + para + " . " + id);
+        System.out.println(" actual: " + para + " . " + id);*/  // TODO debug output
         return mdl;
     }
 
@@ -387,7 +505,7 @@ public class Grid implements StatsObj {
                 mdl += cluster.calculateIDCost();
                 para += cluster.calculateParameterCost();
                 id += cluster.calculateIDCost();
-                System.out.println("cc" + i++ + ": " + cluster.calculateCodingCost());
+                //System.out.println("cc" + i++ + ": " + cluster.calculateCodingCost());
             }
         }
         //System.out.println("mdl: " + mdl);
@@ -399,9 +517,9 @@ public class Grid implements StatsObj {
         mdl += mergeCandidate.calculateIDCost();
         para += mergeCandidate.calculateParameterCost();
         id += mergeCandidate.calculateIDCost();
-        System.out.println("cc" + i++ + ": " + mergeCandidate.calculateCodingCost());
+        /*System.out.println("cc" + i++ + ": " + mergeCandidate.calculateCodingCost());
         System.out.println("mdl: " + mdl);
-        System.out.println("before merge: " + para + " . " + id);
+        System.out.println("before merge: " + para + " . " + id);*/
         return mdl;
     }
 

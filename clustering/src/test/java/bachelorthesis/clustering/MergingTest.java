@@ -41,11 +41,17 @@ public class MergingTest {
         List<DataPoint> dataPointsTest4 = null;
         Grid testGrid4 = null;
 
-        //testClustering(testGrid0, dataPointsTest0, 0, false, mean);
-        //testClustering(testGrid1, dataPointsTest1, 1, false, mean);
-        testClustering(testGrid2, dataPointsTest2, 2, true, mean);
-        //testClustering(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
-        //testClustering(testGrid4, dataPointsTest4, 4, false, mean);
+        /*testClustering_old(testGrid0, dataPointsTest0, 0, false, mean);
+        testClustering_old(testGrid1, dataPointsTest1, 1, false, mean);
+        testClustering_old(testGrid2, dataPointsTest2, 2, false, mean);
+        testClustering_old(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
+        testClustering_old(testGrid4, dataPointsTest4, 4, false, mean);*/
+
+        testClustering_new(testGrid0, dataPointsTest0, 0, false, mean);
+        testClustering_new(testGrid1, dataPointsTest1, 1, false, mean);
+        testClustering_new(testGrid2, dataPointsTest2, 2, false, mean);
+        testClustering_new(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
+        testClustering_new(testGrid4, dataPointsTest4, 4, false, mean);
 
         /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
         chart.pack();
@@ -98,11 +104,11 @@ public class MergingTest {
         chart.setVisible(true);*/
     }
 
-    private static void testClustering(Grid testGrid, List<DataPoint> dataPointsTest, int index, boolean debug, double[] mean) {
+    private static void testClustering_old(Grid testGrid, List<DataPoint> dataPointsTest, int index, boolean debug, double[] mean) {
 
         dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
         DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
-        int k = dataPartitioner.findOptimalPartition("results/results" + index + ".txt", "results/areas" + index + ".txt");
+        int k = dataPartitioner.findOptimalPartition_old("results/results" + index + "_old.txt", "results/areas" + index + "_old.txt");
         if (index == 3) {
             k += 20;
         }
@@ -114,7 +120,31 @@ public class MergingTest {
         }
         testGrid.performClustering(debug);
         resultsOfClustering(testGrid, mean);
-        saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + ".jpg"));
+        saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + "_old.jpg"));
+    }
+
+    private static void testClustering_new(Grid testGrid, List<DataPoint> dataPointsTest, int index, boolean debug, double[] mean) {
+
+        dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
+        DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
+        int k = dataPartitioner.findOptimalPartition_old("results/results" + index + "_new.txt", "results/areas" + index + "_new.txt");
+        if (index == 3) {
+            k += 20;
+        }
+        testGrid = new Grid(k, dataPointsTest);
+        //testGrid.setupCells();
+        //testGrid.setupClusters();
+        if (debug) {
+            System.out.println("clusters: " + testGrid.getClusters().size());
+        }
+        testGrid.performClustering(debug);
+        resultsOfClustering(testGrid, mean);
+        saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + "_new.jpg"));
+        try {
+            testGrid.writeToCSV("results/mergingTests/results" + index + ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void saveToFile(Grid grid, int index, File filename) {

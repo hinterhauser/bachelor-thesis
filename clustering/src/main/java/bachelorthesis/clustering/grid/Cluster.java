@@ -84,6 +84,15 @@ public class Cluster {          // TODO clean it up
         this.name = name;
     }
 
+    public List<DataPoint> getDataPoints() {
+
+        List<DataPoint> dataPoints = new ArrayList<>();
+        for (Cell cell : clusterCells) {
+            dataPoints.addAll(cell.getDataPoints());
+        }
+        return dataPoints;
+    }
+
     public boolean removeNeighbor(Cluster neighbor) {
 
         return neighbors.remove(neighbor);
@@ -240,6 +249,18 @@ public class Cluster {          // TODO clean it up
             array[i] = 0.0;
         }
     }
+
+    public int getNumberOfDataPointsInCluster() {
+        int sum = 0;
+        for (Cell cell : clusterCells) {
+            sum += cell.getDataPoints().size();
+        }
+        return sum;
+    }
+
+    /*******************************
+     * functions for debugging
+     *******************************/
 
     private void debugMerging(String description, Cluster merger) {
 

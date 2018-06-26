@@ -21,11 +21,11 @@ public class App
 
         //createShape("halfmoon");
 
-        clusterData("halfmoon-simple", "Halfmoon-simple", true);
-        //clusterData("halfmoon", "Halfmoon");
-        //clusterData("double-moon", "Double-moon");
-        //clusterData("double-moon-close", "Double-moon-close");
-        //clusterData("circle", "Circle");
+        //clusterData("halfmoon-simple", "Halfmoon-simple", false);
+        //clusterData("halfmoon", "Halfmoon", false);
+        //clusterData("double-moon", "Double-moon", false);
+        //clusterData("double-moon-close", "Double-moon-close", false);
+        clusterData("circle", "Circle", true);
     }
 
     private static void clusterData(String shapeName, String fileName, boolean debug) {
@@ -35,9 +35,9 @@ public class App
         selectShape(shapeName, segments);
         shape.setSegments(segments);
         ShapeGenerator generator = new ShapeGenerator(shape);
-        List<DataPoint> dataPoints = generator.generateShape(500);
+        List<DataPoint> dataPoints = generator.generateShape(2000);
         DataPartitioner partitioner = new DataPartitioner(dataPoints, 100.0, 100.0);
-        int k = partitioner.findOptimalPartition(DIR_NAME + fileName + "Results.txt", DIR_NAME + fileName + "Areas.txt");
+        int k = partitioner.findOptimalPartition_old(DIR_NAME + fileName + "Results_old.txt", DIR_NAME + fileName + "Areas_old.txt");
         if (shapeName.equals("double-moon-close")) {
             k += 8;
         }
@@ -183,16 +183,21 @@ public class App
         double radius = 10.0;
         double x = 0.0;
         double y = 0.0;
-        while (x < radius) {
+        double phi = 0.0;
+        while (phi < 90) {
+        //while (x < radius) {
 
-            y = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(x, 2.0));
+            //y = Math.sqrt( Math.pow(radius, 2.0) - Math.pow(x, 2.0) );
+            y = Math.sin(phi) * radius;
+            x = Math.cos(phi) * radius;
 
             segments.add(new Segment(getXandY(center, x, y), 0.1));
             segments.add(new Segment(getXandY(center, -x, y), 0.1));
             segments.add(new Segment(getXandY(center, x, -y), 0.1));
             segments.add(new Segment(getXandY(center, -x, -y), 0.1));
 
-            x += 0.1;
+            //x += 0.1;
+            phi += 0.9;
         }
     }
 

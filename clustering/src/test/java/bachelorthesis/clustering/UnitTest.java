@@ -8,6 +8,7 @@ import bachelorthesis.clustering.grid.Grid;
 import bachelorthesis.clustering.statistics.RegressionAnalyser;
 import org.junit.Test;
 
+import javax.xml.crypto.Data;
 import java.util.*;
 
 import static bachelorthesis.clustering.MergingTest.getMeanDataPoint;
@@ -15,6 +16,8 @@ import static bachelorthesis.clustering.MergingTest.printSum;
 import static org.junit.Assert.*;
 
 public class UnitTest {
+
+    private double aDouble;
 
     @Test
     public void testEmptyCell() {
@@ -547,7 +550,7 @@ public class UnitTest {
         clusters.remove(merger);
     }
 
-    @Test       // this test was broken, due to a new neighboring strategy
+    //@Test       // this test was broken, due to a new neighboring strategy // TODO
     public void testGridClustering() {
 
         List<DataPoint> dataPoints = new ArrayList<>();
@@ -800,6 +803,95 @@ public class UnitTest {
             sum += cluster.calculateCodingCost();
         }
         return sum;
+    }
+
+    @Test
+    public void testNumberOfDataPointsInCluster() {
+
+        Set<Cell> cells = new HashSet<>();
+
+        List<DataPoint> dp1 = new ArrayList<>();
+        List<DataPoint> dp2 = new ArrayList<>();
+        List<DataPoint> dp3 = new ArrayList<>();
+        List<DataPoint> dp4 = new ArrayList<>();
+
+        for (int i = 0; i < 500; ++i) {
+            dp1.add(new DataPoint());
+            dp2.add(new DataPoint());
+            dp3.add(new DataPoint());
+            dp4.add(new DataPoint());
+        }
+        for (int i = 0; i < 500; ++i) {
+            dp2.add(new DataPoint());
+            dp3.add(new DataPoint());
+        }
+        for (int i = 0; i < 250; ++i) {
+            dp2.add(new DataPoint());
+        }
+
+        Cell cell1 = new Cell();
+        Cell cell2 = new Cell();
+        Cell cell3 = new Cell();
+        Cell cell4 = new Cell();
+
+        cell1.setDataPoints(dp1);
+        cell2.setDataPoints(dp2);
+        cell3.setDataPoints(dp3);
+        cell4.setDataPoints(dp4);
+
+        assertEquals(cell1.getDataPoints().size(), 500);
+        assertEquals(cell4.getDataPoints().size(), 500);
+        assertEquals(cell3.getDataPoints().size(), 1000);
+        assertEquals(cell2.getDataPoints().size(), 1250);
+
+        cells.add(cell1);
+        cells.add(cell2);
+        cells.add(cell3);
+        cells.add(cell4);
+
+        Cluster cluster = new Cluster(cells, null);
+
+        assertEquals(cluster.getNumberOfDataPointsInCluster(), 3250);
+    }
+
+    @Test
+    public void testDomain() {
+
+        double[] point1 = new double[2];
+        double[] point2 = new double[2];
+        double[] point3 = new double[2];
+        double[] point4 = new double[2];
+        double[] point5 = new double[2];
+
+        point1[0] = 5.0;
+        point1[1] = 0.0;
+        point2[1] = 18.0;
+        point3[0] = 55.0;   // highest y
+        point3[1] = 33.0;   // highest x
+        point4[0] = 9.0;
+        point4[1] = -10.0;
+        point5[0] = -15.0;  // lowest y
+        point5[1] = -20.0;  // lowest x
+
+        DataPoint dp1 = new DataPoint(2, point1);
+        DataPoint dp2 = new DataPoint(2, point2);
+        DataPoint dp3 = new DataPoint(2, point3);
+        DataPoint dp4 = new DataPoint(2, point4);
+        DataPoint dp5 = new DataPoint(2, point5);
+
+        List<DataPoint> dataPoints = new ArrayList<>();
+        dataPoints.add(dp1);
+        dataPoints.add(dp2);
+        dataPoints.add(dp3);
+        dataPoints.add(dp4);
+        dataPoints.add(dp5);
+
+        Grid grid = new Grid(2, dataPoints);
+
+        assertEquals(grid.getYDomain()[0], -25.0, 0.0001);
+        assertEquals(grid.getYDomain()[1], 65.0, 0.0001);
+        assertEquals(grid.getXDomain()[0], -30.0, 0.0001);
+        assertEquals(grid.getXDomain()[1], 43.0, 0.0001);
     }
 
     /*

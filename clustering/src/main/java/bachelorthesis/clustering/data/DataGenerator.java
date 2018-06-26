@@ -22,6 +22,15 @@ public class DataGenerator {
 		return new DataPoint(dim, point, makeIdentifier(mean, deviation));
 	}
 
+	public DataPoint generateDataPoint(double[] mean, double deviation, String groundTruth) {
+
+		double[] point = new double[dim];
+		for (int i = 0; i < dim; ++i) {
+			point[i] = mean[i] + seed.nextGaussian() * deviation;
+		}
+		return new DataPoint(dim, point, groundTruth);
+	}
+
 	private String makeIdentifier(double[] mean, double deviation) {
 
 		String idString = "mean:";

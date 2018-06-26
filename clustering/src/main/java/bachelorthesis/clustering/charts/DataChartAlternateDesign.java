@@ -52,14 +52,15 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         plot.setDomainGridlinesVisible(true);
         plot.setRangeGridlinesVisible(true);
 
-        NumberTickUnit tickUnit = new NumberTickUnit(grid.getX() / grid.getK());
+        NumberTickUnit tickUnitR = new NumberTickUnit((grid.getYDomain()[1] - grid.getYDomain()[0]) / grid.getK()); // TODO
+        NumberTickUnit tickUnitD = new NumberTickUnit((grid.getXDomain()[1] - grid.getXDomain()[0]) / grid.getK());
         //TickUnitSource ticks = NumberAxis.createIntegerTickUnits();
         NumberAxis domain = (NumberAxis) plot.getDomainAxis();
         //domain.setStandardTickUnits(ticks);
-        domain.setTickUnit(tickUnit);
+        domain.setTickUnit(tickUnitD);
         NumberAxis range = (NumberAxis) plot.getRangeAxis();
         //range.setStandardTickUnits(ticks);
-        range.setTickUnit(tickUnit);
+        range.setTickUnit(tickUnitR);
 
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));
