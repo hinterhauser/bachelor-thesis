@@ -333,6 +333,33 @@ public class Grid implements StatsObj {
         assignClusterID();
     }
 
+    public void writeNMIFiles(String directory, String fileName, int index, String ending) throws IOException {
+
+        FileWriter writerGroundTruth = new FileWriter(directory + fileName + index + "_truth" + ending);
+        FileWriter writerCluster = new FileWriter(directory + fileName + index + "_results" + ending);
+
+        StringBuilder stringBuilderGroundTruth = new StringBuilder();
+        StringBuilder stringBuilderCluster = new StringBuilder();
+
+        for (Cluster cluster : clusters) {
+            for (Cell cell : cluster.getClusterCells()) {
+                for (DataPoint dataPoint : cell.getDataPoints()) {
+
+                    stringBuilderGroundTruth.append(dataPoint.getGroundTruth() + " ");
+                    stringBuilderCluster.append(dataPoint.getCluster() + " ");
+                }
+            }
+        }
+
+        writerGroundTruth.append(stringBuilderGroundTruth);
+        writerCluster.append(stringBuilderCluster);
+
+        writerGroundTruth.flush();
+        writerCluster.flush();
+        writerGroundTruth.close();
+        writerCluster.close();
+    }
+
     public void writeToCSV(String csvFile) throws IOException {
 
         FileWriter writer = new FileWriter(csvFile);
@@ -369,7 +396,7 @@ public class Grid implements StatsObj {
         for (int i = 0; i < clusters.size(); ++i) {
 
             for (DataPoint dataPoint : clusters.get(i).getDataPoints()) {
-                dataPoint.setCluster("" + i);
+                dataPoint.setCluster("" + (i+1));
             }
         }
     }

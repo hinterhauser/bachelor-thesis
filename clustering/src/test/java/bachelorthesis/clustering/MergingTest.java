@@ -141,7 +141,8 @@ public class MergingTest {
         resultsOfClustering(testGrid, mean);
         saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + "_new.jpg"));
         try {
-            testGrid.writeToCSV("results/mergingTests/results" + index + ".txt");
+            testGrid.writeToCSV("results/mergingTests/results/results" + index + ".txt");
+            testGrid.writeNMIFiles("results/mergingTests/results/", "nmi", index, ".txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
