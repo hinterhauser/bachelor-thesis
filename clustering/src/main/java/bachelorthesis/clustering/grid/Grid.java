@@ -120,17 +120,21 @@ public class Grid implements StatsObj {
         for (DataPoint dataPoint : dataPoints) {
 
             if (dataPoint.getVector()[0] < xDomain[0]) {
-                xDomain[0] = dataPoint.getVector()[0] - 5;
+                xDomain[0] = dataPoint.getVector()[0];
             } else if (dataPoint.getVector()[0] > xDomain[1]) {
-                xDomain[1] = dataPoint.getVector()[0] + 5;
+                xDomain[1] = dataPoint.getVector()[0];
             }
 
             if (dataPoint.getVector()[1] < yDomain[0]) {
-                yDomain[0] = dataPoint.getVector()[1] - 5;
+                yDomain[0] = dataPoint.getVector()[1];
             } else if (dataPoint.getVector()[1] > yDomain[1]) {
-                yDomain[1] = dataPoint.getVector()[1] + 5;
+                yDomain[1] = dataPoint.getVector()[1];
             }
         }
+        xDomain[0] -= 10;
+        xDomain[1] += 10;
+        yDomain[0] -= 10;
+        yDomain[1] += 10;
     }
 
     private void defineInitialDomain() {
@@ -138,11 +142,11 @@ public class Grid implements StatsObj {
         xDomain = new double[2];
         yDomain = new double[2];
 
-        xDomain[0] = dataPoints.get(0).getVector()[0] - 5;
-        xDomain[1] = dataPoints.get(0).getVector()[0] + 5;
+        xDomain[0] = dataPoints.get(0).getVector()[0];
+        xDomain[1] = dataPoints.get(0).getVector()[0];
 
-        yDomain[0] = dataPoints.get(0).getVector()[1] - 5;
-        yDomain[1] = dataPoints.get(0).getVector()[1] + 5;
+        yDomain[0] = dataPoints.get(0).getVector()[1];
+        yDomain[1] = dataPoints.get(0).getVector()[1];
     }
 
     private void calculateMean() {

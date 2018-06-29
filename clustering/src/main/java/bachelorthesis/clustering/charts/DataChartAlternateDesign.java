@@ -12,6 +12,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.TickUnitSource;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -47,20 +48,34 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         chart.setBackgroundPaint(Color.white);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.white);
-        plot.setDomainGridlinePaint(Color.black);
-        plot.setRangeGridlinePaint(Color.black);
-        plot.setDomainGridlinesVisible(true);
-        plot.setRangeGridlinesVisible(true);
 
-        NumberTickUnit tickUnitR = new NumberTickUnit((grid.getYDomain()[1] - grid.getYDomain()[0]) / grid.getK()); // TODO
-        NumberTickUnit tickUnitD = new NumberTickUnit((grid.getXDomain()[1] - grid.getXDomain()[0]) / grid.getK());
-        //TickUnitSource ticks = NumberAxis.createIntegerTickUnits();
         NumberAxis domain = (NumberAxis) plot.getDomainAxis();
-        //domain.setStandardTickUnits(ticks);
-        domain.setTickUnit(tickUnitD);
+        domain.setLowerBound(grid.getXDomain()[0]);
+        domain.setUpperBound(grid.getXDomain()[1]);
+        double positionX = grid.getXDomain()[0];
+        double sizeX = (grid.getXDomain()[1] - grid.getXDomain()[0]) / grid.getK();
+        for (int i = 0; i <= grid.getK(); ++i) {
+            ValueMarker marker = new ValueMarker(positionX);
+            marker.setPaint(Color.black);
+            plot.addDomainMarker(marker);
+            positionX += sizeX;
+        }
+
         NumberAxis range = (NumberAxis) plot.getRangeAxis();
-        //range.setStandardTickUnits(ticks);
-        range.setTickUnit(tickUnitR);
+        range.setLowerBound(grid.getYDomain()[0]);
+        range.setUpperBound(grid.getYDomain()[1]);
+
+        double positionY = grid.getYDomain()[0];
+        double sizeY = (grid.getYDomain()[1] - grid.getYDomain()[0]) / grid.getK();
+        for (int i = 0; i <= grid.getK(); ++i) {
+            ValueMarker marker = new ValueMarker(positionY);
+            marker.setPaint(Color.black);
+            plot.addRangeMarker(marker);
+            positionY += sizeY;
+        }
+
+        //System.out.println(grid.getXDomain()[0] + " : " + grid.getXDomain()[1]);
+        //System.out.println(grid.getYDomain()[0] + " : " + grid.getYDomain()[1]);
 
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));
