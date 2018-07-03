@@ -127,7 +127,7 @@ public class MergingTest {
 
         dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
         DataPartitioner dataPartitioner = new DataPartitioner(dataPointsTest, 100, 100);
-        int k = dataPartitioner.findOptimalPartition_old("results/results" + index + "_new.txt", "results/areas" + index + "_new.txt");
+        int k = dataPartitioner.findOptimalPartition("results/results" + index + "_new.txt", "results/areas" + index + "_new.txt");
         if (index == 3) {
             k += 20;
         }

@@ -1,8 +1,8 @@
-# Created by Octave 4.2.1, Wed Jun 27 12:46:35 2018 GMT <unknown@unknown>
+# Created by Octave 4.2.1, Tue Jul 03 19:35:14 2018 GMT <unknown@unknown>
 # name: SSS
 # type: matrix
 # rows: 1
 # columns: 4
- 0 9.511750818183375e-016 1.902350163636673e-015 -1.110223024625157e-016
+ 0.9912709586231561 1.008883410953648 1.004422063971065 1.386350858013004
 
 

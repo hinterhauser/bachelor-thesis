@@ -49,6 +49,12 @@ public class TestDataGenerator {
         for (int i = 0; i < 2000; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,5.0, "1"));
         }
+
+        mean[0] = 100;
+        mean[1] = 80;
+        for (int i = 0; i < 2000; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean,4.0, "2"));
+        }
     }
 
     private static void fillDataForTestData1(ArrayList<DataPoint> dataPoints, double[] mean) {
@@ -120,6 +126,12 @@ public class TestDataGenerator {
         mean[1] = 50;
         for (int i = 0; i < 500; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,2.0, "1"));
+        }
+
+        mean[0] = 0;
+        mean[1] = 0;
+        for (int i = 0; i < 2000; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean,6.0, "2"));
         }
     }
 
