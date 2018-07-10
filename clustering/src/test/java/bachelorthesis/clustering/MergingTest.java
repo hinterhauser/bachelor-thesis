@@ -1,9 +1,11 @@
 package bachelorthesis.clustering;
 
 import bachelorthesis.clustering.charts.DataChartAlternateDesign;
+import bachelorthesis.clustering.clustering.DBSCANer;
 import bachelorthesis.clustering.data.DataGenerator;
 import bachelorthesis.clustering.data.DataPartitioner;
 import bachelorthesis.clustering.data.DataPoint;
+import bachelorthesis.clustering.fileIO.FileIO;
 import bachelorthesis.clustering.grid.Cell;
 import bachelorthesis.clustering.grid.Cluster;
 import bachelorthesis.clustering.grid.Grid;
@@ -47,11 +49,17 @@ public class MergingTest {
         testClustering_old(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
         testClustering_old(testGrid4, dataPointsTest4, 4, false, mean);*/
 
-        testClustering_new(testGrid0, dataPointsTest0, 0, false, mean);
+        /*testClustering_new(testGrid0, dataPointsTest0, 0, false, mean);
         testClustering_new(testGrid1, dataPointsTest1, 1, false, mean);
         testClustering_new(testGrid2, dataPointsTest2, 2, false, mean);
         testClustering_new(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
-        testClustering_new(testGrid4, dataPointsTest4, 4, false, mean);
+        testClustering_new(testGrid4, dataPointsTest4, 4, false, mean);*/
+
+        testClustering_DBSCAN(dataPointsTest0, 0);
+        testClustering_DBSCAN(dataPointsTest1, 1);
+        testClustering_DBSCAN(dataPointsTest2, 2);
+        testClustering_DBSCAN(dataPointsTest3, 3);
+        testClustering_DBSCAN(dataPointsTest4, 4);
 
         /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
         chart.pack();
@@ -102,6 +110,20 @@ public class MergingTest {
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);*/
+    }
+
+    private static void testClustering_DBSCAN(List<DataPoint> dataPointsTest, int index) {
+
+        System.out.println("started: " + index);
+        dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
+        DBSCANer dbscaNer = new DBSCANer(dataPointsTest);
+        dbscaNer.performDBSCAN(1.0, 5);
+        try {
+            FileIO.writeNMIFiles(dataPointsTest, "results/mergingTests/results/DBSCAN/", "nmi_dbscan", index, ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("finished: " + index);
     }
 
     private static void testClustering_old(Grid testGrid, List<DataPoint> dataPointsTest, int index, boolean debug, double[] mean) {

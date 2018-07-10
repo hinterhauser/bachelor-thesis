@@ -12,7 +12,7 @@ public class PartitionTest {
     public static void main(String[] args) {
 
         // Before starting this program, run TestDataGenerator to produce the csv file used in this program
-        runFirstGenerationTests();
+        //runFirstGenerationTests();
         runSecondGenerationTests();
     }
 
