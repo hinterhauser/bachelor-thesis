@@ -9,7 +9,8 @@ import java.util.List;
 public class Kmean {
 
     private int k;
-    private ClusterDBSCAN[] clusters;
+    private int dim;
+    private ClusterKMeans[] clusters;
     private List<DataPoint> dataPoints;
     private List<double[]> centroids;
 
@@ -17,33 +18,119 @@ public class Kmean {
 
         this.k = k;
         this.dataPoints = dataPoints;
-        clusters = new ClusterDBSCAN[k];
+        clusters = new ClusterKMeans[k];
         centroids = new ArrayList<>();
-        findCentroids();
+        dim = dataPoints.get(0).getDim();
+        for (int i = 0; i < k; ++i) {
+            centroids.add(new double[dim]);
+            clusters[i] = new ClusterKMeans(dim);
+        }
+    }
+
+    public ClusterKMeans[] getClusters() {
+        return clusters;
+    }
+
+    public void setClusters(ClusterKMeans[] clusters) {
+        this.clusters = clusters;
     }
 
     private void findCentroids() {
 
-        int n = dataPoints.size() / k;
-        int dim = dataPoints.get(0).getDim();
-        for (int i = 0; i < n; ++i) {
-            double[] centroid = new double[dim];
-            VectorMath.fillVectorWithZeros(centroid);
-            for (int j = i * n; j < (i+1) * n; ++j) {
-                for (int k = 0; k < dim; ++k) {
+        for (int i = 0; i < k; ++i) {
+            for (int j = 0; j < dim; ++j) {
 
-                    centroid[k] += dataPoints.get(j).getVector()[k];
-                }
+                centroids.get(i)[j] = clusters[i].getCentroid()[j];
+                //System.out.println("" + i + ": " + j + "   " + centroids.get(i)[j]);
             }
-            for (int l = 0; l < dim; ++l) {
-                centroid[l] /= n;
-            }
-            centroids.add(centroid);
         }
     }
 
     public void performKmeans() {
 
+        initialAssignment();
+        //System.out.println("Cluster 1: " + clusters[0].getDataPoints().size());
+        //System.out.println("Cluster 2: " + clusters[1].getDataPoints().size());
+        //System.out.println("Cluster 3: " + clusters[2].getDataPoints().size());
+        int iter = 0;
+        do {
+            findCentroids();
+            assignPointsToClosestCentroid();
+            //System.out.println("Iteration " + iter++);
+        } while(centroidsNotIdent());
+    }
 
+    private void assignPointsToClosestCentroid() {
+
+        clearClusters();
+        assignPoints();
+        for (ClusterKMeans cluster : clusters) {
+            cluster.calculateCentroid();
+        }
+    }
+
+    private void assignPoints() {
+
+        for (DataPoint dataPoint : dataPoints) {
+            int index = 0;
+            double dist = calculateDistToCentroid(dataPoint, index);
+            for (int i = 1; i < k; ++i) {
+                double d = calculateDistToCentroid(dataPoint, i);
+                if (d < dist) {
+
+                    index = i;
+                    dist = d;
+                }
+            }
+            clusters[index].addDataPoint(dataPoint);
+        }
+    }
+
+    private double calculateDistToCentroid(DataPoint dataPoint, int index) {
+
+        double dist = 0.0;
+        for (int i = 0; i < dim; ++i) {
+
+            double diff = dataPoint.getVector()[i] - clusters[index].getCentroid()[i];
+            dist += Math.pow( diff, 2.0 );
+        }
+        return Math.sqrt(dist);
+    }
+
+    private void clearClusters() {
+
+        for (ClusterKMeans cluster : clusters) {
+            cluster.clear();
+        }
+    }
+
+    private boolean centroidsNotIdent() {
+
+        boolean ident = true;
+        for (int i = 0; i < k; ++i) {
+            for (int j = 0; j < dim; ++j) {
+
+                if (centroids.get(i)[j] != clusters[i].getCentroid()[j]) {
+                    ident = false;
+                    break;
+                }
+            }
+            if (!ident) {
+                break;
+            }
+        }
+        return !ident;
+    }
+
+    private void initialAssignment() {
+
+        for (int i = 0; i < dataPoints.size(); ++i) {
+
+            clusters[i % k].addDataPoint(dataPoints.get(i));
+        }
+        for (int i = 0; i < k; ++i) {
+
+            clusters[i].calculateCentroid();
+        }
     }
 }

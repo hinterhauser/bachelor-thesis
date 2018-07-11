@@ -1,7 +1,9 @@
 package bachelorthesis.clustering;
 
 import bachelorthesis.clustering.charts.DataChartAlternateDesign;
+import bachelorthesis.clustering.clustering.ClusterKMeans;
 import bachelorthesis.clustering.clustering.DBSCANer;
+import bachelorthesis.clustering.clustering.Kmean;
 import bachelorthesis.clustering.data.DataGenerator;
 import bachelorthesis.clustering.data.DataPartitioner;
 import bachelorthesis.clustering.data.DataPoint;
@@ -55,11 +57,18 @@ public class MergingTest {
         testClustering_new(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
         testClustering_new(testGrid4, dataPointsTest4, 4, false, mean);*/
 
-        testClustering_DBSCAN(dataPointsTest0, 0);
+        /*testClustering_DBSCAN(dataPointsTest0, 0);
         testClustering_DBSCAN(dataPointsTest1, 1);
         testClustering_DBSCAN(dataPointsTest2, 2);
         testClustering_DBSCAN(dataPointsTest3, 3);
-        testClustering_DBSCAN(dataPointsTest4, 4);
+        testClustering_DBSCAN(dataPointsTest4, 4);*/
+
+        System.out.println("K-means");
+        testClustering_Kmeans(2, 0);
+        testClustering_Kmeans(2, 1);
+        testClustering_Kmeans(3, 2);
+        testClustering_Kmeans(4, 3);
+        testClustering_Kmeans(2, 4);
 
         /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
         chart.pack();
@@ -120,6 +129,27 @@ public class MergingTest {
         dbscaNer.performDBSCAN(1.0, 5);
         try {
             FileIO.writeNMIFiles(dataPointsTest, "results/mergingTests/results/DBSCAN/", "nmi_dbscan", index, ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("finished: " + index);
+    }
+
+    private static void testClustering_Kmeans(int k, int index) {
+
+        System.out.println("started: " + index);
+        List<DataPoint> dataPoints = extractDataPointsFromFile("results/testData" + index + ".csv");
+        Kmean kmean = new Kmean(k, dataPoints);
+        kmean.performKmeans();
+        int i = 1;
+        for (ClusterKMeans cluster : kmean.getClusters()) {
+            for (DataPoint dp : cluster.getDataPoints()) {
+                dp.setCluster("" + i);
+            }
+            ++i;
+        }
+        try {
+            FileIO.writeNMIFiles(dataPoints, "results/mergingTests/results/Kmeans/", "nmi_dbscan", index, ".txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
