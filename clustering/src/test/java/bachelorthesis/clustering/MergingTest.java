@@ -3,6 +3,7 @@ package bachelorthesis.clustering;
 import bachelorthesis.clustering.charts.DataChartAlternateDesign;
 import bachelorthesis.clustering.clustering.ClusterKMeans;
 import bachelorthesis.clustering.clustering.DBSCANer;
+import bachelorthesis.clustering.clustering.HierarchicalClusterer;
 import bachelorthesis.clustering.clustering.Kmean;
 import bachelorthesis.clustering.data.DataGenerator;
 import bachelorthesis.clustering.data.DataPartitioner;
@@ -63,12 +64,19 @@ public class MergingTest {
         testClustering_DBSCAN(dataPointsTest3, 3);
         testClustering_DBSCAN(dataPointsTest4, 4);*/
 
-        System.out.println("K-means");
+        /*System.out.println("K-means");
         testClustering_Kmeans(2, 0);
         testClustering_Kmeans(2, 1);
         testClustering_Kmeans(3, 2);
         testClustering_Kmeans(4, 3);
-        testClustering_Kmeans(2, 4);
+        testClustering_Kmeans(2, 4);*/
+
+        System.out.println("Test hierarchical Clustering");
+        testClustering_hierarchical(2, 0);
+        /*testClustering_hierarchical(2, 1);
+        testClustering_hierarchical(3, 2);
+        testClustering_hierarchical(4, 3);
+        testClustering_hierarchical(2, 4);*/
 
         /*DataChartAlternateDesign chart = new DataChartAlternateDesign("Grid " + 3, testGrid3);
         chart.pack();
@@ -150,6 +158,28 @@ public class MergingTest {
         }
         try {
             FileIO.writeNMIFiles(dataPoints, "results/mergingTests/results/Kmeans/", "nmi_dbscan", index, ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("finished: " + index);
+    }
+
+    private static void testClustering_hierarchical(int k, int index) {
+
+        System.out.println("started: " + index);
+        List<DataPoint> dataPoints = extractDataPointsFromFile("results/testData" + index + ".csv");
+        HierarchicalClusterer clusterer = new HierarchicalClusterer(dataPoints);
+        clusterer.performHierarchicalClustering(k);
+        int i = 1;
+        for (ClusterKMeans cluster : clusterer.getClusters()) {
+            for (DataPoint dp : cluster.getDataPoints()) {
+                dp.setCluster("" + i);
+            }
+            //System.out.println("DP: " + cluster.getDataPoints().size());
+            ++i;
+        }
+        try {
+            FileIO.writeNMIFiles(dataPoints, "results/mergingTests/results/Hierarchical/", "nmi_hier", index, ".txt");
         } catch (IOException e) {
             e.printStackTrace();
         }

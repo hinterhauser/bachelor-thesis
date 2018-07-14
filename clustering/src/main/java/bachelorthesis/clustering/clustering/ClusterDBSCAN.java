@@ -26,4 +26,9 @@ public class ClusterDBSCAN {
 
         dataPoints.add(dataPoint);
     }
+
+    public void addAllDataPoints(List<DataPoint> dataPoints) {
+
+        this.dataPoints.addAll(dataPoints);
+    }
 }
