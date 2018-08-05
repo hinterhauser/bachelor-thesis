@@ -82,7 +82,7 @@ public class HierarchicalClusterer {
             clusters.remove(merger);
             //System.out.println("After delete: " + cluster.getDataPoints().size());
             cluster.calculateCentroid();
-            System.out.println("Set size: " + clusters.size());
+            //System.out.println("Set size: " + clusters.size());
             minDist = Double.MAX_VALUE;
         }
     }

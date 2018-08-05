@@ -49,20 +49,21 @@ public class MergingTest {
         /*testClustering_old(testGrid0, dataPointsTest0, 0, false, mean);
         testClustering_old(testGrid1, dataPointsTest1, 1, false, mean);
         testClustering_old(testGrid2, dataPointsTest2, 2, false, mean);
-        testClustering_old(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
+        testClustering_old(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging, might run out of memory
         testClustering_old(testGrid4, dataPointsTest4, 4, false, mean);*/
 
         /*testClustering_new(testGrid0, dataPointsTest0, 0, false, mean);
         testClustering_new(testGrid1, dataPointsTest1, 1, false, mean);
         testClustering_new(testGrid2, dataPointsTest2, 2, false, mean);
-        testClustering_new(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging
+        testClustering_new(testGrid3, dataPointsTest3, 3, false, mean); // attention with debugging, might run out of memory
         testClustering_new(testGrid4, dataPointsTest4, 4, false, mean);*/
 
-        /*testClustering_DBSCAN(dataPointsTest0, 0);
-        testClustering_DBSCAN(dataPointsTest1, 1);
-        testClustering_DBSCAN(dataPointsTest2, 2);
-        testClustering_DBSCAN(dataPointsTest3, 3);
-        testClustering_DBSCAN(dataPointsTest4, 4);*/
+        System.out.println("DBSCAN");
+        testClustering_DBSCAN(dataPointsTest0, 0, 2.0, 3);
+        testClustering_DBSCAN(dataPointsTest1, 1, 1.0, 5);
+        testClustering_DBSCAN(dataPointsTest2, 2, 1.0, 5);
+        testClustering_DBSCAN(dataPointsTest3, 3, 1.0, 5);
+        testClustering_DBSCAN(dataPointsTest4, 4, 2.0, 3);
 
         /*System.out.println("K-means");
         testClustering_Kmeans(2, 0);
@@ -71,9 +72,9 @@ public class MergingTest {
         testClustering_Kmeans(4, 3);
         testClustering_Kmeans(2, 4);*/
 
-        System.out.println("Test hierarchical Clustering");
+        /*System.out.println("Test hierarchical Clustering");
         testClustering_hierarchical(2, 0);
-        /*testClustering_hierarchical(2, 1);
+        testClustering_hierarchical(2, 1);
         testClustering_hierarchical(3, 2);
         testClustering_hierarchical(4, 3);
         testClustering_hierarchical(2, 4);*/
@@ -129,12 +130,12 @@ public class MergingTest {
         chart.setVisible(true);*/
     }
 
-    private static void testClustering_DBSCAN(List<DataPoint> dataPointsTest, int index) {
+    private static void testClustering_DBSCAN(List<DataPoint> dataPointsTest, int index, double epsilon, int minPoints) {
 
         System.out.println("started: " + index);
         dataPointsTest = extractDataPointsFromFile("results/testData" + index + ".csv");
         DBSCANer dbscaNer = new DBSCANer(dataPointsTest);
-        dbscaNer.performDBSCAN(1.0, 5);
+        dbscaNer.performDBSCAN(epsilon, minPoints);
         try {
             FileIO.writeNMIFiles(dataPointsTest, "results/mergingTests/results/DBSCAN/", "nmi_dbscan", index, ".txt");
         } catch (IOException e) {
@@ -219,8 +220,11 @@ public class MergingTest {
         if (debug) {
             System.out.println("clusters: " + testGrid.getClusters().size());
         }
+        long start = System.currentTimeMillis();
         testGrid.performClustering(debug);
-        resultsOfClustering(testGrid, mean);
+        long end = System.currentTimeMillis() - start;
+        System.out.println("size: " + dataPointsTest.size() + "   time: " + end);
+        //resultsOfClustering(testGrid, mean);
         saveToFile(testGrid, index, new File("results/mergingTests/testGrid" + index + "_new.jpg"));
         try {
             testGrid.writeToCSV("results/mergingTests/results/results" + index + ".txt");

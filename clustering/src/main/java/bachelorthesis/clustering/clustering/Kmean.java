@@ -49,15 +49,14 @@ public class Kmean {
     public void performKmeans() {
 
         initialAssignment();
-        //System.out.println("Cluster 1: " + clusters[0].getDataPoints().size());
-        //System.out.println("Cluster 2: " + clusters[1].getDataPoints().size());
-        //System.out.println("Cluster 3: " + clusters[2].getDataPoints().size());
         int iter = 0;
         do {
             findCentroids();
             assignPointsToClosestCentroid();
+            iter++;
             //System.out.println("Iteration " + iter++);
-        } while(centroidsNotIdent());
+            // sometimes it does not converge
+        } while(centroidsNotIdent() && iter < 100);
     }
 
     private void assignPointsToClosestCentroid() {
