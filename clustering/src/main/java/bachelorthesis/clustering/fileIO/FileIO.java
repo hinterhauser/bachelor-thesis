@@ -8,6 +8,15 @@ import java.util.List;
 
 public class FileIO {
 
+    public static String[] readNMIcsvData(String filename) throws IOException {
+
+        String[] data = null;
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String nmiResult = reader.readLine();
+        data = nmiResult.split(",");
+        return data;
+    }
+
     public static void writeNMIFiles(List<DataPoint> dataPoints, String directory, String fileName, int index, String ending) throws IOException {
 
         writeNMIFiles(dataPoints, directory + fileName + index, ending);
