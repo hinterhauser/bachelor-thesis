@@ -129,6 +129,32 @@ public class DataPartitioner {
         return costK;
     }
 
+    public int findOptimalPartition() {
+
+        Grid grid;
+        RegressionAnalyser CostAnalyser = new RegressionAnalyser();
+        RegressionAnalyser AreaAnalyser = new RegressionAnalyser();
+        int sizeTestSeries = 150;
+
+        for (int k = 1; k <= sizeTestSeries; ++k) {
+            grid = new Grid(k, dataPoints);
+            grid.setupCells();
+            grid.calculateDeviationAndMean();
+            double partitioningCost = calculatePartitioningCost(grid);
+            double areaCost = ((grid.getXDomain()[1] - grid.getXDomain()[0]) / k) * ((grid.getYDomain()[1] - grid.getYDomain()[0]) / k) * grid.nonEmptyCells();
+            CostAnalyser.addDataPoint(partitioningCost);
+            AreaAnalyser.addDataPoint(areaCost);
+        }
+        System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
+        int costK = computeOptimalGridSize(CostAnalyser, sizeTestSeries);
+        int costA = computeOptimalGridSize(AreaAnalyser, sizeTestSeries);
+
+        if (costA > costK) {
+            costK = costA;
+        }
+        return costK;
+    }
+
     private int computeOptimalGridSize(RegressionAnalyser analyser, int sizeTestSeries) {
 
         analyser.setK(sizeTestSeries); // TODO that might not be necessary, change it eventually

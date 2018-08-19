@@ -166,6 +166,7 @@ public class Cell implements StatsObj {
 
                 double p = probability(dataPoint, i);
                 codingCosts[i] += -p * Math.log(p) / Math.log(2.0);
+                //System.out.println("p: " + p + "    " + Math.log(p));
             }
         }
         if (dataPoints.size() <= 1) {

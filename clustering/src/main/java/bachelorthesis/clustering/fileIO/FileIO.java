@@ -27,7 +27,7 @@ public class FileIO {
         writeNMIFiles(dataPoints, directory + fileName, ending);
     }
 
-    private static void writeNMIFiles(List<DataPoint> dataPoints, String fullFileName, String ending) throws IOException {
+    public static void writeNMIFiles(List<DataPoint> dataPoints, String fullFileName, String ending) throws IOException {
 
         FileWriter writerGroundTruth = new FileWriter(fullFileName + "_truth" + ending);
         FileWriter writerCluster = new FileWriter(fullFileName + "_results" + ending);

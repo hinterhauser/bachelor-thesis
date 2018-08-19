@@ -22,10 +22,10 @@ public class App
         //createShape("halfmoon");
 
         //clusterData("halfmoon-simple", "Halfmoon-simple", false);
-        //clusterData("halfmoon", "Halfmoon", false);
+        clusterData("halfmoon", "Halfmoon", false);
         //clusterData("double-moon", "Double-moon", false);
         //clusterData("double-moon-close", "Double-moon-close", false);
-        clusterData("circle", "Circle", true);
+        //clusterData("circle", "Circle", true);
     }
 
     private static void clusterData(String shapeName, String fileName, boolean debug) {
@@ -48,7 +48,7 @@ public class App
 
         DataChartAlternateDesign chart = new DataChartAlternateDesign(shapeName, grid);
         chart.showChart();
-        chart.saveToJpegFile(new File(DIR_NAME + fileName + ".jpg"), shapeName, grid);
+        chart.saveToJpegFile(new File(DIR_NAME + fileName + ".jpg"));
     }
 
     private static void createShape(String shapeName) {

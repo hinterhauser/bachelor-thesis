@@ -27,6 +27,10 @@ public class Kmean {
         }
     }
 
+    public List<DataPoint> getDataPoints() {
+        return dataPoints;
+    }
+
     public ClusterKMeans[] getClusters() {
         return clusters;
     }
@@ -130,6 +134,17 @@ public class Kmean {
         for (int i = 0; i < k; ++i) {
 
             clusters[i].calculateCentroid();
+        }
+    }
+
+    public void assignClusterIds() {
+
+        int i = 1;
+        for (ClusterKMeans cluster : getClusters()) {
+            for (DataPoint dp : cluster.getDataPoints()) {
+                dp.setCluster("" + i);
+            }
+            ++i;
         }
     }
 }

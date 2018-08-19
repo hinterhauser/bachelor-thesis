@@ -18,6 +18,9 @@ public class DataGenerator {
 		double[] point = new double[dim];
 		for (int i = 0; i < dim; ++i) {
 			point[i] = mean[i] + seed.nextGaussian() * deviation;
+			if (i > 1) {
+				point[i] = mean[i];
+			}
 		}
 		return new DataPoint(dim, point, makeIdentifier(mean, deviation));
 	}
@@ -27,6 +30,9 @@ public class DataGenerator {
 		double[] point = new double[dim];
 		for (int i = 0; i < dim; ++i) {
 			point[i] = mean[i] + seed.nextGaussian() * deviation;
+			if (i > 1) {
+				point[i] = mean[i];
+			}
 		}
 		return new DataPoint(dim, point, groundTruth);
 	}
@@ -38,5 +44,15 @@ public class DataGenerator {
 			idString += mean[i] + "/";	// TODO a reimplementation using StringBuilders might be preferable
 		}
 		return idString + "deviation:" + deviation;
+	}
+
+	public DataPoint generateEllipticalDataPoint(double[] mean, double a, double b, String groundTruth) {
+
+		double[] point = new double[dim];
+		point[0] = mean[0] + seed.nextGaussian() * a;
+		for (int i = 1; i < dim; ++i) {
+			point[i] = mean[i] + seed.nextGaussian() * b;
+		}
+		return new DataPoint(dim, point, groundTruth);
 	}
 }

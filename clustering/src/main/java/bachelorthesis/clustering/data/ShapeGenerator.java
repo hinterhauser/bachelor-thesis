@@ -23,7 +23,7 @@ public class ShapeGenerator {
         Segment segment;
         for (int i = 0; i < dataSetSize; ++i) {
 
-            modulus = i % numberSegments;
+            modulus = (i + numberSegments / 2) % numberSegments;
             segment = shape.getSegment(modulus);
             dataPoints.add(generator.generateDataPoint(segment.getMean(), segment.getDeviation()));
         }
@@ -33,8 +33,8 @@ public class ShapeGenerator {
     public void createDoubleMoonLeft(double[] center, double radius) {
 
         double x = 0.0;
-        double y = radius;
-        while (y > -radius) {
+        double y = radius - 0.05;
+        while (y > -radius + 0.05) {
 
             x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
 
@@ -48,8 +48,8 @@ public class ShapeGenerator {
     public void createDoubleMoonRight(double[] center, double radius) {
 
         double x = 0.0;
-        double y = radius;
-        while (y > -radius) {
+        double y = radius - 0.05;
+        while (y > -radius + 0.05) {
 
             x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
 
@@ -63,8 +63,8 @@ public class ShapeGenerator {
     public void createHalfMoon(double radius, double[] center) {
 
         double x = 0.0;
-        double y = radius;
-        while (y > -radius) {
+        double y = radius - 0.05;
+        while (y > -radius + 0.05) {
 
             x = Math.sqrt(Math.pow(radius, 2.0) - Math.pow(y, 2.0));
 

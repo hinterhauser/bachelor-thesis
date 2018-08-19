@@ -21,6 +21,7 @@ public class SecondTestDataGenerator {
         generateDataSetWithOverlappingGaussianClusters();
         generateDataSetWithArbitraryShapes();
         generateDateSetWithHalfMoons();
+        generateDataSetWithEllipticalClusters();
     }
 
     private static void generateDataSetWithNearGaussianClusters() {
@@ -265,5 +266,54 @@ public class SecondTestDataGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void generateDataSetWithEllipticalClusters() {
+
+        for (int i = 1; i <= 10; ++i) {
+
+            generateDataSetWithEllipticalClusters(5, i);
+        }
+        for (int i = 10; i <= 50; i += 5) {
+
+            generateDataSetWithEllipticalClusters(i, 1);
+        }
+    }
+
+    private static void generateDataSetWithEllipticalClusters(int dim, int factor) {
+
+        double[] mean = new double[dim];
+        List<DataPoint> dataPoints = new ArrayList<>();
+        generator = new DataGenerator(dim);
+
+        for (int i = 2; i < dim; ++i) {
+            mean[i] = 1;
+        }
+
+        mean[0] = 15;
+        mean[1] = 15;
+        for (int i = 0; i < 300 * factor; ++i) {
+            dataPoints.add(generator.generateEllipticalDataPoint(mean, 5.0, 1.0, "1"));
+        }
+
+        mean[0] = 25;
+        mean[1] = 25;
+        for (int i = 0; i < 300 * factor; ++i) {
+            dataPoints.add(generator.generateEllipticalDataPoint(mean,0.5, 2.0, "2"));
+        }
+
+        mean[0] = 80;
+        mean[1] = 20;
+        for (int i = 0; i < 250 * factor; ++i) {
+            dataPoints.add(generator.generateEllipticalDataPoint(mean,2.0, 1.0, "3"));
+        }
+
+        mean[0] = 50;
+        mean[1] = 50;
+        for (int i = 0; i < 150 * factor; ++i) {
+            dataPoints.add(generator.generateEllipticalDataPoint(mean,2.0, 2.5, "4"));
+        }
+
+        writeFile(dim, factor, dataPoints, "elliptical");
     }
 }

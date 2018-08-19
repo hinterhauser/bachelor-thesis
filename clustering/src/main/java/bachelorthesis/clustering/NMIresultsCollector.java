@@ -29,6 +29,8 @@ public class NMIresultsCollector {
         try {
             FileWriter writer = new FileWriter(file);
             for (int i = 0; i < length; ++i) {
+                builder.append(i+1);
+                builder.append("   ");
                 builder.append(mdlResults.get(i));
                 builder.append("   ");
                 builder.append(kmeansResults.get(i));
@@ -67,6 +69,11 @@ public class NMIresultsCollector {
             getNMIresults("moons", i, 1);
         }
         writeResultsToFile("secondSerieMoons.txt", 10);
+        clearLists();
+        for (int i = 5; i <= 50; i+=5) {
+            getNMIresults("elliptical", i, 1);
+        }
+        writeResultsToFile("secondSerieElliptical.txt", 10);
         clearLists();
     }
 
@@ -107,6 +114,11 @@ public class NMIresultsCollector {
             getNMIresults("moons", 5, i);
         }
         writeResultsToFile("firstSerieMoons.txt", 10);
+        clearLists();
+        for (int i = 1; i <= 10; ++i) {
+            getNMIresults("elliptical", 5, i);
+        }
+        writeResultsToFile("firstSerieElliptical.txt", 10);
         clearLists();
     }
 

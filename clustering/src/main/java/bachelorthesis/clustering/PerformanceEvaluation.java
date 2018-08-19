@@ -40,10 +40,10 @@ public class PerformanceEvaluation {
         }
         for (int i = 5; i <= 50; i += 5) {
 
-            kmeansNmiPerformance(i, 1);
-            dbscanNmiPerformance(i, 1);
+            //kmeansNmiPerformance(i, 1);
+            //dbscanNmiPerformance(i, 1);
             hierarchicalNmiPerformance(i, 1);
-            mdlNmiPerformance(i, 1);
+            //mdlNmiPerformance(i, 1);
         }
     }
 
@@ -54,12 +54,13 @@ public class PerformanceEvaluation {
         kmeans(dim, factor, "over");
         kmeans(dim, factor, "arbitrary");
         kmeans(dim, factor, "moons");
+        kmeans(dim, factor, "elliptical");
     }
 
     private static void kmeans(int dim, int factor, String type) {
 
         List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
-        Kmean kmean = new Kmean(4, dataPoints);
+        Kmean kmean = new Kmean(10, dataPoints);
         kmean.performKmeans();
         int i = 1;
         for (ClusterKMeans cluster : kmean.getClusters()) {
@@ -82,13 +83,14 @@ public class PerformanceEvaluation {
         dbscan(dim, factor, "over");
         dbscan(dim, factor, "arbitrary");
         dbscan(dim, factor, "moons");
+        dbscan(dim, factor, "elliptical");
     }
 
     private static void dbscan(int dim, int factor, String type) {
 
         List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
         DBSCANer dbscan = new DBSCANer(dataPoints);
-        dbscan.performDBSCAN(1.0, 5);
+        dbscan.performDBSCAN(0.3, 10);
         int i = 1;
         for (ClusterDBSCAN cluster : dbscan.getClusters()) {
             for (DataPoint dp : cluster.getDataPoints()) {
@@ -110,6 +112,7 @@ public class PerformanceEvaluation {
         hier(dim, factor, "over");
         hier(dim, factor, "arbitrary");
         hier(dim, factor, "moons");
+        hier(dim, factor, "elliptical");
     }
 
     private static void hier(int dim, int factor, String type) {
@@ -138,6 +141,7 @@ public class PerformanceEvaluation {
         mdl(dim, factor, "over");
         mdl(dim, factor, "arbitrary");
         mdl(dim, factor, "moons");
+        mdl(dim, factor, "elliptical");
     }
 
     private static void mdl(int dim, int factor, String type) {
@@ -147,7 +151,7 @@ public class PerformanceEvaluation {
             int k = new DataPartitioner(dataPoints).findOptimalPartition("results/performanceTests/res.txt", "results/performanceTests/areas.txt");
             //int k = 10;
             HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
-            grid.performClustering();
+            grid.performClustering(false);
             int i = 1;
             for (Cluster cluster : grid.getClusters()) {
                 for (DataPoint dp : cluster.getDataPoints()) {
@@ -233,7 +237,7 @@ public class PerformanceEvaluation {
             List<DataPoint> dataPoints = generateDatapoints(dim, size);
             HigherDimGrid grid = new HigherDimGrid(2, dataPoints);
             long start = System.currentTimeMillis();
-            grid.performClustering();
+            grid.performClustering(false);
             long end = System.currentTimeMillis();
             long time = end - start;
             printResults(dim, size, time);

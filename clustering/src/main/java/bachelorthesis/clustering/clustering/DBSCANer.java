@@ -46,19 +46,21 @@ public class DBSCANer {
     public void performDBSCAN(double epsilon, int minPoints) {
 
         clusters = new ArrayList<>();
+        clusters.add(new ClusterDBSCAN());
         int clusterID = 1;
         Set<DataPoint> queriedNeighbors;
         for (DataPoint dataPoint : dataPoints) {
             if (dataPoint.getCluster().equals("-1")) {
                 queriedNeighbors = regionQuery(dataPoint, epsilon);
-                // noise is marked with "0"
+                // noise is marked with "1"
                 if (queriedNeighbors.size() < minPoints) {
                     dataPoint.setCluster("1");
+                    clusters.get(0).addDataPoint(dataPoint);
                 } else {
                     clusters.add(new ClusterDBSCAN());
                     dataPoint.setCluster("" + clusterID+1);
-                    clusters.get(clusterID-1).addDataPoint(dataPoint);
-                    expandCluster(queriedNeighbors, epsilon, minPoints, clusters.get(clusterID-1), clusterID+1);
+                    clusters.get(clusterID).addDataPoint(dataPoint);
+                    expandCluster(queriedNeighbors, epsilon, minPoints, clusters.get(clusterID), clusterID+1);
                     ++clusterID;
                 }
             }
@@ -101,5 +103,16 @@ public class DBSCANer {
             }
         }
         return queriedDP;
+    }
+
+    public void assignClusterIds() {
+
+        int i = 1;
+        for (ClusterDBSCAN cluster : getClusters()) {
+            for (DataPoint dp : cluster.getDataPoints()) {
+                dp.setCluster("" + i);
+            }
+            ++i;
+        }
     }
 }
