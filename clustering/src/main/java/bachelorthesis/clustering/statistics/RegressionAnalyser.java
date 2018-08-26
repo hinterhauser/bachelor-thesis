@@ -30,6 +30,14 @@ public class RegressionAnalyser {
         return dataset.get(index);
     }
 
+    public List<Double> getDataset() {
+        return dataset;
+    }
+
+    public void setDataset(List<Double> dataset) {
+        this.dataset = dataset;
+    }
+
     public double getDeviation() {
         return deviation;
     }

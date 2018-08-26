@@ -9,8 +9,10 @@ import bachelorthesis.clustering.grid.Cluster;
 import bachelorthesis.clustering.grid.HigherDimGrid;
 import org.jfree.ui.ApplicationFrame;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class ChartTest {
     private static int factor = 1;
     private static int groundTruthNumber;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         double[] mean = new double[dim];
         initMean(mean);
@@ -32,8 +34,12 @@ public class ChartTest {
         //halfmoonWithGaussian(dataPoints, mean);
         //yinYang(dataPoints, mean);
         //doubleMoon(dataPoints, mean);
-        circlesInCircles(dataPoints, mean);
+        //circlesInCircles(dataPoints, mean);
+        //gaussianDifferentDensities(dataPoints, mean);
+        //gaussianDifferentDensitiesThreeClusters(dataPoints, mean);
+        halfmoonAndGaussians(dataPoints, mean);
 
+        System.out.println("Start MDL");
         DataPartitioner partitioner = new DataPartitioner(dataPoints);
         int k = partitioner.findOptimalPartition();
         //int k = 8;
@@ -41,7 +47,9 @@ public class ChartTest {
         DataChartAlternateDesign chart = new DataChartAlternateDesign("Test, Ground Truth", grid, groundTruthNumber);
         chart.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);
         chart.saveToJpegFile(new File("testResults/chartTest_truth.jpg"));
+        System.out.println("Clustering start");
         grid.performClustering(false);
+        System.out.println("Clustering end");
         int i = 1;
         for (Cluster cluster : grid.getClusters()) {
             for (DataPoint dp : cluster.getDataPoints()) {
@@ -51,26 +59,74 @@ public class ChartTest {
         }
         DataChartAlternateDesign chartClustered = new DataChartAlternateDesign("Test, MDL", grid);
         chartClustered.saveToJpegFile(new File("testResults/chartTest_mdl.jpg"));
+        FileIO.writeNMIFiles(grid.getDataPoints(), "testResults/mdl_nmi", ".txt");
+        System.out.println("Finish MDL");
 
+        System.out.println("Start Kmeans");
         Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
         kmean.performKmeans();
         kmean.assignClusterIds();
         chartClustered = new DataChartAlternateDesign("Test, k - means", kmean.getClusters());
         chartClustered.saveToJpegFile(new File("testResults/chartTest_kmean.jpg"));
+        FileIO.writeNMIFiles(kmean.getDataPoints(), "testResults/kmean_nmi", ".txt");
+        System.out.println("Finish Kmeans");
 
+        System.out.println("Start DBSCAN");
         DBSCANer dbscan = new DBSCANer(dataPoints);
-        dbscan.performDBSCAN(1.0, 5);
+        k = 10;
+        dbscan.findKnearestNeighborDistance(k);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Type in Epsilon: ");
+        double epsilon = Double.parseDouble(reader.readLine());
+        dbscan.performDBSCAN(epsilon, k);
         dbscan.assignClusterIds();
         chartClustered = new DataChartAlternateDesign("Test, DBSCAN", dbscan.getClusters());
-        chartClustered.saveToJpegFile(new File("testResults/chartTest_dbscan.jpg"));
+        chartClustered.saveToJpegFile(new File("testResults/chartTest_dbscan_eps=" + epsilon + ".jpg"));
+        FileIO.writeNMIFiles(dbscan.getDataPoints(), "testResults/dbscan_nmi", ".txt");
+        System.out.println("Finish DBSCAN");
+    }
 
-        try {
-            FileIO.writeNMIFiles(grid.getDataPoints(), "testResults/mdl_nmi", ".txt");
-            FileIO.writeNMIFiles(kmean.getDataPoints(), "testResults/kmean_nmi", ".txt");
-            FileIO.writeNMIFiles(dbscan.getDataPoints(), "testResults/dbscan_nmi", ".txt");
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static void makeGaussianCluster(List<DataPoint> dataPoints, double[] mean, double mean0, double mean1, double deviation, int number, String clusterId) {
+
+        mean[0] = mean0;
+        mean[1] = mean1;
+
+        for (int i = 0; i < number; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean, deviation, clusterId));
         }
+    }
+
+    private static void halfmoonAndGaussians(List<DataPoint> dataPoints, double[] mean) {
+
+        mean[0] = 50;
+        mean[1] = 50;
+        shapeGenerator = new ShapeGenerator(new ArbitraryShape(dim));
+        shapeGenerator.createHalfMoon(50, mean);
+        List<DataPoint> shapePoints = shapeGenerator.generateShape(1000 * factor);
+        for (DataPoint dp : shapePoints) {
+            dp.setGroundTruth("1");
+        }
+        dataPoints.addAll(shapePoints);
+
+        makeGaussianCluster(dataPoints, mean, 75, 50, 8.0, 3000, "2");
+        makeGaussianCluster(dataPoints, mean, 25, 50, 4.5, 100, "3");
+
+        groundTruthNumber = 3;
+    }
+
+    private static void gaussianDifferentDensitiesThreeClusters(List<DataPoint> dataPoints, double[] mean) {
+
+        makeGaussianCluster(dataPoints, mean, 20.0, 50.0, 1.0, 1000, "1");
+        makeGaussianCluster(dataPoints, mean, 45.0, 50.0, 5.0, 100, "2");
+        makeGaussianCluster(dataPoints, mean, 25.0, 65.0, 2.2, 500, "3");
+        groundTruthNumber = 3;
+    }
+
+    private static void gaussianDifferentDensities(List<DataPoint> dataPoints, double[] mean) {
+
+        makeGaussianCluster(dataPoints, mean, 20.0, 50.0, 1.0, 1000, "1");
+        makeGaussianCluster(dataPoints, mean, 40.0, 50.0, 5.0, 100, "2");
+        groundTruthNumber = 2;
     }
 
     private static void circlesInCircles(List<DataPoint> dataPoints, double[] mean) {

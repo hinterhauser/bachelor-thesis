@@ -2,6 +2,7 @@ package bachelorthesis.clustering.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ShapeGenerator {
 
@@ -21,10 +22,12 @@ public class ShapeGenerator {
         int numberSegments = shape.getSegments().size();
         int modulus;
         Segment segment;
+        Random random = new Random();
         for (int i = 0; i < dataSetSize; ++i) {
 
-            modulus = (i + numberSegments / 2) % numberSegments;
-            segment = shape.getSegment(modulus);
+            //modulus = (i + numberSegments / 2) % numberSegments;
+            //segment = shape.getSegment(modulus);
+            segment = shape.getSegment(random.nextInt(numberSegments));
             dataPoints.add(generator.generateDataPoint(segment.getMean(), segment.getDeviation()));
         }
         return dataPoints;

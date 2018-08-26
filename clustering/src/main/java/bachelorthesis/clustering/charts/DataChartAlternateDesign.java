@@ -215,31 +215,6 @@ public class DataChartAlternateDesign extends ApplicationFrame {
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.white);
 
-        /*NumberAxis domain = (NumberAxis) plot.getDomainAxis();
-        domain.setLowerBound(grid.getDomain()[0][0]);
-        domain.setUpperBound(grid.getDomain()[0][1]);
-        double positionX = grid.getDomain()[0][0];
-        double sizeX = (grid.getDomain()[0][1] - grid.getDomain()[0][0]) / grid.getK();
-        for (int i = 0; i <= grid.getK(); ++i) {
-            ValueMarker marker = new ValueMarker(positionX);
-            marker.setPaint(Color.black);
-            plot.addDomainMarker(marker);
-            positionX += sizeX;
-        }
-
-        NumberAxis range = (NumberAxis) plot.getRangeAxis();
-        range.setLowerBound(grid.getDomain()[1][0]);
-        range.setUpperBound(grid.getDomain()[1][1]);
-
-        double positionY = grid.getDomain()[1][0];
-        double sizeY = (grid.getDomain()[1][1] - grid.getDomain()[1][0]) / grid.getK();
-        for (int i = 0; i <= grid.getK(); ++i) {
-            ValueMarker marker = new ValueMarker(positionY);
-            marker.setPaint(Color.black);
-            plot.addRangeMarker(marker);
-            positionY += sizeY;
-        }*/
-
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));
         setContentPane(chartPanel);
@@ -260,46 +235,11 @@ public class DataChartAlternateDesign extends ApplicationFrame {
             }
             collection.addSeries(series[i]);
         }
-        /*int clusterIndex = 0;
-        for (ClusterDBSCAN cluster : clusters) {
-
-            final XYSeries serie = new XYSeries("Cluster " + ++clusterIndex);
-            for (DataPoint dataPoint : cluster.getDataPoints()) {
-
-                serie.add(dataPoint.getVector()[0], dataPoint.getVector()[1]);
-            }
-            collection.addSeries(serie);
-        }*/
 
         chart = ChartFactory.createScatterPlot(title, "x", "y", collection, PlotOrientation.VERTICAL, true, false, false);
         chart.setBackgroundPaint(Color.white);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.white);
-
-        /*NumberAxis domain = (NumberAxis) plot.getDomainAxis();
-        domain.setLowerBound(grid.getDomain()[0][0]);
-        domain.setUpperBound(grid.getDomain()[0][1]);
-        double positionX = grid.getDomain()[0][0];
-        double sizeX = (grid.getDomain()[0][1] - grid.getDomain()[0][0]) / grid.getK();
-        for (int i = 0; i <= grid.getK(); ++i) {
-            ValueMarker marker = new ValueMarker(positionX);
-            marker.setPaint(Color.black);
-            plot.addDomainMarker(marker);
-            positionX += sizeX;
-        }
-
-        NumberAxis range = (NumberAxis) plot.getRangeAxis();
-        range.setLowerBound(grid.getDomain()[1][0]);
-        range.setUpperBound(grid.getDomain()[1][1]);
-
-        double positionY = grid.getDomain()[1][0];
-        double sizeY = (grid.getDomain()[1][1] - grid.getDomain()[1][0]) / grid.getK();
-        for (int i = 0; i <= grid.getK(); ++i) {
-            ValueMarker marker = new ValueMarker(positionY);
-            marker.setPaint(Color.black);
-            plot.addRangeMarker(marker);
-            positionY += sizeY;
-        }*/
 
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 600));

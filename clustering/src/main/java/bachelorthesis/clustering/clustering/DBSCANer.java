@@ -1,13 +1,13 @@
 package bachelorthesis.clustering.clustering;
 
+import bachelorthesis.clustering.charts.KdistChart;
 import bachelorthesis.clustering.data.DataPoint;
 import bachelorthesis.clustering.grid.Cluster;
+import bachelorthesis.clustering.statistics.RegressionAnalyser;
 
 import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 
 public class DBSCANer {
 
@@ -40,6 +40,69 @@ public class DBSCANer {
 
         for (DataPoint dataPoint : dataPoints) {
             dataPoint.setCluster("-1");
+        }
+    }
+
+    private void initKdist(double[] kdist) {
+
+        for (int i = 0; i < kdist.length; ++i) {
+            kdist[i] = Double.MAX_VALUE;
+        }
+    }
+
+    public double findEpsilon(int k) {
+
+        double[] kdist = findKnearestNeighborDistance(k);
+        RegressionAnalyser analyser = new RegressionAnalyser();
+        for (int i = 0; i < kdist.length; ++i) {
+            analyser.addDataPoint(kdist[i]);
+        }
+        analyser.linearRegression();
+        return 0.0; // not implemented
+    }
+
+    public double[] findKnearestNeighborDistance(int k) {
+
+        double[] kdist = new double[dataPoints.size()];
+        int index = 0;
+        List<Double> distances = new ArrayList<>();
+        for (DataPoint dataPoint : dataPoints) {
+
+            distances.clear();
+            for (DataPoint dp : dataPoints) {
+
+                double distance = computeDistance(dataPoint, dp);
+                int i = 0;
+                for (; i < k && i < distances.size(); ++i) {
+                    if (distance < distances.get(i)) {
+                        distances.add(i, distance);
+                        break;
+                    }
+                }
+                if (i == distances.size()) {
+                    distances.add(distance);
+                }
+            }
+            kdist[index++] = distances.get(k);
+            //System.out.println("index: " + index + " of " + dataPoints.size());
+        }
+        sortKdist(kdist);
+        KdistChart chart = new KdistChart("K distance", kdist);
+        chart.showChart();
+        chart.saveToJpegFile(new File("testResults/4nearestNeighbors.jpg"));
+        return kdist;
+    }
+
+    private void sortKdist(double[] kdist) {
+
+        for (int i = 0; i < kdist.length-1; ++i) {
+            for (int j = i+1; j < kdist.length; ++j) {
+                if (kdist[i] < kdist[j]) {
+                    double temp = kdist[i];
+                    kdist[i] = kdist[j];
+                    kdist[j] = temp;
+                }
+            }
         }
     }
 
@@ -103,6 +166,17 @@ public class DBSCANer {
             }
         }
         return queriedDP;
+    }
+
+    private double computeDistance(DataPoint dataPoint, DataPoint center) {
+
+        double distance = 0.0;
+        for (int i = 0; i < dataPoint.getDim(); ++i) {
+
+            double diff = dataPoint.getVector()[i] - center.getVector()[i];
+            distance += Math.pow( diff, 2.0 );
+        }
+        return Math.sqrt(distance);
     }
 
     public void assignClusterIds() {
