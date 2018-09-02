@@ -33,11 +33,12 @@ public class ChartTest {
 
         //halfmoonWithGaussian(dataPoints, mean);
         //yinYang(dataPoints, mean);
+        //yinYang2(dataPoints, mean);
         //doubleMoon(dataPoints, mean);
         //circlesInCircles(dataPoints, mean);
-        //gaussianDifferentDensities(dataPoints, mean);
+        gaussianDifferentDensities(dataPoints, mean);
         //gaussianDifferentDensitiesThreeClusters(dataPoints, mean);
-        halfmoonAndGaussians(dataPoints, mean);
+        //halfmoonAndGaussians(dataPoints, mean);
 
         System.out.println("Start MDL");
         DataPartitioner partitioner = new DataPartitioner(dataPoints);
@@ -74,7 +75,7 @@ public class ChartTest {
         System.out.println("Start DBSCAN");
         DBSCANer dbscan = new DBSCANer(dataPoints);
         k = 10;
-        dbscan.findKnearestNeighborDistance(k);
+        dbscan.findKnearestNeighborDistance(k, "testResults/10nearestNeighbors.jpg");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Type in Epsilon: ");
         double epsilon = Double.parseDouble(reader.readLine());
@@ -234,6 +235,39 @@ public class ChartTest {
         dataPoints.addAll(shapePoints);
 
         for (int i = 0; i < 2000 * factor; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean,2.0, "3"));
+        }
+
+        groundTruthNumber = 3;
+    }
+
+    private static void yinYang2(List<DataPoint> dataPoints, double[] mean) {
+
+        mean[0] = 52;
+        mean[1] = 75;
+        shapeGenerator = new ShapeGenerator(new ArbitraryShape(dim));
+        shapeGenerator.createHalfMoon(25, mean);
+        List<DataPoint> shapePoints = shapeGenerator.generateShape(1000 * factor);
+        for (DataPoint dp : shapePoints) {
+            dp.setGroundTruth("1");
+        }
+        dataPoints.addAll(shapePoints);
+
+        for (int i = 0; i < 500 * factor; ++i) {
+            dataPoints.add(generator.generateDataPoint(mean,2.0, "2"));
+        }
+
+        mean[0] = 48;
+        mean[1] = 25;
+        shapeGenerator = new ShapeGenerator(new ArbitraryShape(dim));
+        shapeGenerator.createDoubleMoonRight(mean, 25);
+        shapePoints = shapeGenerator.generateShape(1000 * factor);
+        for (DataPoint dp : shapePoints) {
+            dp.setGroundTruth("1");
+        }
+        dataPoints.addAll(shapePoints);
+
+        for (int i = 0; i < 2500 * factor; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,2.0, "3"));
         }
 

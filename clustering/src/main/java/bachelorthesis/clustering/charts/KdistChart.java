@@ -31,7 +31,7 @@ public class KdistChart extends ApplicationFrame {
             series.add(i, kdist[i]);
         }
         dataset.addSeries(series);
-        chart = ChartFactory.createXYLineChart(
+        chart = ChartFactory.createScatterPlot(
                 "K distance",
                 "datapoint",
                 "k distance",

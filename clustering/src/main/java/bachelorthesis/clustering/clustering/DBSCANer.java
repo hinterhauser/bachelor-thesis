@@ -50,9 +50,10 @@ public class DBSCANer {
         }
     }
 
+    // deprecated
     public double findEpsilon(int k) {
 
-        double[] kdist = findKnearestNeighborDistance(k);
+        double[] kdist = findKnearestNeighborDistance(k, "deprecated");
         RegressionAnalyser analyser = new RegressionAnalyser();
         for (int i = 0; i < kdist.length; ++i) {
             analyser.addDataPoint(kdist[i]);
@@ -61,7 +62,7 @@ public class DBSCANer {
         return 0.0; // not implemented
     }
 
-    public double[] findKnearestNeighborDistance(int k) {
+    public double[] findKnearestNeighborDistance(int k, String fileName) {
 
         double[] kdist = new double[dataPoints.size()];
         int index = 0;
@@ -87,9 +88,17 @@ public class DBSCANer {
             //System.out.println("index: " + index + " of " + dataPoints.size());
         }
         sortKdist(kdist);
-        KdistChart chart = new KdistChart("K distance", kdist);
-        chart.showChart();
-        chart.saveToJpegFile(new File("testResults/4nearestNeighbors.jpg"));
+        while(true) {
+            try {
+                KdistChart chart = new KdistChart("K distance", kdist);
+                chart.showChart();
+                chart.saveToJpegFile(new File(fileName));
+                break;
+            } catch (Exception e) {
+                System.out.println("Redraw");
+            }
+        }
+
         return kdist;
     }
 
