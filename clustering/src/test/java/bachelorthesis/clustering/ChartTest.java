@@ -33,10 +33,10 @@ public class ChartTest {
 
         //halfmoonWithGaussian(dataPoints, mean);
         //yinYang(dataPoints, mean);
-        //yinYang2(dataPoints, mean);
+        yinYang2(dataPoints, mean);
         //doubleMoon(dataPoints, mean);
         //circlesInCircles(dataPoints, mean);
-        gaussianDifferentDensities(dataPoints, mean);
+        //gaussianDifferentDensities(dataPoints, mean);
         //gaussianDifferentDensitiesThreeClusters(dataPoints, mean);
         //halfmoonAndGaussians(dataPoints, mean);
 
@@ -247,13 +247,13 @@ public class ChartTest {
         mean[1] = 75;
         shapeGenerator = new ShapeGenerator(new ArbitraryShape(dim));
         shapeGenerator.createHalfMoon(25, mean);
-        List<DataPoint> shapePoints = shapeGenerator.generateShape(1000 * factor);
+        List<DataPoint> shapePoints = shapeGenerator.generateShape(200 * factor);
         for (DataPoint dp : shapePoints) {
             dp.setGroundTruth("1");
         }
         dataPoints.addAll(shapePoints);
 
-        for (int i = 0; i < 500 * factor; ++i) {
+        for (int i = 0; i < 100 * factor; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,2.0, "2"));
         }
 
@@ -261,13 +261,13 @@ public class ChartTest {
         mean[1] = 25;
         shapeGenerator = new ShapeGenerator(new ArbitraryShape(dim));
         shapeGenerator.createDoubleMoonRight(mean, 25);
-        shapePoints = shapeGenerator.generateShape(1000 * factor);
+        shapePoints = shapeGenerator.generateShape(200 * factor);
         for (DataPoint dp : shapePoints) {
             dp.setGroundTruth("1");
         }
         dataPoints.addAll(shapePoints);
 
-        for (int i = 0; i < 2500 * factor; ++i) {
+        for (int i = 0; i < 500 * factor; ++i) {
             dataPoints.add(generator.generateDataPoint(mean,2.0, "3"));
         }
 

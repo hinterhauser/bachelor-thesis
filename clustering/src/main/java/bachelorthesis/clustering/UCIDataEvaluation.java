@@ -21,10 +21,30 @@ public class UCIDataEvaluation {
 
     private static int groundTruthNumber = 3;
     private static final String dirResults = "results/uciResults/";
+    private static int maxK = 20;
 
     public static void main(String[] args) {
 
-        CsvDataReader csvDataReader = new CsvDataReader("results/uciData/iris.csv", 4);
+        //irisClassification("results/uciData/iris.csv", 4);
+        //glassClassification();
+        occupancyClassification();
+    }
+
+    private static void occupancyClassification() {
+
+        maxK = 20;
+        uciEvaluation("results/uciData/occupancy.csv", 5);
+    }
+
+    private static void glassClassification() {
+
+        maxK = 10;
+        uciEvaluation("results/uciData/glass.csv", 9);
+    }
+
+    private static void uciEvaluation(String csvFile, int dim) {
+
+        CsvDataReader csvDataReader = new CsvDataReader(csvFile, dim);
         List<DataPoint> dataPoints = csvDataReader.getDataPoints();
 
         System.out.println("Start MDL");
@@ -32,7 +52,79 @@ public class UCIDataEvaluation {
         int opt = partitioner.findOptimalPartition();
         System.out.println("optimal partition: " + opt);
         //int k = 4;
-        for (int k = 2; k <= 20; ++k) {
+        for (int k = 6; k <= maxK; ++k) {
+            HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
+            //DataChartAlternateDesign chart = new DataChartAlternateDesign("Test, Ground Truth", grid, groundTruthNumber);
+            //chart.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);
+            //chart.saveToJpegFile(new File(dirResults + "iris_mdl.jpg"));
+            System.out.println("Clustering start");
+            grid.performClustering(false);
+            System.out.println("Clustering end");
+            int i = 1;
+            for (Cluster cluster : grid.getClusters()) {
+                for (DataPoint dp : cluster.getDataPoints()) {
+                    dp.setCluster("" + i);
+                }
+                ++i;
+            }
+            //DataChartAlternateDesign chartClustered = new DataChartAlternateDesign("Test, MDL", grid);
+            //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_mdl.jpg"));
+            try {
+                FileIO.writeNMIFiles(grid.getDataPoints(), dirResults + "mdl_nmi" + k, ".txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Finish MDL");
+
+        System.out.println("Start Kmeans");
+        Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
+        kmean.performKmeans();
+        kmean.assignClusterIds();
+        //chartClustered = new DataChartAlternateDesign("Test, k - means", kmean.getClusters());
+        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_kmean.jpg"));
+        try {
+            FileIO.writeNMIFiles(kmean.getDataPoints(), dirResults + "kmean_nmi", ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish Kmeans");
+
+        System.out.println("Start DBSCAN");
+        DBSCANer dbscan = new DBSCANer(dataPoints);
+        int k = 2 * dim;
+        dbscan.findKnearestNeighborDistance(k, dirResults + "KnearestNeighbors.jpg");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Type in Epsilon: ");
+        double epsilon = 0;
+        try {
+            epsilon = Double.parseDouble(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dbscan.performDBSCAN(epsilon, k);
+        dbscan.assignClusterIds();
+        //chartClustered = new DataChartAlternateDesign("Test, DBSCAN", dbscan.getClusters());
+        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_dbscan_eps=" + epsilon + ".jpg"));
+        try {
+            FileIO.writeNMIFiles(dbscan.getDataPoints(), dirResults + "dbscan_nmi", ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish DBSCAN");
+    }
+
+    private static void irisClassification(String csvFile, int dim) {
+
+        CsvDataReader csvDataReader = new CsvDataReader(csvFile, dim);
+        List<DataPoint> dataPoints = csvDataReader.getDataPoints();
+
+        System.out.println("Start MDL");
+        DataPartitioner partitioner = new DataPartitioner(dataPoints);
+        int opt = partitioner.findOptimalPartition();
+        System.out.println("optimal partition: " + opt);
+        //int k = 4;
+        for (int k = 2; k <= maxK; ++k) {
             HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
             //DataChartAlternateDesign chart = new DataChartAlternateDesign("Test, Ground Truth", grid, groundTruthNumber);
             //chart.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);

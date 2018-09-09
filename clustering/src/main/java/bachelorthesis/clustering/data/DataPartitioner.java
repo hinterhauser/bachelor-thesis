@@ -111,15 +111,15 @@ public class DataPartitioner {
             CostAnalyser.addDataPoint(partitioningCost);
             AreaAnalyser.addDataPoint(areaCost);
         }
-        System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
+        //System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
         int costK = computeOptimalGridSize(CostAnalyser, sizeTestSeries);
         int costA = computeOptimalGridSize(AreaAnalyser, sizeTestSeries);
 
         try {
             writeToFile(outputResults, fileName);
-            System.out.println(fileName + " Successfully written");
+            //System.out.println(fileName + " Successfully written");
             writeToFile(outputAreas, areaFile);
-            System.out.println(areaFile + " Successfully written");
+            //System.out.println(areaFile + " Successfully written");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,7 +145,7 @@ public class DataPartitioner {
             CostAnalyser.addDataPoint(partitioningCost);
             AreaAnalyser.addDataPoint(areaCost);
         }
-        System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
+        //System.out.println("First the optimal grid size is computed via partitioning cost, then via areas");
         int costK = computeOptimalGridSize(CostAnalyser, sizeTestSeries);
         int costA = computeOptimalGridSize(AreaAnalyser, sizeTestSeries);
 
@@ -175,7 +175,7 @@ public class DataPartitioner {
             }
         }
         ++i; // because it is rounded upwards
-        System.out.println("The size of the grid should be at least " + i + " times " + i);
+        //System.out.println("The size of the grid should be at least " + i + " times " + i);
         return i;
     }
 

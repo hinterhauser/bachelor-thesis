@@ -26,8 +26,105 @@ public class PerformanceEvaluation {
         //mdlPerformance();
         //performanceEvaluation();
 
-        nmiPerformanceEvaluation();
+        //nmiPerformanceEvaluation();
+        runtimePerformanceEvaluation();
     }
+
+    private static void runtimePerformanceEvaluation() {
+
+        for (int i = 1; i <= 10; ++i) {
+
+            kmeansRuntimePerformance(5, i);
+            dbscanRuntimePerformance(5, i);
+            if (i == 1) {
+                hierarchicalRuntimePerformance(5, i);
+            }
+            mdlRuntimePerformance(5, i);
+        }
+        for (int i = 5; i <= 50; i += 5) {
+
+            kmeansRuntimePerformance(i, 1);
+            dbscanRuntimePerformance(i, 1);
+            hierarchicalRuntimePerformance(i, 1);
+            mdlRuntimePerformance(i, 1);
+        }
+    }
+
+    private static void kmeansRuntimePerformance(int dim, int factor) {
+
+        System.out.print("Kmeans : dim=" + dim + "   size=" + factor * 1000);
+        kmeansRuntime(dim, factor, "yinyang");
+    }
+
+    private static void kmeansRuntime(int dim, int factor, String type) {
+
+        List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
+        Kmean kmean = new Kmean(10, dataPoints);
+        long start = System.currentTimeMillis();
+        kmean.performKmeans();
+        long end = System.currentTimeMillis();
+        System.out.println("   " + " time= " + (end - start));
+    }
+
+    private static void dbscanRuntimePerformance(int dim, int factor) {
+
+        System.out.print("DBSCAN : dim=" + dim + "   size=" + factor * 1000);
+        dbscanRuntime(dim, factor, "yinyang");
+    }
+
+    private static void dbscanRuntime(int dim, int factor, String type) {
+
+        List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
+        DBSCANer dbscan = new DBSCANer(dataPoints);
+        long start = System.currentTimeMillis();
+        dbscan.performDBSCAN(1, 5);
+        long end = System.currentTimeMillis();
+        System.out.println("   " + " time= " + (end - start));
+    }
+
+    private static void hierarchicalRuntimePerformance(int dim, int factor) {
+
+        System.out.print("hierarchical : dim=" + dim + "   size=" + factor * 1000);
+        hierRuntime(dim, factor, "yinyang");
+    }
+
+    private static void hierRuntime(int dim, int factor, String type) {
+
+        List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
+        HierarchicalClusterer clusterer = new HierarchicalClusterer(dataPoints);
+        long start = System.currentTimeMillis();
+        clusterer.performHierarchicalClustering(3);
+        long end = System.currentTimeMillis();
+        System.out.println("   " + " time= " + (end - start));
+    }
+
+    private static void mdlRuntimePerformance(int dim, int factor) {
+
+        System.out.print("mdl : dim=" + dim + "   size=" + factor * 1000);
+        mdlRuntime(dim, factor, "yinyang");
+    }
+
+    private static void mdlRuntime(int dim, int factor, String type) {
+
+        try {
+            List<DataPoint> dataPoints = FileIO.extractDataPointsFromFile("results/performanceTests/dim" + dim + "size" + factor + type + ".csv");
+            int k = new DataPartitioner(dataPoints).findOptimalPartition("results/performanceTests/res.txt", "results/performanceTests/areas.txt");
+            //int k = 10;
+            HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
+            long start = System.currentTimeMillis();
+            grid.performClustering(false);
+            long end = System.currentTimeMillis();
+            System.out.println("   " + " time= " + (end - start));
+            try {
+                FileIO.writeNMIFiles(dataPoints, "results/performanceTests/results/MDL/", "mdl_" + type + "_dim" + dim + "size" + factor + "x", ".txt");
+            } catch (IOException e) {
+                //e.printStackTrace();
+            }
+        } catch (OutOfMemoryError error) {
+            //error.printStackTrace();
+        }
+    }
+
 
     private static void nmiPerformanceEvaluation() {
 

@@ -40,6 +40,9 @@ public class CsvDataReader {
                 String[] data = line.split(splitter);
                 double[] vectors = getVectors(data);
                 String groundTruth = (String)data[dim];
+                if (groundTruth.equals("0")) {
+                    groundTruth = "100";
+                }
                 dataPoints.add(new DataPoint(dim, vectors, groundTruth));
             }
         } catch (FileNotFoundException e) {
