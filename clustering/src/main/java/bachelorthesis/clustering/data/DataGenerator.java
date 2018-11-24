@@ -10,7 +10,7 @@ public class DataGenerator {
 	public DataGenerator(int dim) {
 		
 		this.dim = dim;
-		seed = new Random();
+		seed = new Random(123456789);
 	}
 	
 	public DataPoint generateDataPoint(double[] mean, double deviation) {
