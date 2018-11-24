@@ -34,20 +34,20 @@ public class PerformanceEvaluation {
 
         for (int i = 1; i <= 10; ++i) {
 
-            kmeansRuntimePerformance(5, i);
-            dbscanRuntimePerformance(5, i);
-            if (i == 1) {
+            //kmeansRuntimePerformance(5, i);
+            //dbscanRuntimePerformance(5, i);
+            if (i > 7) {
                 hierarchicalRuntimePerformance(5, i);
             }
-            mdlRuntimePerformance(5, i);
+            //mdlRuntimePerformance(5, i);
         }
-        for (int i = 5; i <= 50; i += 5) {
+        /*for (int i = 5; i <= 50; i += 5) {
 
             kmeansRuntimePerformance(i, 1);
             dbscanRuntimePerformance(i, 1);
             hierarchicalRuntimePerformance(i, 1);
             mdlRuntimePerformance(i, 1);
-        }
+        }*/
     }
 
     private static void kmeansRuntimePerformance(int dim, int factor) {

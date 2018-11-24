@@ -15,40 +15,8 @@
       <file leaf-file-name="ChartTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/ChartTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataPartitioner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataPartitioner.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="157" column="16" lean-forward="false" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iris.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/uciData/iris.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="149" column="17" lean-forward="false" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="glass.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/uciData/glass.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="191" column="51" lean-forward="false" selection-start-line="191" selection-start-column="51" selection-end-line="191" selection-end-column="51" />
+              <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -57,38 +25,76 @@
       <file leaf-file-name="UCIDataEvaluation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/UCIDataEvaluation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="46" column="51" lean-forward="false" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+            <state relative-caret-position="261">
+              <caret line="175" column="45" lean-forward="false" selection-start-line="175" selection-start-column="45" selection-end-line="175" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CsvDataReader.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/CsvDataReader.java">
+      <file leaf-file-name="HierarchicalClusterer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/HierarchicalClusterer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+            <state relative-caret-position="436">
+              <caret line="123" column="5" lean-forward="false" selection-start-line="114" selection-start-column="4" selection-end-line="123" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cell.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cell.java">
+      <file leaf-file-name="DataGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="17">
+              <caret line="30" column="39" lean-forward="false" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="occupancy.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/uciData/occupancy.csv">
+      <file leaf-file-name="ClusterDBSCAN.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/ClusterDBSCAN.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="68">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataChartAlternateDesign.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChartAlternateDesign.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3757">
+              <caret line="247" column="94" lean-forward="false" selection-start-line="247" selection-start-column="94" selection-end-line="247" selection-end-column="94" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CLIQUE.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/CLIQUE.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="611">
+              <caret line="63" column="19" lean-forward="true" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2125#2126#0" expanded="true" />
+                <element signature="e#2156#2157#0" expanded="true" />
+                <element signature="e#2202#2203#0" expanded="true" />
+                <element signature="e#2235#2236#0" expanded="true" />
+                <element signature="e#2273#2274#0" expanded="true" />
+                <element signature="e#2300#2301#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cluster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cluster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1224">
+              <caret line="97" column="27" lean-forward="false" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -107,11 +113,30 @@
     <findStrings>
       <find>Clusters:</find>
       <find>Iris-virginica</find>
+      <find>POX</find>
+      <find>;</find>
+      <find>Low</find>
+      <find>ERL</find>
+      <find>High</find>
+      <find />
+      <find>\t</find>
+      <find>,,</find>
+      <find>,10</find>
+      <find>,11</find>
     </findStrings>
     <replaceStrings>
+      <replace>5</replace>
+      <replace>6</replace>
+      <replace>7</replace>
+      <replace>8</replace>
+      <replace>9</replace>
+      <replace>.</replace>
       <replace>1</replace>
       <replace>2</replace>
       <replace>3</replace>
+      <replace>10</replace>
+      <replace>4</replace>
+      <replace>,</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\src\main</dir>
@@ -125,15 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataPoint.java" />
-        <option value="$PROJECT_DIR$/src/test/java/data/TestDataReader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/statistics/VectorMath.java" />
-        <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/CodingCostTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/Segment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/ArbitraryShape.java" />
-        <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/JFreeChartTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/UnitTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Grid.java" />
         <option value="$PROJECT_DIR$/src/test/java/data/TestDataGenerator.java" />
         <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/PartitionTest.java" />
@@ -143,33 +159,48 @@
         <option value="$PROJECT_DIR$/results/performanceTests/results/firstSerieArbitrary.txt" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/NMIresultsCollector.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/HigherDimGrid.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cell.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/HierarchicalClusterer.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/Kmean.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/ClusterKMeans.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/FileIO.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/statistics/RegressionAnalyser.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/ShapeGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChartAlternateDesign.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/KdistChart.java" />
         <option value="$PROJECT_DIR$/results/uciData/iris.csv" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/DBSCANer.java" />
         <option value="$PROJECT_DIR$/src/test/java/data/SecondTestDataGenerator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/ChartTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/PerformanceEvaluation.java" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataPartitioner.java" />
         <option value="$PROJECT_DIR$/results/performanceTests/results/runtimeResultsYinyang.txt" />
         <option value="$PROJECT_DIR$/results/performanceTests/results/mdlYinyangFixedDim.txt" />
         <option value="$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim.txt" />
         <option value="$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedSize.txt" />
-        <option value="$PROJECT_DIR$/results/performanceTests/results/plot.plt" />
         <option value="$PROJECT_DIR$/results/performanceTests/results/plotWithoutHierarchical.plt" />
         <option value="$PROJECT_DIR$/results/uciData/glass.csv" />
         <option value="$PROJECT_DIR$/results/uciData/occupancy.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/UCIDataEvaluation.java" />
+        <option value="$PROJECT_DIR$/results/uciData/banknote.csv" />
+        <option value="$PROJECT_DIR$/results/uciData/user_knowledge.csv" />
+        <option value="$PROJECT_DIR$/results/uciResults/occupancy_classification/output.txt" />
+        <option value="$PROJECT_DIR$/results/uciData/yeast.csv" />
         <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/CsvDataReader.java" />
+        <option value="$PROJECT_DIR$/results/uciResults/output.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/HierarchicalClusterer.java" />
+        <option value="$PROJECT_DIR$/results/performanceTests/results/runtimeResultsYinYang_16_9.txt" />
+        <option value="$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedSize_16_9.txt" />
+        <option value="$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim_16_9.txt" />
+        <option value="$PROJECT_DIR$/results/performanceTests/results/plot.plt" />
+        <option value="$PROJECT_DIR$/results/uciData/blood_donations.csv" />
+        <option value="$PROJECT_DIR$/results/uciResults/blood_donations_classification/output.txt" />
+        <option value="$PROJECT_DIR$/results/uciData/seeds.csv" />
+        <option value="$PROJECT_DIR$/results/uciData/skin.csv" />
+        <option value="$PROJECT_DIR$/results/uciResults/seeds_classification/output.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/PerformanceEvaluation.java" />
+        <option value="$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim_23_9.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChartAlternateDesign.java" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataGenerator.java" />
+        <option value="$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/ChartTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/UCIDataEvaluation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/CLIQUE.java" />
       </list>
     </option>
   </component>
@@ -185,8 +216,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="683" />
-    <option name="width" value="683" />
+    <option name="x" value="-13" />
+    <option name="y" value="50" />
+    <option name="width" value="800" />
     <option name="height" value="728" />
   </component>
   <component name="ProjectView">
@@ -204,10 +236,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,6 +297,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="clustering" type="462c0819:PsiDirectoryNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="clustering" type="b2602c69:ProjectViewProjectNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -280,6 +321,15 @@
               <item name="clustering" type="b2602c69:ProjectViewProjectNode" />
               <item name="clustering" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
+              <item name="grid" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="clustering" type="b2602c69:ProjectViewProjectNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -304,6 +354,11 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="clustering" type="b2602c69:ProjectViewProjectNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
+              <item name="testResults" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -320,15 +375,15 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\mergingTests\results\DBSCAN" />
-      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\backup" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\partitionTests" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="bachelorthesis.clustering.fileIO" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\partitionTests" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\mergingTests\results\DBSCAN" />
+      <recent name="C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\results\backup" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -530,9 +585,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.UCIDataEvaluation" />
-        <item index="1" class="java.lang.String" itemvalue="Application.PerformanceEvaluation" />
-        <item index="2" class="java.lang.String" itemvalue="Application.SecondTestDataGenerator" />
-        <item index="3" class="java.lang.String" itemvalue="Application.ChartTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ChartTest" />
+        <item index="2" class="java.lang.String" itemvalue="Application.PerformanceEvaluation" />
+        <item index="3" class="java.lang.String" itemvalue="Application.SecondTestDataGenerator" />
         <item index="4" class="java.lang.String" itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -618,11 +673,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6013072" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40359476" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27458397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24810892" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -689,147 +744,209 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="29" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/dim5size1moons.csv" />
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/dim5size1arbitrary.csv" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/PartitionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="78" column="48" lean-forward="false" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/shapes/plotTestData.plt">
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/results_5_8/secondSerieArbitrary.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/firstSerieArbitrary.txt" />
-    <entry file="file://$PROJECT_DIR$/results/partitionTests/plotTestData.plt">
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/results_5_8/firstSerieArbitrary.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/data/TestDataGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataPartitioner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2431">
-          <caret line="149" column="17" lean-forward="false" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
+        <state relative-caret-position="2448">
+          <caret line="157" column="16" lean-forward="false" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/JFreeChartTest.java">
+    <entry file="file://$PROJECT_DIR$/results/uciResults/occupancy_classification/output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168">
-          <caret line="129" column="32" lean-forward="false" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
+        <state relative-caret-position="680">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/MergingTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/CsvDataReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-433">
-          <caret line="205" column="18" lean-forward="false" selection-start-line="205" selection-start-column="8" selection-end-line="205" selection-end-column="18" />
+        <state relative-caret-position="561">
+          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciResults/output.txt" />
+    <entry file="file://$PROJECT_DIR$/results/uciResults/user_knowledge_classification/output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/rt.jar!/javax/swing/RepaintManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/runtimeResultsYinYang_16_9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="57" column="40" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/plotWithoutHierarchical.plt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim_16_9.jpg" />
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedSize_16_9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim_16_9.txt" />
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/plot.plt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciResults/blood_donations_classification/output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="5" lean-forward="false" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4573">
-          <caret line="306" column="5" lean-forward="false" selection-start-line="299" selection-start-column="4" selection-end-line="306" selection-end-column="5" />
+        <state relative-caret-position="136">
+          <caret line="17" column="39" lean-forward="false" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataGenerator.java">
+    <entry file="file://$PROJECT_DIR$/results/uciResults/seeds_classification/output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        <state relative-caret-position="1071">
+          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/ClusterKMeans.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/ClusterDBSCAN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="29" column="34" lean-forward="false" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChart.java">
+    <entry file="file://$PROJECT_DIR$/results/partitionTests/testData1.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="29" column="57" lean-forward="true" selection-start-line="29" selection-start-column="57" selection-end-line="29" selection-end-column="57" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/statistics/VectorMath.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/data/TestDataGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        <state relative-caret-position="68">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/Kmean.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/data/SecondTestDataGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim_23_9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/runtimeResultsYinyang.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="63" column="24" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="63" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedSize.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciData/user_knowledge.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="194" column="8" lean-forward="false" selection-start-line="194" selection-start-column="8" selection-end-line="194" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciData/skin.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="29" column="44" lean-forward="false" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/statistics/RegressionAnalyser.java">
+    <entry file="file://$PROJECT_DIR$/results/uciData/seeds.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        <state relative-caret-position="3536">
+          <caret line="208" column="44" lean-forward="false" selection-start-line="208" selection-start-column="44" selection-end-line="208" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/HigherDimGrid.java">
+    <entry file="file://$PROJECT_DIR$/results/uciData/iris.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="95" column="10" lean-forward="false" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
+        <state relative-caret-position="550">
+          <caret line="149" column="17" lean-forward="false" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/ShapeGenerator.java">
+    <entry file="file://$PROJECT_DIR$/results/uciData/glass.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="71" lean-forward="false" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
-          <folding />
+        <state relative-caret-position="3048">
+          <caret line="191" column="51" lean-forward="false" selection-start-line="191" selection-start-column="51" selection-end-line="191" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/ArbitraryShape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/FileIO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="29" column="10" lean-forward="false" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/KdistChart.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/DBSCANer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="39" column="21" lean-forward="false" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+        <state relative-caret-position="1360">
+          <caret line="95" column="22" lean-forward="false" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -841,127 +958,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/dim5size2over.csv" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/data/TestDataReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="63" column="5" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="63" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/uciResults/mdl_nmi_results.txt" />
-    <entry file="file://$PROJECT_DIR$/results/uciResults/mdl_nmi_truth.txt" />
-    <entry file="file://$PROJECT_DIR$/results/uciResults/dbscan_nmi_results.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChartAlternateDesign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/data/SecondTestDataGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/Kmean/kmean_arbitrary_dim5size1x_results.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/results_12_8/firstSerieArbitrary.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="68" lean-forward="true" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/PerformanceEvaluation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="247" column="62" lean-forward="false" selection-start-line="247" selection-start-column="62" selection-end-line="247" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/HierarchicalClusterer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/NMIresultsCollector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
+        <state relative-caret-position="1190">
           <caret line="75" column="49" lean-forward="false" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/runtimeResultsYinyang.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/PerformanceEvaluation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="63" column="24" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="63" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/plotWithoutHierarchical.plt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state relative-caret-position="561">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/plot.plt">
+    <entry file="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar!/org/jfree/chart/ChartUtilities.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="60" />
+        <state relative-caret-position="194">
+          <caret line="157" column="23" lean-forward="false" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/MergingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3281">
+          <caret line="215" column="9" lean-forward="false" selection-start-line="215" selection-start-column="9" selection-end-line="215" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/HigherDimGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7106">
+          <caret line="445" column="24" lean-forward="false" selection-start-line="445" selection-start-column="24" selection-end-line="445" selection-end-column="24" />
+          <folding>
+            <element signature="e#1514#1515#0" expanded="false" />
+            <element signature="e#1559#1560#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/charts/DataChartAlternateDesign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3757">
+          <caret line="247" column="94" lean-forward="false" selection-start-line="247" selection-start-column="94" selection-end-line="247" selection-end-column="94" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/bachelorthesis/clustering/ChartTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedDim.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        <state relative-caret-position="17">
+          <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/yinyangRunFixedSize.txt">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/rt.jar!/java/util/Set.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        <state relative-caret-position="323">
+          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/results_5_8/secondSerieArbitrary.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="97" column="27" lean-forward="false" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="30" column="39" lean-forward="false" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/ClusterDBSCAN.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciResults/Iris_classification/dbscan_nmi_truth.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -969,75 +1056,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/performanceTests/results/results_5_8/firstSerieArbitrary.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/HierarchicalClusterer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/DBSCANer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="95" column="22" lean-forward="false" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/data/DataPartitioner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="157" column="16" lean-forward="false" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/uciData/iris.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="149" column="17" lean-forward="false" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/uciData/glass.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="191" column="51" lean-forward="false" selection-start-line="191" selection-start-column="51" selection-end-line="191" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/grid/Cell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state relative-caret-position="436">
+          <caret line="123" column="5" lean-forward="false" selection-start-line="114" selection-start-column="4" selection-end-line="123" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/results/uciData/occupancy.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="191">
+          <caret line="8141" column="53" lean-forward="false" selection-start-line="8141" selection-start-column="53" selection-end-line="8141" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciData/blood_donations.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12236">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciData/banknote.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/uciData/yeast.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16384">
+          <caret line="507" column="41" lean-forward="true" selection-start-line="507" selection-start-column="41" selection-end-line="507" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/UCIDataEvaluation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="46" column="51" lean-forward="false" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+        <state relative-caret-position="261">
+          <caret line="175" column="45" lean-forward="false" selection-start-line="175" selection-start-column="45" selection-end-line="175" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/fileIO/CsvDataReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bachelorthesis/clustering/clustering/CLIQUE.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="611">
+          <caret line="63" column="19" lean-forward="true" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2125#2126#0" expanded="true" />
+            <element signature="e#2156#2157#0" expanded="true" />
+            <element signature="e#2202#2203#0" expanded="true" />
+            <element signature="e#2235#2236#0" expanded="true" />
+            <element signature="e#2273#2274#0" expanded="true" />
+            <element signature="e#2300#2301#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

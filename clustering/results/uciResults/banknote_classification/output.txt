@@ -1,0 +1,83 @@
+"C:\Program Files\Java\jdk1.8.0_25\bin\java" -XX:-UseConcMarkSweepGC "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3\lib\idea_rt.jar=53900:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_25\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\rt.jar;C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\target\classes;C:\Users\Gabriele\.m2\repository\jfree\jfreechart\1.0.13\jfreechart-1.0.13.jar;C:\Users\Gabriele\.m2\repository\jfree\jcommon\1.0.16\jcommon-1.0.16.jar" bachelorthesis.clustering.UCIDataEvaluation
+Start MDL
+optimal partition: 15
+k = 2
+k = 3
+k = 4
+k = 5
+k = 6
+k = 7
+k = 8
+k = 9
+k = 10
+k = 11
+k = 12
+k = 13
+k = 14
+k = 15
+k = 16
+k = 17
+k = 18
+k = 19
+k = 20
+Finish MDL
+Start Kmeans
+Finish Kmeans
+Start DBSCAN
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+	at org.jfree.chart.block.FlowArrangement.arrangeNN(FlowArrangement.java:365)
+	at org.jfree.chart.block.FlowArrangement.arrangeRR(FlowArrangement.java:283)
+	at org.jfree.chart.block.FlowArrangement.arrange(FlowArrangement.java:158)
+	at org.jfree.chart.block.BlockContainer.arrange(BlockContainer.java:179)
+	at org.jfree.chart.title.LegendTitle.arrange(LegendTitle.java:501)
+	at org.jfree.chart.JFreeChart.drawTitle(JFreeChart.java:1330)
+	at org.jfree.chart.JFreeChart.draw(JFreeChart.java:1220)
+	at org.jfree.chart.ChartPanel.paintComponent(ChartPanel.java:1668)
+	at javax.swing.JComponent.paint(JComponent.java:1053)
+	at javax.swing.JComponent.paintChildren(JComponent.java:886)
+	at javax.swing.JComponent.paint(JComponent.java:1062)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:886)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5230)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1572)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1495)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1265)
+	at javax.swing.JComponent.paint(JComponent.java:1039)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1973)
+	at java.awt.Window.paint(Window.java:3901)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:835)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:807)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:807)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:782)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:731)
+	at javax.swing.RepaintManager.access$1300(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1720)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:744)
+	at java.awt.EventQueue.access$400(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:697)
+	at java.awt.EventQueue$3.run(EventQueue.java:691)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:714)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Redraw
+Type in Epsilon: 
+1.8
+Finish DBSCAN
+Start hierarchical clustering
+Finish hierarchical clustering
+Start CLIQUE
+Clustering start
+Clustering end
+Finish CLIQUE

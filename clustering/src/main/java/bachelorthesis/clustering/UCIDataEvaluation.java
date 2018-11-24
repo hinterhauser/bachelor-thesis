@@ -1,7 +1,9 @@
 package bachelorthesis.clustering;
 
 import bachelorthesis.clustering.charts.DataChartAlternateDesign;
+import bachelorthesis.clustering.clustering.CLIQUE;
 import bachelorthesis.clustering.clustering.DBSCANer;
+import bachelorthesis.clustering.clustering.HierarchicalClusterer;
 import bachelorthesis.clustering.clustering.Kmean;
 import bachelorthesis.clustering.data.DataPartitioner;
 import bachelorthesis.clustering.data.DataPoint;
@@ -22,23 +24,67 @@ public class UCIDataEvaluation {
     private static int groundTruthNumber = 3;
     private static final String dirResults = "results/uciResults/";
     private static int maxK = 20;
+    private static final String dirData = "results/uciData/";
 
     public static void main(String[] args) {
 
         //irisClassification("results/uciData/iris.csv", 4);
         //glassClassification();
-        occupancyClassification();
+        //occupancyClassification();
+        //banknoteClassification();
+        //yeastClassification();
+        //userKnowledgeClassification();
+        //bloodDonationsClassification();
+        seedsClassification();
+    }
+
+    private static void seedsClassification() {
+
+        maxK = 7;
+        groundTruthNumber = 3;
+        uciEvaluation(dirData + "seeds.csv", 7);
+    }
+
+    private static void bloodDonationsClassification() {
+
+        maxK = 20;
+        groundTruthNumber = 2;
+        uciEvaluation(dirData + "blood_donations.csv", 4);
+    }
+
+    private static void userKnowledgeClassification() {
+
+        maxK = 20;
+        groundTruthNumber = 4;
+        uciEvaluation(dirData + "user_knowledge.csv", 5);
+    }
+
+    private static void yeastClassification() {
+
+        maxK = 6;
+        groundTruthNumber = 10;
+        uciEvaluation(dirData + "yeast.csv", 8);
+    }
+
+    private static void banknoteClassification() {
+
+        maxK = 20;
+        groundTruthNumber = 2;
+        uciEvaluation(dirData + "banknote.csv", 4);
     }
 
     private static void occupancyClassification() {
 
+        System.out.println("occupancy - detection");
         maxK = 20;
+        groundTruthNumber = 2;
         uciEvaluation("results/uciData/occupancy.csv", 5);
     }
 
     private static void glassClassification() {
 
-        maxK = 10;
+        maxK = 5;
+        groundTruthNumber = 7;
         uciEvaluation("results/uciData/glass.csv", 9);
     }
 
@@ -52,14 +98,12 @@ public class UCIDataEvaluation {
         int opt = partitioner.findOptimalPartition();
         System.out.println("optimal partition: " + opt);
         //int k = 4;
-        for (int k = 6; k <= maxK; ++k) {
+        for (int k = 2; k <= maxK; ++k) {
             HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
-            //DataChartAlternateDesign chart = new DataChartAlternateDesign("Test, Ground Truth", grid, groundTruthNumber);
-            //chart.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);
-            //chart.saveToJpegFile(new File(dirResults + "iris_mdl.jpg"));
-            System.out.println("Clustering start");
+            //System.out.println("Clustering start");
+            System.out.println("k = " + k);
             grid.performClustering(false);
-            System.out.println("Clustering end");
+            //System.out.println("Clustering end");
             int i = 1;
             for (Cluster cluster : grid.getClusters()) {
                 for (DataPoint dp : cluster.getDataPoints()) {
@@ -67,8 +111,6 @@ public class UCIDataEvaluation {
                 }
                 ++i;
             }
-            //DataChartAlternateDesign chartClustered = new DataChartAlternateDesign("Test, MDL", grid);
-            //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_mdl.jpg"));
             try {
                 FileIO.writeNMIFiles(grid.getDataPoints(), dirResults + "mdl_nmi" + k, ".txt");
             } catch (IOException e) {
@@ -81,8 +123,6 @@ public class UCIDataEvaluation {
         Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
         kmean.performKmeans();
         kmean.assignClusterIds();
-        //chartClustered = new DataChartAlternateDesign("Test, k - means", kmean.getClusters());
-        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_kmean.jpg"));
         try {
             FileIO.writeNMIFiles(kmean.getDataPoints(), dirResults + "kmean_nmi", ".txt");
         } catch (IOException e) {
@@ -104,14 +144,40 @@ public class UCIDataEvaluation {
         }
         dbscan.performDBSCAN(epsilon, k);
         dbscan.assignClusterIds();
-        //chartClustered = new DataChartAlternateDesign("Test, DBSCAN", dbscan.getClusters());
-        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_dbscan_eps=" + epsilon + ".jpg"));
         try {
             FileIO.writeNMIFiles(dbscan.getDataPoints(), dirResults + "dbscan_nmi", ".txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Finish DBSCAN");
+
+        if (dataPoints.size() > 2000) {
+            System.out.println("data set to big for hierarchical clustering");
+        } else {
+            System.out.println("Start hierarchical clustering");
+            /*HierarchicalClusterer hierarchicalClusterer = new HierarchicalClusterer(dataPoints);
+            hierarchicalClusterer.performHierarchicalClustering(groundTruthNumber);
+            hierarchicalClusterer.assignClusterIds();
+            try {
+                FileIO.writeNMIFiles(hierarchicalClusterer.getDataPoints(), dirResults + "hier_nmi", ".txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Finish hierarchical clustering");*/
+        }
+
+        System.out.println("Start CLIQUE");
+        CLIQUE clique = new CLIQUE(dataPoints, 6);
+        System.out.println("Clustering start");
+        clique.performCliqueAlgorithm(0);
+        System.out.println("Clustering end");
+        clique.assignClusterIds();
+        try {
+            FileIO.writeNMIFiles(clique.getDataPoints(), dirResults + "clique_nmi", ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish CLIQUE");
     }
 
     private static void irisClassification(String csvFile, int dim) {
@@ -123,12 +189,8 @@ public class UCIDataEvaluation {
         DataPartitioner partitioner = new DataPartitioner(dataPoints);
         int opt = partitioner.findOptimalPartition();
         System.out.println("optimal partition: " + opt);
-        //int k = 4;
         for (int k = 2; k <= maxK; ++k) {
             HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
-            //DataChartAlternateDesign chart = new DataChartAlternateDesign("Test, Ground Truth", grid, groundTruthNumber);
-            //chart.setDefaultCloseOperation(ApplicationFrame.DISPOSE_ON_CLOSE);
-            //chart.saveToJpegFile(new File(dirResults + "iris_mdl.jpg"));
             System.out.println("Clustering start");
             grid.performClustering(false);
             System.out.println("Clustering end");
@@ -139,8 +201,6 @@ public class UCIDataEvaluation {
                 }
                 ++i;
             }
-            //DataChartAlternateDesign chartClustered = new DataChartAlternateDesign("Test, MDL", grid);
-            //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_mdl.jpg"));
             try {
                 FileIO.writeNMIFiles(grid.getDataPoints(), dirResults + "mdl_nmi" + k, ".txt");
             } catch (IOException e) {
@@ -153,8 +213,6 @@ public class UCIDataEvaluation {
         Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
         kmean.performKmeans();
         kmean.assignClusterIds();
-        //chartClustered = new DataChartAlternateDesign("Test, k - means", kmean.getClusters());
-        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_kmean.jpg"));
         try {
             FileIO.writeNMIFiles(kmean.getDataPoints(), dirResults + "kmean_nmi", ".txt");
         } catch (IOException e) {
@@ -176,13 +234,33 @@ public class UCIDataEvaluation {
         }
         dbscan.performDBSCAN(epsilon, k);
         dbscan.assignClusterIds();
-        //chartClustered = new DataChartAlternateDesign("Test, DBSCAN", dbscan.getClusters());
-        //chartClustered.saveToJpegFile(new File(dirResults + "chartTest_dbscan_eps=" + epsilon + ".jpg"));
         try {
             FileIO.writeNMIFiles(dbscan.getDataPoints(), dirResults + "dbscan_nmi", ".txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Finish DBSCAN");
+
+        System.out.println("Start hierarchical clustering");
+        HierarchicalClusterer hierarchicalClusterer = new HierarchicalClusterer(dataPoints);
+        hierarchicalClusterer.performHierarchicalClustering(groundTruthNumber);
+        hierarchicalClusterer.assignClusterIds();
+        try {
+            FileIO.writeNMIFiles(hierarchicalClusterer.getDataPoints(), dirResults + "hier_nmi", ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish hierarchical clustering");
+
+        System.out.println("Start CLIQUE");
+        CLIQUE clique = new CLIQUE(dataPoints, 7);
+        clique.performCliqueAlgorithm(10);
+        clique.assignClusterIds();
+        try {
+            FileIO.writeNMIFiles(clique.getDataPoints(), dirResults + "clique_nmi", ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish CLIQUE");
     }
 }

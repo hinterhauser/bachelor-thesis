@@ -58,7 +58,7 @@ public class HierarchicalClusterer {
         double dist = 0.0;
         ClusterKMeans cluster = new ClusterKMeans(dataPoints.get(0).getDim());
         ClusterKMeans merger = new ClusterKMeans(dataPoints.get(0).getDim());
-        long time = System.currentTimeMillis();
+        //long time = System.currentTimeMillis();
         while (clusters.size() > numClusters) {
             for (ClusterKMeans clusterCandidate : clusters) {
                 for (ClusterKMeans mergerCandidate : clusters) {
@@ -75,15 +75,15 @@ public class HierarchicalClusterer {
                             //System.out.println(merger);
                         }
                     }
-                    if (System.currentTimeMillis() - time > 300000) {
+                    /*if (System.currentTimeMillis() - time > 300000) {
                         //System.out.println("Aborted due to time, size: " + dataPoints.size());
                         break;
-                    }
+                    }*/
                 }
-                if (System.currentTimeMillis() - time > 300000) {
+                /*if (System.currentTimeMillis() - time > 300000) {
                     //System.out.println("Aborted due to time, size: " + dataPoints.size());
                     break;
-                }
+                }*/
             }
             //System.out.println("Before merge: " + cluster.getDataPoints().size());
             cluster.addAllDataPoints(merger.getDataPoints());
@@ -94,10 +94,10 @@ public class HierarchicalClusterer {
             //System.out.println("Set size: " + clusters.size());
             minDist = Double.MAX_VALUE;
             // if the algorithm takes more than 3 minutes, end it
-            if (System.currentTimeMillis() - time > 300000) {
+            /*if (System.currentTimeMillis() - time > 300000) {
                 System.out.println("Aborted due to time, size: " + dataPoints.size());
                 break;
-            }
+            }*/
         }
     }
 

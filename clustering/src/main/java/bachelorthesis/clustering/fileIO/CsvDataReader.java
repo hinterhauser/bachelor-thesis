@@ -35,8 +35,10 @@ public class CsvDataReader {
         try {
 
             reader = new BufferedReader(new FileReader(csvFile));
+            //int i = 0;
             while((line = reader.readLine()) != null) {
 
+                //System.out.println(++i);
                 String[] data = line.split(splitter);
                 double[] vectors = getVectors(data);
                 String groundTruth = (String)data[dim];

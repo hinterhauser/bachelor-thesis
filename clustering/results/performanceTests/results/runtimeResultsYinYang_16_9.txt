@@ -1,0 +1,67 @@
+"C:\Program Files\Java\jdk1.8.0_25\bin\java" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3\lib\idea_rt.jar=49371:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_25\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\rt.jar;C:\Users\Gabriele\Desktop\BSP\git_code\bachelor-thesis\clustering\target\classes;C:\Users\Gabriele\.m2\repository\jfree\jfreechart\1.0.13\jfreechart-1.0.13.jar;C:\Users\Gabriele\.m2\repository\jfree\jcommon\1.0.16\jcommon-1.0.16.jar" bachelorthesis.clustering.PerformanceEvaluation
+Kmeans : dim=5   size=1000    time= 762
+DBSCAN : dim=5   size=1000    time= 441
+hierarchical : dim=5   size=1000    time= 42697
+mdl : dim=5   size=1000    time= 1226
+Kmeans : dim=5   size=2000    time= 188
+DBSCAN : dim=5   size=2000    time= 578
+hierarchical : dim=5   size=2000    time= 488577
+mdl : dim=5   size=2000    time= 1703
+Kmeans : dim=5   size=3000    time= 406
+DBSCAN : dim=5   size=3000    time= 2297
+hierarchical : dim=5   size=3000    time= 989784
+mdl : dim=5   size=3000    time= 2961
+Kmeans : dim=5   size=4000    time= 438
+DBSCAN : dim=5   size=4000    time= 4760
+mdl : dim=5   size=4000    time= 5354
+Kmeans : dim=5   size=5000    time= 761
+DBSCAN : dim=5   size=5000    time= 14684
+mdl : dim=5   size=5000    time= 3726
+Kmeans : dim=5   size=6000    time= 609
+DBSCAN : dim=5   size=6000    time= 14976
+mdl : dim=5   size=6000    time= 6355
+Kmeans : dim=5   size=7000    time= 949
+DBSCAN : dim=5   size=7000    time= 18307
+mdl : dim=5   size=7000    time= 4327
+Kmeans : dim=5   size=8000    time= 703
+DBSCAN : dim=5   size=8000    time= 24358
+mdl : dim=5   size=8000    time= 5782
+Kmeans : dim=5   size=9000    time= 1140
+DBSCAN : dim=5   size=9000    time= 21934
+mdl : dim=5   size=9000    time= 5599
+Kmeans : dim=5   size=10000    time= 887
+DBSCAN : dim=5   size=10000    time= 20870
+mdl : dim=5   size=10000    time= 6507
+Kmeans : dim=5   size=1000    time= 93
+DBSCAN : dim=5   size=1000    time= 79
+hierarchical : dim=5   size=1000    time= 27508
+mdl : dim=5   size=1000    time= 547
+Kmeans : dim=10   size=1000    time= 78
+DBSCAN : dim=10   size=1000    time= 94
+hierarchical : dim=10   size=1000    time= 33243
+mdl : dim=10   size=1000Kmeans : dim=15   size=1000    time= 125
+DBSCAN : dim=15   size=1000    time= 125
+hierarchical : dim=15   size=1000    time= 44739
+mdl : dim=15   size=1000Kmeans : dim=20   size=1000    time= 371
+DBSCAN : dim=20   size=1000    time= 945
+hierarchical : dim=20   size=1000    time= 63823
+mdl : dim=20   size=1000Kmeans : dim=25   size=1000    time= 344
+DBSCAN : dim=25   size=1000    time= 390
+hierarchical : dim=25   size=1000    time= 83743
+mdl : dim=25   size=1000Kmeans : dim=30   size=1000    time= 250
+DBSCAN : dim=30   size=1000    time= 761
+hierarchical : dim=30   size=1000    time= 68201
+mdl : dim=30   size=1000Kmeans : dim=35   size=1000    time= 218
+DBSCAN : dim=35   size=1000    time= 827
+hierarchical : dim=35   size=1000    time= 71936
+mdl : dim=35   size=1000Kmeans : dim=40   size=1000    time= 203
+DBSCAN : dim=40   size=1000    time= 281
+hierarchical : dim=40   size=1000    time= 112441
+mdl : dim=40   size=1000Kmeans : dim=45   size=1000    time= 329
+DBSCAN : dim=45   size=1000    time= 820
+hierarchical : dim=45   size=1000    time= 114190
+mdl : dim=45   size=1000Kmeans : dim=50   size=1000    time= 266
+DBSCAN : dim=50   size=1000    time= 531
+hierarchical : dim=50   size=1000    time= 95615
+mdl : dim=50   size=1000
+Process finished with exit code 0
