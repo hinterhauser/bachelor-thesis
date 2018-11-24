@@ -29,13 +29,13 @@ public class UCIDataEvaluation {
     public static void main(String[] args) {
 
         //irisClassification("results/uciData/iris.csv", 4);
-        //glassClassification();
+        glassClassification();
         //occupancyClassification();
         //banknoteClassification();
         //yeastClassification();
         //userKnowledgeClassification();
         //bloodDonationsClassification();
-        seedsClassification();
+        //seedsClassification();
     }
 
     private static void seedsClassification() {
@@ -83,6 +83,7 @@ public class UCIDataEvaluation {
 
     private static void glassClassification() {
 
+        System.out.println("Glass classification");
         maxK = 5;
         groundTruthNumber = 7;
         uciEvaluation("results/uciData/glass.csv", 9);
@@ -92,13 +93,14 @@ public class UCIDataEvaluation {
 
         CsvDataReader csvDataReader = new CsvDataReader(csvFile, dim);
         List<DataPoint> dataPoints = csvDataReader.getDataPoints();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Start MDL");
+        /*System.out.println("Start MDL");
         DataPartitioner partitioner = new DataPartitioner(dataPoints);
         int opt = partitioner.findOptimalPartition();
         System.out.println("optimal partition: " + opt);
         //int k = 4;
-        for (int k = 2; k <= maxK; ++k) {
+        /*for (int k = 2; k <= maxK; ++k) {
             HigherDimGrid grid = new HigherDimGrid(k, dataPoints);
             //System.out.println("Clustering start");
             System.out.println("k = " + k);
@@ -117,7 +119,7 @@ public class UCIDataEvaluation {
                 e.printStackTrace();
             }
         }
-        System.out.println("Finish MDL");
+        System.out.println("Finish MDL");*/
 
         System.out.println("Start Kmeans");
         Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
@@ -130,11 +132,10 @@ public class UCIDataEvaluation {
         }
         System.out.println("Finish Kmeans");
 
-        System.out.println("Start DBSCAN");
+        /*System.out.println("Start DBSCAN");
         DBSCANer dbscan = new DBSCANer(dataPoints);
         int k = 2 * dim;
         dbscan.findKnearestNeighborDistance(k, dirResults + "KnearestNeighbors.jpg");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Type in Epsilon: ");
         double epsilon = 0;
         try {
@@ -149,13 +150,13 @@ public class UCIDataEvaluation {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Finish DBSCAN");
+        System.out.println("Finish DBSCAN");*/
 
         if (dataPoints.size() > 2000) {
             System.out.println("data set to big for hierarchical clustering");
         } else {
             System.out.println("Start hierarchical clustering");
-            /*HierarchicalClusterer hierarchicalClusterer = new HierarchicalClusterer(dataPoints);
+            HierarchicalClusterer hierarchicalClusterer = new HierarchicalClusterer(dataPoints);
             hierarchicalClusterer.performHierarchicalClustering(groundTruthNumber);
             hierarchicalClusterer.assignClusterIds();
             try {
@@ -163,11 +164,18 @@ public class UCIDataEvaluation {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Finish hierarchical clustering");*/
+            System.out.println("Finish hierarchical clustering");
         }
 
         System.out.println("Start CLIQUE");
-        CLIQUE clique = new CLIQUE(dataPoints, 6);
+        System.out.println("Type in grid - resolution:");
+        int resolution = 0;
+        try {
+            resolution = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CLIQUE clique = new CLIQUE(dataPoints, resolution);  // k should be the same k used for MDL
         System.out.println("Clustering start");
         clique.performCliqueAlgorithm(0);
         System.out.println("Clustering end");
@@ -182,10 +190,11 @@ public class UCIDataEvaluation {
 
     private static void irisClassification(String csvFile, int dim) {
 
+        System.out.println("Iris classification");
         CsvDataReader csvDataReader = new CsvDataReader(csvFile, dim);
         List<DataPoint> dataPoints = csvDataReader.getDataPoints();
 
-        System.out.println("Start MDL");
+        /*System.out.println("Start MDL");
         DataPartitioner partitioner = new DataPartitioner(dataPoints);
         int opt = partitioner.findOptimalPartition();
         System.out.println("optimal partition: " + opt);
@@ -207,7 +216,7 @@ public class UCIDataEvaluation {
                 e.printStackTrace();
             }
         }
-        System.out.println("Finish MDL");
+        System.out.println("Finish MDL");*/
 
         System.out.println("Start Kmeans");
         Kmean kmean = new Kmean(groundTruthNumber, dataPoints);
@@ -253,8 +262,8 @@ public class UCIDataEvaluation {
         System.out.println("Finish hierarchical clustering");
 
         System.out.println("Start CLIQUE");
-        CLIQUE clique = new CLIQUE(dataPoints, 7);
-        clique.performCliqueAlgorithm(10);
+        CLIQUE clique = new CLIQUE(dataPoints, 7);  // k should be the optimal partitioning, determined for MDL
+        clique.performCliqueAlgorithm(0);
         clique.assignClusterIds();
         try {
             FileIO.writeNMIFiles(clique.getDataPoints(), dirResults + "clique_nmi", ".txt");
